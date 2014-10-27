@@ -1,3 +1,7 @@
+SET search_path = "folder_path";
+DROP SCHEMA IF EXISTS project CASCADE;
+CREATE SCHEMA project;
+
 CREATE TABLE Spices(
   name varchar(50),
   descr text,
