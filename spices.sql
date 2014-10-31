@@ -10,7 +10,7 @@ CREATE TABLE Spices(
   size varchar(10),
   id serial PRIMARY KEY,
   food varchar(255),
-  catagory varchar(50));
+  catagory varchar(100));
   
 CREATE TABLE Users(
   email varchar(50),
