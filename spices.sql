@@ -10,12 +10,21 @@ CREATE TABLE Spices(
   size varchar(10),
   id serial PRIMARY KEY,
   food varchar(255),
-  catagory varchar(100));
+  category varchar(100));
   
 CREATE TABLE Users(
   email varchar(50),
   name varchar(50),
   user_Id serial PRIMARY KEY);
+  
+CREATE TABLE Category(
+  catagory varchar(50) PRIMARY KEY
+  );
+  
+CREATE TABLE Spice_Category(
+  id int NOT NULL REFERENCES Spices,
+  category varchar(50) NOT NULL REFERENCES Category,
+  PRIMARY KEY (id, category));
 
 -- 1-20
  
