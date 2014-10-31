@@ -1,6 +1,7 @@
-SET search_path = "folder_path";
 DROP SCHEMA IF EXISTS spices CASCADE;
 CREATE SCHEMA spices;
+
+SET search_path = spices;
 
 CREATE TABLE Spices(
   name varchar(50),
