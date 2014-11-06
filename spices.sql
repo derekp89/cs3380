@@ -15,16 +15,46 @@ CREATE TABLE Spices(
 CREATE TABLE Users(
   email varchar(50),
   name varchar(50),
+  password_hash CHAR(40) NOT NULL,
   user_Id serial PRIMARY KEY);
   
 CREATE TABLE Category(
-  category varchar(50) PRIMARY KEY
-  );
+  category varchar(50) PRIMARY KEY );
   
 CREATE TABLE Spice_Category(
   id int NOT NULL REFERENCES Spices,
   category varchar(50) NOT NULL REFERENCES Category,
   PRIMARY KEY (id, category));
+  
+ CREATE TABLE Cards(
+	cardOwner varchar(50),
+	user_id int,
+	securityNo smallint,
+	cardType varchar(50),
+	cardNumber varchar(35) PRIMARY KEY,
+	expMonth smallint,
+	expYear smallint,
+	FOREIGN KEY (user_id) REFERENCES Users);
+	
+CREATE TABLE Shipping(
+	street varchar(50),
+	city varchar(50),
+	state_code varchar(2),
+	zip int,
+	shipping_id int PRIMARY KEY,
+	tranking_no varchar(25),
+	carrier varchar(50));
+	
+CREATE TABLE Orders(
+	order_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	order_id serial PRIMARY KEY);
+	
+CREATE TABLE Order_Details(
+	product_id int,
+	quantity int,
+	price int,
+	order_id int PRIMARY KEY REFERENCES Orders,
+	FOREIGN KEY (product_id) REFERENCES Spices);
 
 -- 1-20
 INSERT INTO Spices VALUES('Turmeric','Turmeric, essential to curry powder, is a member of the ginger family. It has a light, musky flavor along with a brilliant golden-orange color for which it is famous throughout the world. It contains the compound curcumin, which is a strong anti-inflammatory. In Asia, its main use for thousands of years was as a dyestuff. At one time, sun worshippers, whose sacred color was yellow, dyed their textiles with the very expensive saffron. When it was discovered that the very inexpensive turmeric produced the same brilliant color, the sacred saffron was guarded for special culinary dishes.',6.29,8,1,'Lamb, fish, beef, potatoes, artichokes, rice dishes, curry','Indian,Thai');
