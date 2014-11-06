@@ -54,7 +54,7 @@ INSERT INTO Spices VALUES('Mexican Vanilla Beans','Mexico has always had the rep
 INSERT INTO Spices VALUES('Whole Spanish Anise Seed','Anise seed is native to the Mediterranean basin, and has been used throughout history in both sweet and savory applications. Anise has long been known as an aid to digestion. The Romans ended their elaborate feasts with anise cakes. In the Mediterranean, anise is featured heavily in cakes, breads, cookies and liquors. In small amounts, anise makes a nice addition to sausage, or in tomato sauce.',7.99,8,24,'sausage, chutney, brisket, bread, cake','German, Italian, Spanish');
 INSERT INTO Spices VALUES('California Sweet Basil','Basil has now become the most popular herb used in this country. Basil, garlic and tomatoes form an unbeatable trio.  Until recently, French basil had a reputation for supremacy. Now, domestic basil is generally regarded as superior to imported basil, in part because the drying process in California has advanced to a very high level. The fresh, sweet basil flavor and nice green color is maintained beautifully. Stored properly, the flavor of these large leaf flakes can stay strong and fresh for months.',7.99,4,25,'cheese, chicken, duck, eggplant, eggs, fish, lamb, liver, olive oil, onions, pasta, pesto, pizza, pork, potatoes, rabbit, salads, shellfish, soups, sweet peppers, tomatoes, veal, vegetables, vinegars, zucchini, tomato sauce','Italian');
 INSERT INTO Spices VALUES('Whole Fennel Seeds','Fennel Seed has a delicate flavor; light and sweet, similar to anise. Use of fennel has a long history, dating back to the Chinese and Hindus who used it as a cure for snake bites. Fennel was hung over doors in the Middle Ages to ward off evil spirits.',5.29,8,26,'Cheese, sausage, fish, sauces','Greek and Turkish, Indian, Italian');
-INSERT INTO Spices VALUES('Granulated Garlic Powder','Regular granulated garlic is the standard for use in most recipes. It takes about 20 minutes for full flavor release, but is fine enough to taste garlicky in a much shorter time. These garlic products are pure dehydrated garlic: no preservatives, no anti-caking agents.',5.29,8,27,'beans, beef, beets, cabbage, chicken, eggplant, fish, lamb, lentils, mushrooms, pasta, pork, potatoes, rice, shellfish, spinach, tomatoes, zucchini','Cajun, Caribbean, Eastern European, Garlic, Greek and Turkish, Italian');
+INSERT INTO Spices VALUES('Granulated Garlic Powder','Regular granulated garlic is the standard for use in most recipes. It takes about 20 minutes for full flavor release, but is fine enough to taste garlicky in a much shorter time. These garlic products are pure dehydrated garlic: no preservatives, no anti-caking agents.',5.29,8,27,'beans, beef, beets, cabbage, chicken, eggplant, fish, lamb, lentils, mushrooms, pasta, pork, potatoes, rice, shellfish, spinach, tomatoes, zucchini','Cajun, Caribbean, Eastern European, Greek and Turkish, Italian');
 INSERT INTO Spices VALUES('Italian Herb Blend','One whiff of this blend will bring to mind everything you recall about dining in your favorite Italian restaurant -- and the scent gets much better when you cook with it!  Use 1 teaspoon per cup of tomato sauce to make flavorful sauce for spaghetti, pizza, veal parmesan, or pasta noodles. To improve the taste of a store-bought pizza, crush herbs between your palms and sprinkle over the top before baking. Use it to roast Italian-style chicken or fish.  Hand mixed from: oregano, basil, marjoram, thyme, and crushed rosemary.',6.99,4,28,'sauces, pizza, chicken, fish','Italian');
 INSERT INTO Spices VALUES('Tomato Powder','Tomato powder has a flavor so rich and tomato-ey you will not believe it, until you taste it. It is the sweetest red tomatoes of the crop, spray-dried into a fine powder.',8.99,7,29,'sauces, pasta, bread, stews, gumbo, chili','Italian');
 INSERT INTO Spices VALUES('Turkish Bay Leaves','The flavor of these Turkish bay leaves is far milder and more complex than that of domestic bay; it adds a subtly sweet astringency to dishes. Only one or two are needed to enhance a whole roast, pot of soup or stew.',7.99,4,30,'beans, game, lentils, potatoes, risotto, shellfish, soups, stews, tomatoes','Cajun, Eastern European, English, Greek and Turkish, Hungarian, Irish');
@@ -134,3 +134,303 @@ INSERT INTO Spices VALUES('Quebec Beef Spice','Quebec Beef Spice is one of our b
 INSERT INTO Spices VALUES('Rosemary Needles, Organic','Rosemary keeps its flavor better when dried than almost any other herb, and this organic rosemary is no exception. French, Spanish and Italian cultures use rosemary in abundance in their cooking. It has also gained a place in American cooking, primarily for lamb and chicken. Rosemary blends well in tomato sauces, soups or stews, or foccacia bread.',6.99,4,98,'Lamb, chicken, sauces, soup, stew, bread',NULL);
 INSERT INTO Spices VALUES('Parisian Bonnes Herbes French Herb Blend','Parisian Bonnes Herbes is a light, delicate blend that’s great for fish, seafood, vegetables, or salad dressings. Hand mixed from: French tarragon, chervil, basil, dill, chives, and ground Muntok white pepper.',7.99,4,99,'fish, scallops, shrimp, vegetables, chicken, soups, sauces','French');
 INSERT INTO Spices VALUES('White Truffle Oil','White truffle oil is Italian olive oil infused with rare white truffles. Use as you would any upscale olive oil, just anticipate the lovely addition of the truffle bouquet. We also carry black truffle oil. This is a luxurious flavored oil that high end foodies are sure to enjoy. It can be used in the same manner as any upscale olive oil. The truffle flavor is an added bonus.  The truffle is a tuber of unusual flavor and aroma savored in Italian and French cookery. The truffle has yet to be successfully cultivated and its scarcity commands a high price. Due to their short growing season and high demand, truffles can sell for up to $800 per pound.The truffles of Piedmont are especially prized for their exceptional flavors.',12.95,2,100,'chicken, grits, steak, risotto, salads ,bread, gnocchi, pizza, vegetables, eggs','Italian');
+
+-- Category TABLE
+INSERT INTO Category VALUES ('Indian');
+INSERT INTO Category VALUES ('Middle Eastern');
+INSERT INTO Category VALUES ('Thai');
+INSERT INTO Category VALUES ('Scandinavian');
+INSERT INTO Category VALUES ('Cajun');
+INSERT INTO Category VALUES ('Mexican');
+INSERT INTO Category VALUES ('Spanish');
+INSERT INTO Category VALUES ('Greek and Turkish');
+INSERT INTO Category VALUES ('Eastern European');
+INSERT INTO Category VALUES ('Caribbean');
+INSERT INTO Category VALUES ('Italian');
+INSERT INTO Category VALUES ('English');
+INSERT INTO Category VALUES ('German');
+INSERT INTO Category VALUES ('Irish');
+INSERT INTO Category VALUES ('Hungarian');
+INSERT INTO Category VALUES ('Chinese and Far Eastern');
+INSERT INTO Category VALUES ('French');
+
+--Spice_Category TABLE
+INSERT INTO Spice_Category VALUES (1, 'Indian');
+INSERT INTO Spice_Category VALUES (1, 'Thai');
+
+INSERT INTO Spice_Category VALUES (2, 'Indian');
+
+INSERT INTO Spice_Category VALUES (3, 'Indian');
+INSERT INTO Spice_Category VALUES (3, 'Middle Eastern');
+INSERT INTO Spice_Category VALUES (3, 'Scandinavian');
+
+INSERT INTO Spice_Category VALUES (4, 'Indian');
+INSERT INTO Spice_Category VALUES (4, 'Cajun');
+
+INSERT INTO Spice_Category VALUES (5, 'Indian');
+INSERT INTO Spice_Category VALUES (5, 'Greek and Turkish');
+INSERT INTO Spice_Category VALUES (5, 'Mexican');
+INSERT INTO Spice_Category VALUES (5, 'Spanish');
+INSERT INTO Spice_Category VALUES (5, 'Middle Eastern');
+
+INSERT INTO Spice_Category VALUES (6, 'Indian');
+INSERT INTO Spice_Category VALUES (6, 'Eastern European');
+INSERT INTO Spice_Category VALUES (6, 'English');
+INSERT INTO Spice_Category VALUES (6, 'Greek and Turkish');
+INSERT INTO Spice_Category VALUES (6, 'Mexican');
+INSERT INTO Spice_Category VALUES (6, 'Middle Eastern');
+
+INSERT INTO Spice_Category VALUES (7, 'Indian');
+INSERT INTO Spice_Category VALUES (7, 'Greek and Turkish');
+INSERT INTO Spice_Category VALUES (7, 'Mexican');
+INSERT INTO Spice_Category VALUES (7, 'Middle Eastern');
+
+INSERT INTO Spice_Category VALUES (8, 'Indian');
+
+INSERT INTO Spice_Category VALUES (9, 'Indian');
+
+INSERT INTO Spice_Category VALUES (10, 'Indian');
+
+INSERT INTO Spice_Category VALUES (11, 'Indian');
+INSERT INTO Spice_Category VALUES (11, 'Greek and Turkish');
+INSERT INTO Spice_Category VALUES (11, 'Middle Eastern');
+
+INSERT INTO Spice_Category VALUES (12, 'Indian');
+INSERT INTO Spice_Category VALUES (12, 'English');
+
+INSERT INTO Spice_Category VALUES (13, 'Mexican');
+
+INSERT INTO Spice_Category VALUES (14, 'Mexican');
+INSERT INTO Spice_Category VALUES (14, 'Middle Eastern');
+INSERT INTO Spice_Category VALUES (14, 'Greek and Turkish');
+
+INSERT INTO Spice_Category VALUES (15, 'Mexican');
+INSERT INTO Spice_Category VALUES (15, 'Caribbean');
+
+INSERT INTO Spice_Category VALUES (16, 'Mexican');
+
+INSERT INTO Spice_Category VALUES (17, 'Mexican');
+
+INSERT INTO Spice_Category VALUES (18, 'Mexican');
+
+INSERT INTO Spice_Category VALUES (19, 'Mexican');
+
+INSERT INTO Spice_Category VALUES (20, 'Mexican');
+INSERT INTO Spice_Category VALUES (20, 'English');
+INSERT INTO Spice_Category VALUES (20, 'Middle Eastern');
+INSERT INTO Spice_Category VALUES (20, 'Scandinavian');
+
+INSERT INTO Spice_Category VALUES (21, 'Mexican');
+
+INSERT INTO Spice_Category VALUES (22, 'Mexican');
+
+INSERT INTO Spice_Category VALUES (23, 'Mexican');
+
+INSERT INTO Spice_Category VALUES (24, 'German');
+INSERT INTO Spice_Category VALUES (24, 'Italian');
+INSERT INTO Spice_Category VALUES (24, 'Spanish');
+
+INSERT INTO Spice_Category VALUES (25, 'Italian');
+
+INSERT INTO Spice_Category VALUES (26, 'Italian');
+INSERT INTO Spice_Category VALUES (26, 'Greek and Turkish');
+INSERT INTO Spice_Category VALUES (26, 'Indian');
+
+INSERT INTO Spice_Category VALUES (27, 'Italian');
+INSERT INTO Spice_Category VALUES (27, 'Cajun');
+INSERT INTO Spice_Category VALUES (27, 'Caribbean');
+INSERT INTO Spice_Category VALUES (27, 'Eastern European');
+INSERT INTO Spice_Category VALUES (27, 'Greek and Turkish');
+
+INSERT INTO Spice_Category VALUES (28, 'Italian');
+
+INSERT INTO Spice_Category VALUES (29, 'Italian');
+
+INSERT INTO Spice_Category VALUES (30, 'Cajun');
+INSERT INTO Spice_Category VALUES (30, 'Eastern European');
+INSERT INTO Spice_Category VALUES (30, 'English');
+INSERT INTO Spice_Category VALUES (30, 'Greek and Turkish');
+INSERT INTO Spice_Category VALUES (30, 'Hungarian');
+INSERT INTO Spice_Category VALUES (30, 'Irish');
+
+INSERT INTO Spice_Category VALUES (31, 'Cajun');
+
+INSERT INTO Spice_Category VALUES (32, 'Cajun');
+
+INSERT INTO Spice_Category VALUES (33, 'Cajun');
+INSERT INTO Spice_Category VALUES (33, 'Eastern European');
+INSERT INTO Spice_Category VALUES (33, 'Greek and Turkish');
+
+INSERT INTO Spice_Category VALUES (34, 'Cajun');
+
+INSERT INTO Spice_Category VALUES (35, 'Caribbean');
+INSERT INTO Spice_Category VALUES (35, 'Eastern European');
+
+INSERT INTO Spice_Category VALUES (36, 'Caribbean');
+INSERT INTO Spice_Category VALUES (36, 'Irish');
+
+INSERT INTO Spice_Category VALUES (37, 'Caribbean');
+INSERT INTO Spice_Category VALUES (37, 'Chinese and Far Eastern');
+INSERT INTO Spice_Category VALUES (37, 'German');
+INSERT INTO Spice_Category VALUES (37, 'Scandinavian');
+INSERT INTO Spice_Category VALUES (37, 'Thai');
+
+INSERT INTO Spice_Category VALUES (38, 'Caribbean');
+INSERT INTO Spice_Category VALUES (38, 'Eastern European');
+INSERT INTO Spice_Category VALUES (38, 'German');
+
+INSERT INTO Spice_Category VALUES (39, 'Caribbean');
+INSERT INTO Spice_Category VALUES (39, 'Eastern European');
+INSERT INTO Spice_Category VALUES (39, 'English');
+
+INSERT INTO Spice_Category VALUES (40, 'Caribbean');
+INSERT INTO Spice_Category VALUES (40, 'Mexican');
+
+INSERT INTO Spice_Category VALUES (41, 'Chinese and Far Eastern');
+INSERT INTO Spice_Category VALUES (41, 'Indian');
+INSERT INTO Spice_Category VALUES (41, 'Thai');
+
+INSERT INTO Spice_Category VALUES (42, 'Chinese and Far Eastern');
+
+INSERT INTO Spice_Category VALUES (43, 'Chinese and Far Eastern');
+
+INSERT INTO Spice_Category VALUES (44, 'Chinese and Far Eastern');
+
+INSERT INTO Spice_Category VALUES (45, 'Chinese and Far Eastern');
+
+INSERT INTO Spice_Category VALUES (46, 'Chinese and Far Eastern');
+INSERT INTO Spice_Category VALUES (46, 'German');
+
+INSERT INTO Spice_Category VALUES (47, 'Chinese and Far Eastern');
+
+INSERT INTO Spice_Category VALUES (48, 'Chinese and Far Eastern');
+
+INSERT INTO Spice_Category VALUES (49, 'Chinese and Far Eastern');
+INSERT INTO Spice_Category VALUES (49, 'Thai');
+
+INSERT INTO Spice_Category VALUES (50, 'Chinese and Far Eastern');
+INSERT INTO Spice_Category VALUES (50, 'Thai');
+
+INSERT INTO Spice_Category VALUES (51, 'Chinese and Far Eastern');
+
+INSERT INTO Spice_Category VALUES (52, 'Eastern European');
+INSERT INTO Spice_Category VALUES (52, 'German');
+INSERT INTO Spice_Category VALUES (52, 'Hungarian');
+INSERT INTO Spice_Category VALUES (52, 'Irish');
+INSERT INTO Spice_Category VALUES (52, 'Scandinavian');
+
+INSERT INTO Spice_Category VALUES (53, 'Eastern European');
+INSERT INTO Spice_Category VALUES (53, 'German');
+INSERT INTO Spice_Category VALUES (53, 'Hungarian');
+
+INSERT INTO Spice_Category VALUES (54, 'Eastern European');
+INSERT INTO Spice_Category VALUES (54, 'Indian');
+
+INSERT INTO Spice_Category VALUES (55, 'Eastern European');
+INSERT INTO Spice_Category VALUES (55, 'German');
+INSERT INTO Spice_Category VALUES (55, 'Scandinavian');
+
+INSERT INTO Spice_Category VALUES (56, 'Eastern European');
+
+INSERT INTO Spice_Category VALUES (57, 'Eastern European');
+INSERT INTO Spice_Category VALUES (57, 'German');
+INSERT INTO Spice_Category VALUES (57, 'Irish');
+
+INSERT INTO Spice_Category VALUES (58, 'Eastern European');
+INSERT INTO Spice_Category VALUES (58, 'German');
+INSERT INTO Spice_Category VALUES (58, 'Indian');
+
+INSERT INTO Spice_Category VALUES (59, 'Eastern European');
+
+INSERT INTO Spice_Category VALUES (60, 'Eastern European');
+INSERT INTO Spice_Category VALUES (60, 'Greek and Turkish');
+INSERT INTO Spice_Category VALUES (60, 'Hungarian');
+
+INSERT INTO Spice_Category VALUES (61, 'Eastern European');
+INSERT INTO Spice_Category VALUES (61, 'German');
+
+INSERT INTO Spice_Category VALUES (62, 'Eastern European');
+INSERT INTO Spice_Category VALUES (62, 'English');
+
+INSERT INTO Spice_Category VALUES (63, 'English');
+
+INSERT INTO Spice_Category VALUES (64, 'English');
+INSERT INTO Spice_Category VALUES (64, 'French');
+
+INSERT INTO Spice_Category VALUES (65, 'English');
+
+INSERT INTO Spice_Category VALUES (66, 'English');
+
+INSERT INTO Spice_Category VALUES (67, 'English');
+INSERT INTO Spice_Category VALUES (67, 'Greek and Turkish');
+INSERT INTO Spice_Category VALUES (67, 'Irish');
+INSERT INTO Spice_Category VALUES (67, 'Middle Eastern');
+
+INSERT INTO Spice_Category VALUES (68, 'French');
+
+INSERT INTO Spice_Category VALUES (69, 'French');
+
+INSERT INTO Spice_Category VALUES (70, 'French');
+
+INSERT INTO Spice_Category VALUES (71, 'French');
+
+INSERT INTO Spice_Category VALUES (72, 'French');
+
+INSERT INTO Spice_Category VALUES (73, 'French');
+
+INSERT INTO Spice_Category VALUES (74, 'French');
+INSERT INTO Spice_Category VALUES (74, 'Hungarian');
+
+INSERT INTO Spice_Category VALUES (75, 'Greek and Turkish');
+INSERT INTO Spice_Category VALUES (75, 'Indian');
+
+INSERT INTO Spice_Category VALUES (76, 'Eastern European');
+INSERT INTO Spice_Category VALUES (76, 'Greek and Turkish');
+INSERT INTO Spice_Category VALUES (76, 'Scandinavian');
+
+INSERT INTO Spice_Category VALUES (77, 'Greek and Turkish');
+
+INSERT INTO Spice_Category VALUES (78, 'Greek and Turkish');
+INSERT INTO Spice_Category VALUES (78, 'Hungarian');
+
+INSERT INTO Spice_Category VALUES (79, 'Greek and Turkish');
+INSERT INTO Spice_Category VALUES (79, 'Middle Eastern');
+
+INSERT INTO Spice_Category VALUES (80, 'Greek and Turkish');
+INSERT INTO Spice_Category VALUES (80, 'Hungarian');
+INSERT INTO Spice_Category VALUES (80, 'Middle Eastern');
+INSERT INTO Spice_Category VALUES (80, 'Spanish');
+
+INSERT INTO Spice_Category VALUES (81, 'Hungarian');
+INSERT INTO Spice_Category VALUES (81, 'Spanish');
+
+INSERT INTO Spice_Category VALUES (82, 'Irish');
+
+INSERT INTO Spice_Category VALUES (83, 'Middle Eastern');
+
+INSERT INTO Spice_Category VALUES (84, 'Middle Eastern');
+
+INSERT INTO Spice_Category VALUES (85, 'Middle Eastern');
+
+INSERT INTO Spice_Category VALUES (86, 'Scandinavian');
+
+INSERT INTO Spice_Category VALUES (87, 'Scandinavian');
+
+INSERT INTO Spice_Category VALUES (88, 'Thai');
+
+INSERT INTO Spice_Category VALUES (89, 'Thai');
+
+INSERT INTO Spice_Category VALUES (90, 'Indian');
+
+INSERT INTO Spice_Category VALUES (92, 'Chinese and Far Eastern');
+
+INSERT INTO Spice_Category VALUES (94, 'Middle Eastern');
+
+INSERT INTO Spice_Category VALUES (95, 'English');
+INSERT INTO Spice_Category VALUES (95, 'German');
+
+INSERT INTO Spice_Category VALUES (96, 'Indian');
+
+INSERT INTO Spice_Category VALUES (99, 'French');
+
+INSERT INTO Spice_Category VALUES (100, 'Italian');
