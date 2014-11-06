@@ -15,6 +15,7 @@ CREATE TABLE Spices(
 CREATE TABLE Users(
   email varchar(50),
   name varchar(50),
+  username varchar(50),
   password_hash CHAR(40) NOT NULL,
   user_Id serial PRIMARY KEY);
   
