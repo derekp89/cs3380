@@ -1,3 +1,51 @@
+<?php
+	session_start();
+	
+	if (isset( $_POST['Submit'])){
+		$username = htmlspecialchars($_POST['username']);
+		$password = htmlspecialchars($_POST['password']);
+		$email = htmlspecialchars($_POST['email']);
+
+		//check if the name exists
+		if(checkUsername($username)==0)
+		{
+			addUser($username,$password,$email);               //adds user into database
+			$_SESSION['username'] = $username;
+			header("Location: home.php");
+		}
+		else
+			echo "Username is already taken taken";
+	}
+	
+	function checkUsername($username){
+
+		$dbconn =pg_connect("host=dbhost-pgsql.cs.missouri.edu dbname=cs3380f14grp13 user=cs3380f14grp13 password=quyRXtKs") or die("Could not connect: " . pg_last_error());
+	
+		$username = pg_escape_string(htmlspecialchars($username));
+		$query = "SELECT * FROM spices.Users where username LIKE $1";
+		pg_prepare($dbconn, "check_u_name",$query);
+		$result = pg_execute($dbconn,"check_u_name",array($username));
+		if(pg_num_rows($result)==0)
+			return 0;
+		else
+			return 1;
+	}
+
+	function addUser($username,$password, $email){
+
+		$dbconn =pg_connect("host=dbhost-pgsql.cs.missouri.edu dbname=cs3380f14grp13 user=cs3380f14grp13 password=quyRXtKs") or die("Could not connect: " . pg_last_error());
+		
+		$username = pg_escape_string(htmlspecialchars($username));
+		$password = pg_escape_string(htmlspecialchars(sha1($password)));
+		$email = pg_escape_string(htmlspecialchars($email));
+
+		$query = "INSERT INTO spices.Users (username, password_hash, email) VALUES ($1,$2,$3)";
+		pg_prepare($dbconn, "add_user_auth",$query);
+	
+		pg_execute($dbconn,"add_user_auth",array($username,$password, $email));
+	}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -112,55 +160,6 @@
 		</div>
 	</section>
 </div>
-
-<?php
-	session_start();
-	
-	if (isset( $_POST['Submit'])){
-		$username = htmlspecialchars($_POST['username']);
-		$password = htmlspecialchars($_POST['password']);
-		$email = htmlspecialchars($_POST['email']);
-
-		//check if the name exists
-		if(checkUsername($username)==0)
-		{
-			addUser($username,$password,$email);               //adds user into database
-			$_SESSION['username'] = $username;
-				printf("<script>location.href='mycategory.html'</script>");
-		}
-		else
-			echo "Username is already taken taken";
-	}
-	
-	function checkUsername($username){
-
-		$dbconn =pg_connect("host=dbhost-pgsql.cs.missouri.edu dbname=cs3380f14grp13 user=cs3380f14grp13 password=quyRXtKs") or die("Could not connect: " . pg_last_error());
-	
-		$username = pg_escape_string(htmlspecialchars($username));
-		$query = "SELECT * FROM spices.Users where username LIKE $1";
-		pg_prepare($dbconn, "check_u_name",$query);
-		$result = pg_execute($dbconn,"check_u_name",array($username));
-		if(pg_num_rows($result)==0)
-			return 0;
-		else
-			return 1;
-	}
-
-	function addUser($username,$password, $email){
-
-		$dbconn =pg_connect("host=dbhost-pgsql.cs.missouri.edu dbname=cs3380f14grp13 user=cs3380f14grp13 password=quyRXtKs") or die("Could not connect: " . pg_last_error());
-		
-		$username = pg_escape_string(htmlspecialchars($username));
-		$password = pg_escape_string(htmlspecialchars(sha1($password)));
-		$email = pg_escape_string(htmlspecialchars($email));
-
-		$query = "INSERT INTO spices.Users (username, password_hash, email) VALUES ($1,$2,$3)";
-		pg_prepare($dbconn, "add_user_auth",$query);
-	
-		pg_execute($dbconn,"add_user_auth",array($username,$password, $email));
-	}
-
-?>
 
 <!-- Bottom Navigation Bar -->
 	<nav class="navbar navbar-inverse navbar-fixed-bottom" role="navigation">
