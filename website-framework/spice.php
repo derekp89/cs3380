@@ -8,47 +8,52 @@
 	//Selecting the name of spices by the alphabet
 	$result = pg_prepare($dbconn, "search_by_alpha", 'SELECT name, descr AS description, price, size, id FROM Spices.spices WHERE id = $1');
 	$result = pg_execute($dbconn, "search_by_alpha", array($id));
+	
+	$result2 = pg_prepare($dbconn, "category", 'SELECT category FROM Spices.Spice_Category WHERE id = $1');
+	$result2 = pg_execute($dbconn, "category", array($id));
 
-	echo"<br><p>There are <i>".pg_num_rows($result)." </i>spices found.</p>\n";
 ?>
 <!DOCTYPE html>
 <html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+</head>
+</script>
 <body>
-	<table class="table table-hover">
-		<?php
-			//print table headers
-			echo "<thead>";
-			echo "\t<tr>\n";
-				$i = pg_num_fields($result);
-				for($j = 0; $j < $i - 1; ++$j)
-					echo "\t\t<th>".pg_field_name($result,$j)."</th>\n";
-			echo "\t<tr>\n";
-			echo "</thead>";
-			
-			echo "<tbody>\n";		
-			while ($line = pg_fetch_array($result, null, PGSQL_ASSOC)){
-				echo "\t<tr>\n";
-				foreach($line as $col_value){
-					/* Will add a $ before each price */
-					if($col_value == $line['price']){
-						echo "\t\t<td>$".$col_value."</td>\n";
-					}
-					/* Will add "oz" after each size number */
-					else if($col_value == $line['size']){
-						echo "\t\t<td>".$col_value." oz</td>\n";
-					}
-					//removed id field
-					else if($col_value == $line['id']){
-					
-					}
-					/* Otherwise just print out the value */
-					else
-						echo "\t\t<td>".$col_value."</td>\n";
-				}	
-				echo "\t</tr>\n";
-			}
-			echo "</tbody>\n";
-		?>
-	</table>
+    <table class="table table-hover">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <p class="lead">Categories</p>
+                    <div class="list-group">
+					<?php while ($line = pg_fetch_array($result2, NULL, PGSQL_ASSOC)){
+								foreach($line as $col_value)
+                                echo "<a href=# class=list-group-item active>" .$col_value . "</a>";
+								}?>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="thumbnail">
+                        <img class="img-responsive" src="http://placehold.it/800x300" alt="">
+                        <div class="caption-full">
+						<?php $line = pg_fetch_array($result, NULL, PGSQL_ASSOC);
+                                echo  "<h4>".$line['name']."</a>"; 
+								echo "</h4>";
+								echo "<p>".$line['description']."</p>";
+								echo "<h4 class=pull-right>$".$line['price']."</h4>";?>
+						 <select class="btn " name="quantity">
+								<?php
+									for($i=1;$i<=5;$i++)  {
+									echo "<option value='$i'>$i</option>";
+									} ?>
+						</select>
+						<button class="btn btn-success">Add To Cart</button></div>
+                        </div>
+
+                        </div>
+                    </div>
+    </table>
 </body>
+
 </html>

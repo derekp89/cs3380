@@ -21,7 +21,7 @@
 			echo "\t<tr>\n";
 				$i = pg_num_fields($result);
 
-					echo "\t\t<th style=text-align:center>".pg_field_name($result,$j)."</th>\n";
+			echo "\t\t<th style=text-align:center>".pg_field_name($result,$j)."</th>\n";
 			echo "\t<tr>\n";
 			echo "</thead>";
 			
