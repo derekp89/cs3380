@@ -18,18 +18,7 @@
 			padding: auto;
 			margin: auto;
 		}
-		/*#myCarousel{
-			width: 700px;
-			float:left;
-		}
-		#search-by-tabs{
-			display:inline;
-			float:left;
-			margin-left:10px;
-		}*/
-		.alpha-highlight{
-			background-color: rgb(216, 226, 244);
-		}
+
 		.scale-img{
 			width:1000px;
 		}
@@ -38,35 +27,14 @@
 	<script src="jquery-ui-1.11.2/external/jquery/jquery.js"></script>
 	<script src="jquery-ui-1.11.2/jquery-ui.min.js"></script>
 	<script src="dist/js/bootstrap.js"></script>
-	<script>
-		/* Will create two dynamic tabs */
-		$(function() {
-			$( "#search-by-tabs,#tabs-1" ).tabs();
-		});
-		
-		/* Will highlight the search-by tabs which the user clicked on */
-		$(function() {
-			$( "#search-by li" ).click(function(){
-				$(this).addClass("active");
-				$("li").not(this).removeClass("active");
-			});
-		});
-		
-		/* Will highlight the alphabet tab which the user clicked on */
-		$(function() {
-			$( "#tabs-1 li" ).click(function(){
-				$(this).addClass("alpha-highlight");
-				$("li").not(this).removeClass("alpha-highlight");
-			});
-		});
-	</script>
+
 </head>
 <body>
 	<!-- Top Navigation Bar -->
 	<nav class="navbar navbar-inverse" role="navigation">
 	  <div class="container-fluid">
 	    <div class="navbar-header">
-	      <a class="navbar-brand" href="#">Home</a>
+	      <a class="navbar-brand" href="home.php">Home</a>
 	    </div>
 	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	      <ul class="nav navbar-nav">
@@ -199,7 +167,7 @@
 	  <div class="container">
 	      <ul class="nav navbar-nav navbar-right">
 			<!-- Redirect to About Us page -->
-	        <li><a href="http://babbage.cs.missouri.edu/~cs3380f14grp13/cs3380/website-framework/logout.php">Logout</a></li>
+	        <li></li>
 		</ul>
 	  </div>
 	</nav>

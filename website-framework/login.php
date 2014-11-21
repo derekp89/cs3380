@@ -1,3 +1,46 @@
+<?php
+	session_start();
+	
+	if(isset($_SESSION['username'])) //if a session exists send client to home.php
+		header("Location: home.php");
+	
+	if (isset( $_POST['Submit'])){
+		$username = htmlspecialchars($_POST['username']);
+		$password = htmlspecialchars($_POST['password']);
+		
+		//sees if username and password are correct
+	  if(checkUserPass($username,$password)==1){
+	  	$_SESSION['username'] = $username;
+	  	header("Location: home.php");
+	  }else 
+	   		echo "<br><div align=center><h4>Invalid username or password,  please try again</h4></div>"; 	
+		
+  }
+  
+  function checkUserPass($username,$password) {
+		
+			$dbconn =pg_connect("host=dbhost-pgsql.cs.missouri.edu dbname=cs3380f14grp13 user=cs3380f14grp13 password=quyRXtKs") or die("Could not connect: " . pg_last_error());
+			
+			$query = "SELECT password_hash FROM spices.Users WHERE username LIKE $1";
+			pg_prepare($dbconn,"login",$query);
+			
+			$username = pg_escape_string(htmlspecialchars($username));
+			$password = pg_escape_string(htmlspecialchars(sha1($password)));
+
+			$result = pg_execute($dbconn, "login", array($username));
+			$line = pg_fetch_array($result, null, PGSQL_ASSOC);
+			$pass = $line['password_hash'];
+			
+	if($pass === $password){   
+		return 1;
+	}else{
+		return 0;
+	}
+	
+	}
+  
+?>	
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -39,26 +82,8 @@
 	<script src="jquery-ui-1.11.2/jquery-ui.min.js"></script>
 	<script src="dist/js/bootstrap.js"></script>
 	<script>
-		/* Will create two dynamic tabs */
-		$(function() {
-			$( "#search-by-tabs,#tabs-1" ).tabs();
-		});
 		
-		/* Will highlight the search-by tabs which the user clicked on */
-		$(function() {
-			$( "#search-by li" ).click(function(){
-				$(this).addClass("active");
-				$("li").not(this).removeClass("active");
-			});
-		});
-		
-		/* Will highlight the alphabet tab which the user clicked on */
-		$(function() {
-			$( "#tabs-1 li" ).click(function(){
-				$(this).addClass("alpha-highlight");
-				$("li").not(this).removeClass("alpha-highlight");
-			});
-		});
+
 	</script>
 </head>
 <body>
@@ -66,7 +91,7 @@
 	<nav class="navbar navbar-inverse" role="navigation">
 	  <div class="container-fluid">
 	    <div class="navbar-header">
-	      <a class="navbar-brand" href="#">Home</a>
+	      <a class="navbar-brand" href="home.php">Home</a>
 	    </div>
 	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	      <ul class="nav navbar-nav">
@@ -74,7 +99,7 @@
   	        <li class="dropdown">
   	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Shop For Spices <span class="caret"></span></a>
   	          <ul class="dropdown-menu" role="menu">
-  	            <li><a href="#">By Alphabet</a></li>
+  	            <li><a href="alpha_category.php">By Alphabet</a></li>
 				<li class="divider"></li>
   	            <li><a href="#">By Category</a></li>
   	          </ul>
@@ -85,7 +110,11 @@
 			<!-- Redirect to About Us page -->
 	        <li><a href="#">About Us</a></li>
 			<!-- Redirect to Login page-->
-	        <li><a href="http://babbage.cs.missouri.edu/~cs3380f14grp13/cs3380/website-framework/login.php">Log Into Your Account</a></li>
+			<?php
+	        	$log_display = $_SESSION['username'] ? "Logout" : "Log Into Your Account";
+	        	echo $_SESSION['username'];
+	        ?>
+	        <li><a href="http://babbage.cs.missouri.edu/~cs3380f14grp13/cs3380/website-framework/login.php"><?=$log_display ?></a></li>
 	      </ul>
 	      <form class="navbar-form navbar-right" role="search">
 	        <div class="form-group">
@@ -103,69 +132,29 @@
 				</br>
 				</br>
 				</br>
-				</br>
                 <div class="account-wall">
                     <form class="form-signin" id='login' action="<?= $_SERVER['PHP_SELF'] ?>" method='post'>
                         <input type="text" name="username" class="form-control" id="username" placeholder="Username" required autofocus>
+                        </br>
                         <input type="password" name="password" class="form-control" id="password"placeholder="Password" required>
-                         <button class="btn btn-lg btn-primary btn-block" type="Submit" name='Submit' value='Submit'>
-                            Sign in</button>
+                        </br>
+                         <button class="btn btn-lg btn-primary btn-block" type="Submit" name='Submit' value='Submit'>Sign in</button>
                         <span class="clearfix"></span>
                     </form>
                 </div>
+                </br>
                 <a href="http://babbage.cs.missouri.edu/~cs3380f14grp13/cs3380/website-framework/registration.php" class="text-center new-account">Create an account </a>
             </div>
         </div>
     </div>
-<?php
-	session_start();
-	
-	if(isset($_SESSION['username'])) //if a session exists send client to home.php
-		printf("<script>location.href='mycategory.html'</script>");
 
-	if (isset( $_POST['Submit'])){
-		$username = htmlspecialchars($_POST['username']);
-		$password = htmlspecialchars($_POST['password']);
-		
-		//sees if username and password are correct
-	  if(checkUserPass($username,$password)==1){
-	  	$_SESSION['username'] = $username;
-	  	printf("<script>location.href='mycategory.html'</script>");
-	  }else 
-	  		echo "<br><div align=center><h4>Invalid username or password,  please try again</h4></div>"; 	
-		
-  }
-  
-  function checkUserPass($username,$password) {
-		
-			$dbconn =pg_connect("host=dbhost-pgsql.cs.missouri.edu dbname=cs3380f14grp13 user=cs3380f14grp13 password=quyRXtKs") or die("Could not connect: " . pg_last_error());
-			
-			$query = "SELECT password_hash FROM spices.Users WHERE username LIKE $1";
-			pg_prepare($dbconn,"login",$query);
-			
-			$username = pg_escape_string(htmlspecialchars($username));
-			$password = pg_escape_string(htmlspecialchars(sha1($password)));
-
-			$result = pg_execute($dbconn, "login", array($username));
-			$line = pg_fetch_array($result, null, PGSQL_ASSOC);
-			$pass = $line['password_hash'];
-			
-	if($pass === $password){   
-		return 1;
-	}else{
-		return 0;
-	}
-	
-	}
-  
-?>	
 	
 <!-- Bottom Navigation Bar -->
 	<nav class="navbar navbar-inverse navbar-fixed-bottom" role="navigation">
 	  <div class="container">
 	      <ul class="nav navbar-nav navbar-right">
 			<!-- Redirect to About Us page -->
-	        <li><a href="http://babbage.cs.missouri.edu/~cs3380f14grp13/cs3380/website-framework/logout.php">Logout</a></li>
+	        <li></li>
 		</ul>
 	  </div>
 	</nav>

@@ -1,3 +1,8 @@
+<?php
+	session_start();
+	$log_display = $_SESSION['username'] ? "Logout" : "Log Into Your Account";
+	$href_page = $_SESSION['username'] ? "logout.php" : "login.php";
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,16 +14,8 @@
 			padding: auto;
 			margin: auto;
 		}
-		/*#myCarousel{
-			width: 700px;
-			float:left;
-		}
-		#search-by-tabs{
-			display:inline;
-			float:left;
-			margin-left:10px;
-		}*/
-		.alpha-highlight{
+
+		.tabs-bg-highlight{
 			background-color: rgb(216, 226, 244);
 		}
 		.scale-img{
@@ -30,9 +27,11 @@
 	<script src="jquery-ui-1.11.2/jquery-ui.min.js"></script>
 	<script src="dist/js/bootstrap.js"></script>
 	<script>
-		/* Will create two dynamic tabs */
+		/* Will create three dynamic tabs */
 		$(function() {
-			$( "#search-by-tabs,#tabs-1" ).tabs();
+			$( "#search-by-tabs, #tabs-1" ).tabs();
+			$( "#tabs-2" ).tabs();
+			$( "#d-menu" ).tabs();
 		});
 		
 		/* Will highlight the search-by tabs which the user clicked on */
@@ -46,10 +45,55 @@
 		/* Will highlight the alphabet tab which the user clicked on */
 		$(function() {
 			$( "#tabs-1 li" ).click(function(){
-				$(this).addClass("alpha-highlight");
-				$("li").not(this).removeClass("alpha-highlight");
+				$(this).addClass("tabs-bg-highlight");
+				$("#tabs-1 li").not(this).removeClass("tabs-bg-highlight");
 			});
 		});
+		/* */
+		$(function() {
+			$( "#tabs-2 li" ).click(function(){
+				$(this).addClass("tabs-bg-highlight");
+				$("#tabs-2 li").not(this).removeClass("tabs-bg-highlight");
+			});
+		});
+	</script>
+	<script src="ajax.js"></script>
+	<script>
+		/* Will update the alphabet content box depending on the letter user chose to search by */
+		function updateAlpha(alphaId){
+			$.get("search_by_alphabet_handler.php",
+			{ "alphaId": alphaId },
+			function(data){
+				$('#'+alphaId).html(data);
+			});
+		}
+
+		/* Will update the category content box depending on the category user chose to search by */
+		function updateCategory(cId){
+			$.get("search_by_category_handler.php",
+			{ "cId": cId },
+			function(data){
+				$('#'+cId).html(data);
+			});
+		}
+		
+		/* Will apply the function updateAlpha on the <li> element that the user clicked on */
+		$(function(){
+			$("#alpha-tabs-list li").click(
+				function(){
+					updateAlpha(this.textContent);
+			});
+		});
+		
+		/* Will apply the function updateCategory on the <li> element that the user clicked on */
+		$(function(){
+			$("#category-tabs-list li").click(
+				function(){
+					console.log(this.textContent);
+					updateCategory(this.textContent);
+			});
+		});
+
 	</script>
 </head>
 <body>
@@ -57,17 +101,17 @@
 	<nav class="navbar navbar-inverse" role="navigation">
 	  <div class="container-fluid">
 	    <div class="navbar-header">
-	      <a class="navbar-brand" href="#">Home</a>
+	      <a class="navbar-brand" href="home.php">Home</a>
 	    </div>
 	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	      <ul class="nav navbar-nav">
 			 <!-- Drop down menu for user to choose search by alphabet or by category -->
   	        <li class="dropdown">
   	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Shop For Spices <span class="caret"></span></a>
-  	          <ul class="dropdown-menu" role="menu">
-  	            <li><a href="#">By Alphabet</a></li>
+  	          <ul id="d-menu" class="dropdown-menu" role="menu">
+  	            <li><a href="#alpha">By Alphabet</a></li>
 				<li class="divider"></li>
-  	            <li><a href="#">By Category</a></li>
+  	            <li><a href="#cate">By Category</a></li>
   	          </ul>
   	        </li>
 	        <li><a href="#">View Cart</a></li>
@@ -76,7 +120,7 @@
 			<!-- Redirect to About Us page -->
 	        <li><a href="#">About Us</a></li>
 			<!-- Redirect to Login page-->
-	        <li><a href="http://babbage.cs.missouri.edu/~cs3380f14grp13/cs3380/website-framework/login.php">Log Into Your Account</a></li>
+	        <li><a href= <?=$href_page?> ><?=$log_display ?></a></li>
 	      </ul>
 	      <form class="navbar-form navbar-right" role="search">
 	        <div class="form-group">
@@ -92,35 +136,18 @@
 		<div id="Title">
 			<h1>THE SPICE SHOP</h1>
 		</div>
-		
-		<div id="myCarousel" class="carousel slide">
-		  <ol class="carousel-indicators">
-		    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-		    <li data-target="#myCarousel" data-slide-to="1"></li>
-		    <li data-target="#myCarousel" data-slide-to="2"></li>
-		  </ol>
-	
-		  <div class="carousel-inner">
-		    <div class="active item"><img class="scale-img" src="https://farm6.staticflickr.com/5140/5461417415_b58a112fe1_b.jpg"></div>
-		    <div class="item"><img class="scale-img" src="https://farm4.staticflickr.com/3318/3346295578_2dcce20805_b.jpg"></div>
-		    <div class="item"><img class="scale-img" src="https://farm4.staticflickr.com/3221/2687570771_fc39dc2ee8_z.jpg?zz=1"></div>
-		  </div>
 
-		  <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-		  <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
-		</div>
-		
 		<div id="search-by-tabs">
 			<ul id="search-by" class="nav nav-tabs">
 		 	   <li class="active">
-		 		  <a href="#tabs-1">Alphabetical</a>
-		 	 </li>
-			  <li><a href="#tabs-2">By category</a></li>
+		 		  <a id="alpha" href="#tabs-1">Alphabetical</a>
+			  </li>
+			  <li><a id="cate" href="#tabs-2">By category</a></li>
 			</ul>
 			<div id="search-by-tab-content">
 				<div id="tabs-1">
-					<ul class="nav nav-tabs">
-				 	  <li class="alpha-highlight"><a href="#A">A</a></li>
+					<ul id="alpha-tabs-list" class="nav nav-tabs">
+				 	  <li class="tabs-bg-highlight"><a href="#A">A</a></li>
 					  <li><a href="#B">B</a></li>
 					  <li><a href="#C">C</a></li>
 					  <li><a href="#D">D</a></li>
@@ -148,7 +175,7 @@
 					  <li><a href="#Z">Z</a></li>
 					</ul>
 					<div id="alphabet-content-box">
-						<div id="A"></div>
+						<div id="A">Select a letter to start with.</div>
 						<div id="B"></div>
 						<div id="C"></div>
 						<div id="D"></div>
@@ -176,7 +203,46 @@
 						<div id="Z"></div>
 					</div>
 				</div>
-				<div id="tabs-2">Reserved for displaying all categories</div>
+				<div id="tabs-2">
+					<ul id="category-tabs-list" class="nav nav-tabs">
+					  <li class="tabs-bg-highlight"><a href="#Indian">Indian</a></li>
+					  <li><a href="#Middle-Eastern">Middle-Eastern</a></li>
+					  <li><a href="#Thai">Thai</a></li>
+					  <li><a href="#Scandinavian">Scandinavian</a></li>
+					  <li><a href="#Cajun">Cajun</a></li>
+					  <li><a href="#Mexican">Mexican</a></li>
+					  <li><a href="#Spanish">Spanish</a></li>
+					  <li><a href="#Greek-and-Turkish">Greek-and-Turkish</a></li>
+					  <li><a href="#Eastern-European">Eastern-European</a></li>
+					  <li><a href="#Caribbean">Caribbean</a></li>
+					  <li><a href="#Italian">Italian</a></li>
+					  <li><a href="#English">English</a></li>
+					  <li><a href="#German">German</a></li>
+					  <li><a href="#Irish">Irish</a></li>
+					  <li><a href="#Hungarian">Hungarian</a></li>
+					  <li><a href="#Chinese-and-Far-Eastern">Chinese-and-Far-Eastern</a></li>
+					  <li><a href="#French">French</a></li>
+					</ul>
+					<div id="alphabet-content-box">
+						<div id="Indian">Select a category to start with.</div>
+						<div id="Middle-Eastern"></div>
+						<div id="Thai"></div>
+						<div id="Scandinavian"></div>
+						<div id="Cajun"></div>
+						<div id="Mexican"></div>
+						<div id="Spanish"></div>
+						<div id="Greek-and-Turkish"></div>
+						<div id="Eastern-European"></div>
+						<div id="Caribbean"></div>
+						<div id="Italian"></div>
+						<div id="English"></div>
+						<div id="German"></div>
+						<div id="Irish"></div>
+						<div id="Hungarian">foo</div>
+						<div id="Chinese-and-Far-Eastern"></div>
+						<div id="French"></div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -185,10 +251,7 @@
 	<!-- Bottom Navigation Bar -->
 	<nav class="navbar navbar-inverse navbar-fixed-bottom" role="navigation">
 	  <div class="container">
-	      <ul class="nav navbar-nav navbar-right">
-			<!-- Redirect to About Us page -->
-	        <li><a href="http://babbage.cs.missouri.edu/~cs3380f14grp13/cs3380/website-framework/logout.php">Logout</a></li>
-		</ul>
+		  
 	  </div>
 	</nav>
 </body>
