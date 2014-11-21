@@ -158,7 +158,7 @@
 		{
 			addUser($username,$password,$email);               //adds user into database
 			$_SESSION['username'] = $username;
-			header("Location: mycategory.html");
+				printf("<script>location.href='mycategory.html'</script>");
 		}
 		else
 			echo "Username is already taken taken";

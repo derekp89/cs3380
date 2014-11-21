@@ -121,8 +121,8 @@
 	session_start();
 	
 	if(isset($_SESSION['username'])) //if a session exists send client to home.php
-		header("Location: mycategory.html");
-	
+		printf("<script>location.href='mycategory.html'</script>");
+
 	if (isset( $_POST['Submit'])){
 		$username = htmlspecialchars($_POST['username']);
 		$password = htmlspecialchars($_POST['password']);
@@ -130,7 +130,7 @@
 		//sees if username and password are correct
 	  if(checkUserPass($username,$password)==1){
 	  	$_SESSION['username'] = $username;
-	  	header("Location: mycategory.html");
+	  	printf("<script>location.href='mycategory.html'</script>");
 	  }else 
 	  		echo "<br><div align=center><h4>Invalid username or password,  please try again</h4></div>"; 	
 		
