@@ -7,13 +7,16 @@
 		or die('Could not connect:'.pg_last_error());
 		
 	//Selecting the name of spices by the alphabet
-	$result = pg_prepare($dbconn, "search_by_alpha", 'SELECT name, descr AS description, price, size FROM Spices.spices WHERE name LIKE $1');
+	$result = pg_prepare($dbconn, "search_by_alpha", 'SELECT name AS "Name", id FROM Spices.spices WHERE name LIKE $1');
 	$result = pg_execute($dbconn, "search_by_alpha", array($alphaId.'%'));
-
-	echo"<br><p>There are <i>".pg_num_rows($result)." </i>spices found.</p>\n";
+	
 ?>
 <!DOCTYPE html>
 <html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+</head>
 <body>
 	<table class="table table-hover">
 		<?php
@@ -21,18 +24,18 @@
 			echo "<thead>";
 			echo "\t<tr>\n";
 				$i = pg_num_fields($result);
-				for($j = 0; $j < $i; ++$j)
-					echo "\t\t<th>".pg_field_name($result,$j)."</th>\n";
+
+					echo "\t\t<th style=text-align:center>".pg_field_name($result,$j)."</th>\n";
 			echo "\t<tr>\n";
 			echo "</thead>";
 			
 			echo "<tbody>\n";		
-			while ($line = pg_fetch_array($result, null, PGSQL_ASSOC)){
-				echo "\t<tr>\n";
+			while ($line = pg_fetch_array($result, NULL, PGSQL_ASSOC)){
+				echo "\t<tr style=text-align:center>\n";
 				foreach($line as $col_value){
 					/* Will add a $ before each price */
-					if($col_value == $line['price']){
-						echo "\t\t<td>$".$col_value."</td>\n";
+					if($col_value == $line['id']){
+					
 					}
 					/* Will add "oz" after each size number */
 					else if($col_value == $line['size']){
@@ -40,9 +43,9 @@
 					}
 					/* Otherwise just print out the value */
 					else
-						echo "\t\t<td>".$col_value."</td>\n";
+						echo "\t\t<td><a href=http://babbage.cs.missouri.edu/~dmpkb4/k/cs3380/website-framework/spice.php/?id=". $line['id'] . ">".$col_value."</a></td>\n";
 				}	
-				echo "\t</tr>\n";
+				echo "\t</tr>\n ";
 			}
 			echo "</tbody>\n";
 		?>
