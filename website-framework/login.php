@@ -138,7 +138,7 @@
   
   function checkUserPass($username,$password) {
 		
-			$dbconn =pg_connect("host=dbhost-pgsql.cs.missouri.edu dbname=dmpkb4 user=dmpkb4 password=tigNzr1w") or die("Could not connect: " . pg_last_error());
+			$dbconn =pg_connect("host=dbhost-pgsql.cs.missouri.edu dbname=cs3380f14grp13 user=cs3380f14grp13 password=quyRXtKs") or die("Could not connect: " . pg_last_error());
 			
 			$query = "SELECT password_hash FROM spices.Users WHERE username LIKE $1";
 			pg_prepare($dbconn,"login",$query);

@@ -166,7 +166,7 @@
 	
 	function checkUsername($username){
 
-		$dbconn =pg_connect("host=dbhost-pgsql.cs.missouri.edu dbname=dmpkb4 user=dmpkb4 password=tigNzr1w") or die("Could not connect: " . pg_last_error());
+		$dbconn =pg_connect("host=dbhost-pgsql.cs.missouri.edu dbname=cs3380f14grp13 user=cs3380f14grp13 password=quyRXtKs") or die("Could not connect: " . pg_last_error());
 	
 		$username = pg_escape_string(htmlspecialchars($username));
 		$query = "SELECT * FROM spices.Users where username LIKE $1";
@@ -180,7 +180,7 @@
 
 	function addUser($username,$password, $email){
 
-		$dbconn =pg_connect("host=dbhost-pgsql.cs.missouri.edu dbname=dmpkb4 user=dmpkb4 password=tigNzr1w") or die("Could not connect: " . pg_last_error());
+		$dbconn =pg_connect("host=dbhost-pgsql.cs.missouri.edu dbname=cs3380f14grp13 user=cs3380f14grp13 password=quyRXtKs") or die("Could not connect: " . pg_last_error());
 		
 		$username = pg_escape_string(htmlspecialchars($username));
 		$password = pg_escape_string(htmlspecialchars(sha1($password)));
