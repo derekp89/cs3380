@@ -11,7 +11,7 @@
 		//sees if username and password are correct
 	  if(checkUserPass($username,$password)==1){
 	  	$_SESSION['username'] = $username;
-	  	header("Location: home.php");
+		header("Location: home.php");
 	  }else 
 	   		echo "<br><div align=center><h4>Invalid username or password,  please try again</h4></div>"; 	
 		
