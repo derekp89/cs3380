@@ -114,7 +114,7 @@
   	            <li><a href="#cate">By Category</a></li>
   	          </ul>
   	        </li>
-	        <li><a href="#">View Cart</a></li>
+	        <li><a href="cart.php">View Cart</a></li>
 	      </ul>
 	      <ul class="nav navbar-nav navbar-right">
 			<!-- Redirect to About Us page -->

@@ -42,7 +42,6 @@ if(isset($_POST["type"]) && $_POST["type"]=='add')
 	
 	
 	if ($line2['name']) { //we have the product info 
-		echo "hi";
 		//prepare array for the session variable
 		$new_product = array(
 									array(
