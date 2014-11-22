@@ -167,7 +167,7 @@ echo "							<h4 class=\"product-name\"><strong>".$line['name']."</strong></h4><
 echo "						</div>\n";
 echo "						<div class=\"col-xs-6\">\n";
 echo "							<div class=\"col-xs-6 text-right\">\n";
-echo "								<h6><strong>".$line['price']."<span class=\"text-muted\">x</span></strong></h6>\n";
+echo "								<h6><strong>$".$line['price']."<span class=\"text-muted\">x</span></strong></h6>\n";
 echo "							</div>\n";
 echo "							<div class=\"col-xs-4\">\n";
 echo "								<input type=\"text\" class=\"form-control input-sm\" value=\"".$cart_itm["qty"]."\">\n";
