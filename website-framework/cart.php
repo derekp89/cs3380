@@ -160,7 +160,7 @@ echo "					</div>\n";
 echo "				</div>\n";
 echo "				<div class=\"panel-body\">\n";
 echo "					<div class=\"row\">\n";
-echo "						<div class=\"col-xs-2\"><img class=\"img-responsive\" src=\"pics2/".$cart_itm["id"].".png\">\n";
+echo "						<div class=\"col-xs-2\"><img class=\"img-responsive\" style=\"width:60%;height:60%\"src=\"pics2/".$cart_itm["id"].".png\">\n";
 echo "						</div>\n";
 echo "						<div class=\"col-xs-4\">\n";
 echo "							<h4 class=\"product-name\"><strong>".$line['name']."</strong></h4><h4><small>".$line['descr']."</small></h4>\n";
