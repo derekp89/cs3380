@@ -178,7 +178,8 @@ echo "							</div>\n";
 echo "						</div>\n";
 echo "					</div>\n";
 
-
+			$subtotal = ($cart_itm["price"]*$cart_itm["qty"]);
+            $total = ($total + $subtotal);
             echo '<input type="hidden" name="item_name['.$cart_items.']" value="'.$line['name'].'" />';
             echo '<input type="hidden" name="item_code['.$cart_items.']" value="'.$line['id'].'" />';
             echo '<input type="hidden" name="item_desc['.$cart_items.']" value="'.$line['descr'].'" />';
@@ -205,8 +206,6 @@ echo "				</div>\n";
 echo "				<div class=\"panel-footer\">\n";
 echo "					<div class=\"row text-center\">\n";
 echo "						<div class=\"col-xs-9\">\n";
-			$subtotal = ($cart_itm["price"]*$cart_itm["qty"]);
-            $total = ($total + $subtotal);
 echo "							<h4 class=\"text-right\">Total <strong>$" .$total."</strong></h4>\n";
 echo "						</div>\n";
 echo "						<div class=\"col-xs-3\">\n";
