@@ -107,14 +107,71 @@ if(isset($_GET["removep"]) && isset($_GET["return_url"]) && isset($_SESSION["pro
 }
 
 ?>
+<?php
+	$log_display = $_SESSION['username'] ? "Logout" : "Log Into Your Account";
+	$href_page = $_SESSION['username'] ? "logout.php" : "login.php";
+?>
 <!DOCTYPE html>
 <html>
 <head>
+	<title>Browse Spices by Name, Category</title>
+	<style>
+		body { padding-bottom: 70px; }
+		#body_wrapper{
+			width: 1000px;
+			padding: auto;
+			margin: auto;
+		}
+		.scale-img{
+			width:1000px;
+		}
+	</style>
+	<link rel="stylesheet" type="text/css" href="dist/css/bootstrap.min.css"/>
+	<script src="jquery-ui-1.11.2/external/jquery/jquery.js"></script>
+	<script src="jquery-ui-1.11.2/jquery-ui.min.js"></script>
+	<script src="dist/js/bootstrap.js"></script>
+	<link rel="stylesheet" href="http://babbage.cs.missouri.edu/~dmpkb4/k/cs3380/website-framework/css/style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+	</style>
+
 </head>
-</script>
 <body>
+	<!-- Top Navigation Bar -->
+	<nav class="navbar navbar-inverse" role="navigation">
+	  <div class="container-fluid">
+	    <div class="navbar-header">
+	      <a class="navbar-brand" href="home.php">Home</a>
+	    </div>
+	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	      <ul class="nav navbar-nav">
+			 <!-- Drop down menu for user to choose search by alphabet or by category -->
+  	        <li class="dropdown">
+  	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Shop For Spices <span class="caret"></span></a>
+  	          <ul class="dropdown-menu" role="menu">
+  	            <li><a href="alpha_category.php">By Alphabet</a></li>
+				<li class="divider"></li>
+  	            <li><a href="alpha_category.php#">By Category</a></li>
+  	          </ul>
+  	        </li>
+	        <li><a href="../cart.php">View Cart</a></li>
+	      </ul>
+	      <ul class="nav navbar-nav navbar-right">
+			<!-- Redirect to About Us page -->
+	        <li><a href="#">About Us</a></li>
+			<!-- Redirect to Login page-->
+	        <li><a href= <?=$href_page?> ><?=$log_display ?></a></li>
+	      </ul>
+	      <form class="navbar-form navbar-right" role="search">
+	        <div class="form-group">
+	          <input type="text" class="form-control" placeholder="Enter Search Term">
+	        </div>
+	        <button type="submit" class="btn btn-default">Search</button>
+	      </form>
+	    </div><!-- /.navbar-collapse -->
+	  </div><!-- /.container-fluid -->
+	</nav>
+
     <table class="table table-hover">
         <div class="container">
             <div class="row">
@@ -159,34 +216,47 @@ if(isset($_GET["removep"]) && isset($_GET["return_url"]) && isset($_SESSION["pro
 
                         </div>
                     </div>
+				</div>
     </table>
 	
-	<div class="shopping-cart">
-<h2>Your Shopping Cart</h2>
+<div class="cart">
+<div class="cart-top">
+      <div class="cart-top-title">Your Shopping Cart</div>
+</div>
+<ul>
 <?php
 if(isset($_SESSION["products"]))
 {
     $total = 0;
-    echo '<ol>';
     foreach ($_SESSION["products"] as $cart_itm)
     {
-        echo '<li>';
-        echo '<span><a href="cart_update.php?removep='.$cart_itm["id"].'&return_url='.$current_url.'">&times;</a></span>';
-        echo '<h3>'.$cart_itm["name"].'</h3>';
-        echo '<div>Qty : '.$cart_itm["qty"].'</div>';
-        echo '<div >Price :$'.$cart_itm["price"].'</div>';
+        echo '<li class="cart-item">';
+        echo '<div class="cart-item-name"><span><a href="cart_update.php?removep='.$cart_itm["id"].'&return_url='.$current_url.'">&times;</a>'.$cart_itm["name"].'</span></div>';
+        echo '<div class="cart-item-desc">Qty : '.$cart_itm["qty"].'</div>';
+        echo '<div class="cart-item-price">Price :$'.$cart_itm["price"].'</div>';
         echo '</li>';
         $subtotal = ($cart_itm["price"]*$cart_itm["qty"]);
         $total = ($total + $subtotal);
     }
-    echo '</ol>';
-    echo '<span><strong>Total : $ '.$total.'</strong> <a href="http://babbage.cs.missouri.edu/~cs3380f14grp13/cs3380/website-framework/cart.php">Check-out!</a></span>';
-	echo '<span><a href="?emptycart=1&return_url='.$current_url.'">Empty Cart</a></span>';
+	echo '<div class="cart-bottom">';
+    echo '<strong>Total : $ '.$total.'</strong>';
+	echo ' <a href="../cart.php" class="cart-button">Check Out</a>';
+	echo '</br><span class="empty-cart"><a href="?emptycart=1&return_url='.$current_url.'">Empty Cart</a></span>';
 }else{
-    echo 'Your Cart is empty';
+    echo '<div class="cart-item-desc" align=center>Your Cart is empty</div>';
 }
 ?>
 </div>
-</body>
+</div>
 
+	<!-- Bottom Navigation Bar -->
+	<nav class="navbar navbar-inverse navbar-fixed-bottom" role="navigation">
+	  <div class="container">
+	      <ul class="nav navbar-nav navbar-right">
+			<!-- Redirect to About Us page -->
+	        <li></li>
+		</ul>
+	  </div>
+	</nav>
+</body>
 </html>
