@@ -70,13 +70,19 @@
 <div class="container-fluid">
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
+			<ul class="nav nav-sidebar">
+
+          </ul>
+		  <ul class="nav nav-sidebar">
+
+          </ul>
           <ul class="nav nav-sidebar">
             <li class="active"><a href="#">Account Home<span class="sr-only">(current)</span></a></li>
             <li><a href="#">Order History</a></li>
           </ul>
           <ul class="nav nav-sidebar">
             <li><a href="">Change Password</a></li>
-            <li><a href="">Address Book</a></li>
+            <li><a href="addressbook.php">Address Book</a></li>
             <li><a href="">Payment Types</a></li>
           </ul>
         </div>
