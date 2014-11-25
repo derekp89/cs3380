@@ -15,10 +15,21 @@ CREATE TABLE Spices(
   
 CREATE TABLE Users(
   email varchar(50),
-  name varchar(50),
   username varchar(50),
   password_hash CHAR(40) NOT NULL,
   user_Id serial PRIMARY KEY);
+  
+ CREATE TABLE Address(
+	fname varchar(50) NOT NULL,
+	lname varchar(50) NOT NULL,
+	street varchar(255) NOT NULL,
+	street2 varchar(50) NOT NULL,
+	zip int NOT NULL,
+	city varchar(255) NOT NULL,
+	state_code varchar(2) NOT NULL,
+	user_id int NOT NULL,
+	FOREIGN KEY (user_id) REFERENCES Users,
+	PRIMARY KEY(street,street2,zip);
   
 CREATE TABLE Category(
   category varchar(50) PRIMARY KEY );
@@ -39,7 +50,7 @@ CREATE TABLE Spice_Category(
 	FOREIGN KEY (user_id) REFERENCES Users);
 	
 CREATE TABLE Shipping(
-	street varchar(50),
+	street varchar(255),
 	city varchar(50),
 	state_code varchar(2),
 	zip int,
