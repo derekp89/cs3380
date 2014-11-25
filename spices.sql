@@ -29,7 +29,7 @@ CREATE TABLE Users(
 	state_code varchar(2) NOT NULL,
 	user_id int NOT NULL,
 	FOREIGN KEY (user_id) REFERENCES Users,
-	PRIMARY KEY(street,street2,zip);
+	PRIMARY KEY(street,street2,zip));
   
 CREATE TABLE Category(
   category varchar(50) PRIMARY KEY );
