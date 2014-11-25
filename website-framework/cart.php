@@ -120,7 +120,7 @@ $href_page = $_SESSION['username'] ? "logout.php" : "login.php";
 	      <ul class="nav navbar-nav navbar-right">
 		  <!-- Redirect to User account page -->
 		  <?php  if($_SESSION['username']){?>
-			<li><a href="#"><?php echo ucfirst($_SESSION['username']); ?>'s Account</a></li>
+			<li><a href="account.php"><?php echo ucfirst($_SESSION['username']); ?>'s Account</a></li>
 			<?php } ?>
 			<!-- Redirect to About Us page -->
 	        <li><a href="#">About Us</a></li>
