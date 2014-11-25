@@ -186,10 +186,11 @@ if(isset($_GET["removep"]) && isset($_GET["return_url"]) && isset($_SESSION["pro
                 </div>
                 <div class="col-md-9">
                     <div class="thumbnail">
-                        <img class="img-responsive" src="http://placehold.it/800x300" alt="">
+					<?php $line = pg_fetch_array($result, NULL, PGSQL_ASSOC);
+                     echo  "<img class=\"img-responsive\" style=\"width:50%;height:50%\"src=\"../bigpic/".$line["id"].".png\">\n"; ?>
                         <div class="caption-full">
-						<form id="update" method="post" action="">
-						<?php $line = pg_fetch_array($result, NULL, PGSQL_ASSOC);
+						<form id="update" method="post" action="">		
+						<?php
 								if($line['size'] != null){
 									echo "<h4 class=pull-right>".$line['size']." oz.</h4>";
 								}
