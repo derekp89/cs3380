@@ -240,7 +240,7 @@ if(isset($_SESSION["products"]))
         $total = ($total + $subtotal);
     }
 	echo '<div class="cart-bottom">';
-    echo '<strong>Total : $ '.$total.'</strong>';
+    echo '<strong>Total : $'.number_format($total, 2).'</strong>';
 	echo ' <a href="cart.php" class="cart-button">Check Out</a>';
 	echo '</br><span class="empty-cart"><a href="?emptycart=1&return_url='.$current_url.'">Empty Cart</a></span>';
 }else{
