@@ -114,7 +114,7 @@
 	        	$log_display = $_SESSION['username'] ? "Logout" : "Log Into Your Account";
 	        	echo $_SESSION['username'];
 	        ?>
-	        <li><a href="http://babbage.cs.missouri.edu/~cs3380f14grp13/cs3380/website-framework/login.php"><?=$log_display ?></a></li>
+	        <li><a href="login.php"><?=$log_display ?></a></li>
 	      </ul>
 	      <form class="navbar-form navbar-right" role="search">
 	        <div class="form-group">
@@ -143,7 +143,7 @@
                     </form>
                 </div>
                 </br>
-                <a href="http://babbage.cs.missouri.edu/~cs3380f14grp13/cs3380/website-framework/registration.php" class="text-center new-account">Create an account </a>
+                <a href="registration.php" class="text-center new-account">Create an account </a>
             </div>
         </div>
     </div>
