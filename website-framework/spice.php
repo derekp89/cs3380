@@ -127,9 +127,9 @@ if(isset($_GET["removep"]) && isset($_GET["return_url"]) && isset($_SESSION["pro
 		}
 	</style>
 	<link rel="stylesheet" type="text/css" href="dist/css/bootstrap.min.css"/>
-	<script src="../jquery-ui-1.11.2/external/jquery/jquery.js"></script>
-	<script src="../jquery-ui-1.11.2/jquery-ui.min.js"></script>
-	<script src="../dist/js/bootstrap.js"></script>
+	<script src="jquery-ui-1.11.2/external/jquery/jquery.js"></script>
+	<script src="jquery-ui-1.11.2/jquery-ui.min.js"></script>
+	<script src="dist/js/bootstrap.js"></script>
 	<link rel="stylesheet" href="http://babbage.cs.missouri.edu/~dmpkb4/k/cs3380/website-framework/css/style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
@@ -149,12 +149,12 @@ if(isset($_GET["removep"]) && isset($_GET["return_url"]) && isset($_SESSION["pro
   	        <li class="dropdown">
   	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Shop For Spices <span class="caret"></span></a>
   	          <ul class="dropdown-menu" role="menu">
-  	            <li><a href="../alpha_category.php">By Alphabet</a></li>
+  	            <li><a href="alpha_category.php">By Alphabet</a></li>
 				<li class="divider"></li>
-  	            <li><a href="../alpha_category.php#">By Category</a></li>
+  	            <li><a href="alpha_category.php#">By Category</a></li>
   	          </ul>
   	        </li>
-	        <li><a href="../cart.php">View Cart</a></li>
+	        <li><a href="cart.php">View Cart</a></li>
 	      </ul>
 	      <ul class="nav navbar-nav navbar-right">
 			<!-- Redirect to About Us page -->
@@ -187,7 +187,7 @@ if(isset($_GET["removep"]) && isset($_GET["return_url"]) && isset($_SESSION["pro
                 <div class="col-md-9">
                     <div class="thumbnail">
 					<?php $line = pg_fetch_array($result, NULL, PGSQL_ASSOC);
-                     echo  "<img class=\"img-responsive\" style=\"width:50%;height:50%\"src=\"../bigpic/".$line["id"].".png\">\n"; ?>
+                     echo  "<img class=\"img-responsive\" style=\"width:50%;height:50%\"src=\"bigpic/".$line["id"].".png\">\n"; ?>
                         <div class="caption-full">
 						<form id="update" method="post" action="">		
 						<?php
@@ -241,7 +241,7 @@ if(isset($_SESSION["products"]))
     }
 	echo '<div class="cart-bottom">';
     echo '<strong>Total : $ '.$total.'</strong>';
-	echo ' <a href="../cart.php" class="cart-button">Check Out</a>';
+	echo ' <a href="cart.php" class="cart-button">Check Out</a>';
 	echo '</br><span class="empty-cart"><a href="?emptycart=1&return_url='.$current_url.'">Empty Cart</a></span>';
 }else{
     echo '<div class="cart-item-desc" align=center>Your Cart is empty</div>';

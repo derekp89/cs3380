@@ -39,7 +39,7 @@
 					}
 					/* Otherwise just print out the value */
 					else
-						echo "\t\t<td><a href=spice.php/?id=". $line['id'] . ">".$col_value."</a></td>\n";
+						echo "\t\t<td><a href=spice.php?id=". $line['id'] . ">".$col_value."</a></td>\n";
 				}	
 				echo "\t</tr>\n ";
 			}
