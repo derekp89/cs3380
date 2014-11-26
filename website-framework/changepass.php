@@ -184,21 +184,21 @@ function checkConfirm($npass,$confirm) {
 			<div class="row clearfix">
 				<div class="col-md-6 column">
 					<div class="form-group">
-						<label for="cpass">Current Password</label><input class="form-control" name="cpass" id="cpass" type="text" required/>
+						<label for="cpass">Current Password</label><input class="form-control" name="cpass" id="cpass" type="password" required/>
 					</div>
 				</div>
 			</div>
 			<div class="row clearfix">
 				<div class="col-md-6 column">
 					<div class="form-group">
-						<label for="npass">New Password</label><input class="form-control" name="npass" id="npass" type="text" required/>
+						<label for="npass">New Password</label><input class="form-control" name="npass" id="npass" type="password" required/>
 					</div>
 				</div>
 			</div>
 			<div class="row clearfix">
 				<div class="col-md-6 column">
 					<div class="form-group">
-						<label for="confirm">Confirm Password</label><input class="form-control" name="confirm" id="confirm" type="text" required/>
+						<label for="confirm">Confirm Password</label><input class="form-control" name="confirm" id="confirm" type="password" required/>
 					</div>
 				</div>
 			</div>
