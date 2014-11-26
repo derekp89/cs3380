@@ -11,58 +11,35 @@
 	
 	$dbconn =pg_connect("host=dbhost-pgsql.cs.missouri.edu dbname=cs3380f14grp13 user=cs3380f14grp13 password=quyRXtKs") or die("Could not connect: " . pg_last_error());
 	
-	$states = array (
-            'AL'=>'Alabama',
-            'AK'=>'Alaska',
-            'AZ'=>'Arizona',
-            'AR'=>'Arkansas',
-            'CA'=>'California',
-            'CO'=>'Colorado',
-            'CT'=>'Connecticut',
-            'DE'=>'Delaware',
-            'DC'=>'District Of Columbia',
-            'FL'=>'Florida',
-            'GA'=>'Georgia',
-            'HI'=>'Hawaii',
-            'ID'=>'Idaho',
-            'IL'=>'Illinois',
-            'IN'=>'Indiana',
-            'IA'=>'Iowa',
-            'KS'=>'Kansas',
-            'KY'=>'Kentucky',
-            'LA'=>'Louisiana',
-            'ME'=>'Maine',
-            'MD'=>'Maryland',
-            'MA'=>'Massachusetts',
-            'MI'=>'Michigan',
-            'MN'=>'Minnesota',
-            'MS'=>'Mississippi',
-            'MO'=>'Missouri',
-            'MT'=>'Montana',
-            'NE'=>'Nebraska',
-            'NV'=>'Nevada',
-            'NH'=>'New Hampshire',
-            'NJ'=>'New Jersey',
-            'NM'=>'New Mexico',
-            'NY'=>'New York',
-            'NC'=>'North Carolina',
-            'ND'=>'North Dakota',
-            'OH'=>'Ohio',
-            'OK'=>'Oklahoma',
-            'OR'=>'Oregon',
-            'PA'=>'Pennsylvania',
-            'RI'=>'Rhode Island',
-            'SC'=>'South Carolina',
-            'SD'=>'South Dakota',
-            'TN'=>'Tennessee',
-            'TX'=>'Texas',
-            'UT'=>'Utah',
-            'VT'=>'Vermont',
-            'VA'=>'Virginia',
-            'WA'=>'Washington',
-            'WV'=>'West Virginia',
-            'WI'=>'Wisconsin',
-            'WY'=>'Wyoming',);
+	$cardType = array (
+			'Visa'=>'Visa',
+			'Mastercard'=>'Mastercard',
+			'Discover'=>'Discover',
+			'Amex'=>'American Express',
+            );
+			
+	$year = array (
+			'2014'=>'2014',
+			'2015'=>'2015',
+			'2016'=>'2016',
+			'2017'=>'2017',
+			'2018'=>'2018',
+            );
+			
+	$month = array (
+			'01'=>'Jan',
+			'02'=>'Feb',
+			'03'=>'Mar',
+			'04'=>'Apr',
+			'05'=>'May',
+			'06'=>'Jun',
+			'07'=>'Jul',
+			'08'=>'Aug',
+			'09'=>'Sep',
+			'10'=>'Oct',
+			'11'=>'Nov',
+			'12'=>'Dec',
+            );
 		
 		$username = $_SESSION['username'];
 		$getID = pg_prepare($dbconn, "getID", "SELECT user_Id FROM spices.Users where username LIKE $1");
@@ -70,7 +47,7 @@
 		$x = pg_fetch_array($getID, NULL, PGSQL_ASSOC);
 		$id = $x["user_id"];
 		
-		$getArray = pg_prepare($dbconn, "getArray", "SELECT * FROM spices.Address where user_Id = $1");
+		$getArray = pg_prepare($dbconn, "getArray", "SELECT * FROM spices.cards where user_id = $1");
 		$getArray = pg_execute($dbconn,"getArray",array($id));
 
 
@@ -80,21 +57,24 @@ if (isset( $_POST['Submit'])){
 		
 		$fname = htmlspecialchars($_POST['fname']);
 		$lname = htmlspecialchars($_POST['lname']);
-		$street = htmlspecialchars($_POST['address']);
-		$street2 = htmlspecialchars($_POST['address2']);
-		$city = htmlspecialchars($_POST['city']);
-		$state = htmlspecialchars($_POST['state']);
-		$zip = htmlspecialchars($_POST['zip']);
+		$cardNumber = htmlspecialchars($_POST['cardNumber']);
+		$cardType = htmlspecialchars($_POST['cardType']);
+		$expMonth = htmlspecialchars($_POST['expMonth']);
+		$expYear = htmlspecialchars($_POST['expYear']);
+		$securityCode = htmlspecialchars($_POST['securityCode']);
+		
+		$name = $fname . ' ' . $lname;
 		
 		
-		if(checkAdd($street,$street2,$zip,$id)==0)
+		if(checkCard($cardNumber)==0)
 		{
-			addAddress($fname,$lname,$city,$street,$street2,$zip,$state,$id);
+			addCard($name,$cardNumber,$cardType,$expMonth,$expYear,$securityCode,$id);
 			header("Location:" . $_SERVER["REQUEST_URI"]);
 			
 		}
 		else
 			$msg="Address already exists";
+
 	}
 	
 if (isset( $_POST['Delete'])){
@@ -103,45 +83,41 @@ if (isset( $_POST['Delete'])){
 	
 	$index_id = htmlspecialchars($_POST['id']);
 	
-	pg_prepare($dbconn, "add_address","DELETE FROM spices.address WHERE index_id = $1");
-	pg_execute($dbconn, "add_address",array($index_id));
+	pg_prepare($dbconn, "del_card","DELETE FROM spices.cards WHERE cardNumber = $1");
+	pg_execute($dbconn, "del_card",array($index_id));
 	
 	header("Location:" . $_SERVER["REQUEST_URI"]);
 
 	}
 	
-function checkAdd($street,$street2,$zip,$id){
+function checkCard($cardNumber){
 
 		$dbconn =pg_connect("host=dbhost-pgsql.cs.missouri.edu dbname=cs3380f14grp13 user=cs3380f14grp13 password=quyRXtKs") or die("Could not connect: " . pg_last_error());
 	
-		$user_id = pg_escape_string(htmlspecialchars($id));
-		$street = pg_escape_string(htmlspecialchars($street));
-		$street2 = pg_escape_string(htmlspecialchars($street2));
-		$zip = pg_escape_string(htmlspecialchars($zip));
+		$cardNumber = pg_escape_string(htmlspecialchars($cardNumber));
 		
-		$result = pg_prepare($dbconn, "check_address","SELECT * FROM spices.Address WHERE user_id = $1 AND street = $2 AND street2 = $3 AND zip = $4");
-		$result = pg_execute($dbconn,"check_address",array($user_id,$street,$street2,$zip));
+		$result = pg_prepare($dbconn, "check_card","SELECT * FROM spices.cards WHERE cardNumber like $1");
+		$result = pg_execute($dbconn,"check_card",array($cardNumber));
 		if(pg_num_rows($result)==0)
 			return 0;
 		else
 			return 1;
 	}
 	
-function addAddress($fname,$lname,$city,$street,$street2,$zip,$state,$id){
+function addCard($name,$cardNumber,$cardType,$expMonth,$expYear,$securityCode,$id){
 
 		$dbconn =pg_connect("host=dbhost-pgsql.cs.missouri.edu dbname=cs3380f14grp13 user=cs3380f14grp13 password=quyRXtKs") or die("Could not connect: " . pg_last_error());
 		
 		$user_id = pg_escape_string(htmlspecialchars($id));
-		$street = pg_escape_string(htmlspecialchars($street));
-		$street2 = pg_escape_string(htmlspecialchars($street2));
-		$fname = pg_escape_string(htmlspecialchars($fname));
-		$lname = pg_escape_string(htmlspecialchars($lname));
-		$city = pg_escape_string(htmlspecialchars($city));
-		$state = pg_escape_string(htmlspecialchars($state));
-		$zip = pg_escape_string(htmlspecialchars($zip));	
+		$cardNumber = pg_escape_string(htmlspecialchars($cardNumber));
+		$cardType = pg_escape_string(htmlspecialchars($cardType));
+		$name = pg_escape_string(htmlspecialchars($name));
+		$expMonth = pg_escape_string(htmlspecialchars($expMonth));
+		$expYear = pg_escape_string(htmlspecialchars($expYear));
+		$securityCode = pg_escape_string(htmlspecialchars($securityCode));	
 
-		pg_prepare($dbconn, "add_address","INSERT INTO spices.address (fname, lname, street, street2, city, state_code, zip, user_Id) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)");
-		pg_execute($dbconn, "add_address",array($fname,$lname, $street, $street2, $city, $state, $zip, $user_id));
+		pg_prepare($dbconn, "add_cards", "INSERT INTO spices.cards (cardOwner, cardNumber, cardType, expMonth, expYear, securityNo, user_id) VALUES ($1,$2,$3,$4,$5,$6,$7)");
+		pg_execute($dbconn, "add_cards",array($name, $cardNumber, $cardType, $expMonth, $expYear, $securityCode, $user_id));
 	}
 
 ?>
@@ -226,12 +202,12 @@ function addAddress($fname,$lname,$city,$street,$street2,$zip,$state,$id){
           </ul>
           <ul class="nav nav-sidebar">
             <li><a href="">Change Password</a></li>
-            <li class="active"><a href="addressbook.php">Address Book<span class="sr-only">(current)</span></a></li>
-            <li><a href="payment.php">Payment Types</a></li>
+            <li><a href="addressbook.php">Address Book</a></li>
+            <li class="active"><a href="">Payment Types<span class="sr-only">(current)</span></a></li>
           </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h1 class="page-header">Address Book</h1>
+          <h1 class="page-header">Payment Types</h1>
 		  </div>
     </div>
 </div>
@@ -242,27 +218,27 @@ function addAddress($fname,$lname,$city,$street,$street2,$zip,$state,$id){
 	<div class="row clearfix">
 		<div class="col-md-12 column">
 
-
+			
 			<div class="row clearfix">
 				<div class="col-md-4 column">
 					<form action="<?= $_SERVER['PHP_SELF'] ?>" method='post'>
 						<?php
 								echo "<hr>";
-                                echo $y["fname"] . " " .  $y["lname"];
+                                echo "<strong>Owner: </strong>".$y["cardowner"];
 								echo "<br>";
-								echo $y["street"] . " " .  $y["street2"];
+								echo "<strong>Card ending in: </strong>".substr($y["cardnumber"], -4 );
 								echo "<br>";
-								echo $y["city"] . ", " .  $y["state_code"] . "  " . $y["zip"] ;
+								echo "<strong>Expires: </strong>".$y["expmonth"] . "/" .  $y["expyear"] . "  " . $y["zip"] ;
 								echo "<br>";
 								echo "<button type=\"submit\" name=\"Delete\" value=\"Delete\"class=\"btn btn-default\">Delete</button>";
-								echo '<input type="hidden" name="id" value="'.$y['index_id'].'">';
+								echo '<input type="hidden" name="id" value="'.$y['cardnumber'].'">';
 								echo "</hr>";
 								echo "</form>";
 						?>
 				</div>
 		</div><?php
 								}?>	
-			<h3 class="page-header">Enter New Address</h1>
+			<h3 class="page-header">Enter New Payment Method</h1>
 			<form id='address' action="<?= $_SERVER['PHP_SELF'] ?>" method='post'>
 			<div class="row clearfix">
 				<div class="col-md-6 column">
@@ -277,40 +253,52 @@ function addAddress($fname,$lname,$city,$street,$street2,$zip,$state,$id){
 				</div>
 			</div>
 			<div class="row clearfix">
-				<div class="col-md-12 column">
+				<div class="col-md-6 column">
 					<div class="form-group">
-						<label for="address">Address</label><input class="form-control" name="address" id="address" type="text" required/>
+						<label for="cardNumber">Card Number</label><input class="form-control" name="cardNumber" id="cardNumber" type="text" required/>
 					</div>
 				</div>
 			</div>
 			<div class="row clearfix">
-				<div class="col-md-12 column">
+				<div class="col-md-2 column">
 					<div class="form-group">
-						<label for="address2">Address #2</label><input class="form-control"  name="address2" id="address2" type="text" />
-					</div>
-				</div>
-			</div>
-			<div class="row clearfix">
-				<div class="col-md-4 column">
-					<div class="form-group">
-						<label for="city">City</label><input class="form-control" id="city" name="city" type="text" required/>
-					</div>
-				</div>
-				<div class="col-md-4 column">
-					<div class="form-group">
-						<label for="state">State</label><select  class="form-control" name="state">
+						<label for="cardType">Card Type</label><select  class="form-control" name="cardType">
 								<option value="">Select</option>
 								<?php
-									foreach($states as $key => $value):
+									foreach($cardType as $key => $value):
 									echo '<option value="'.$key.'">'.$value.'</option>'; //close your tags!!
 									endforeach;
 									?>
 							</select>
 					</div>
 				</div>
-				<div class="col-md-4 column">
+				<div class="col-md-2 column">
 					<div class="form-group">
-						<label for="zip">Zip code</label><input class="form-control" id="zip" name="zip" type="number" required/>
+						<label for="expMonth">Exp Month</label><select  class="form-control" name="expMonth">
+								<option value="">Select</option>
+								<?php
+									foreach($month as $key2 => $value2):
+									echo '<option value="'.$key2.'">'.$value2.'</option>'; //close your tags!!
+									endforeach;
+									?>
+							</select>
+					</div>
+				</div>
+				<div class="col-md-2 column">
+					<div class="form-group">
+						<label for="expYear">Exp Year</label><select  class="form-control" name="expYear">
+								<option value="">Select</option>
+								<?php
+									foreach($year as $key2 => $value2):
+									echo '<option value="'.$key2.'">'.$value2.'</option>'; //close your tags!!
+									endforeach;
+									?>
+							</select>
+					</div>
+				</div>
+				<div class="col-md-2 column">
+					<div class="form-group">
+						<label for="securityCode">Security Code</label><input class="form-control" id="securityCode" name="securityCode" type="number"  pattern=".{3,3}" required title="3 characters" required/>
 					</div>
 				</div>
 			</div>

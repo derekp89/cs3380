@@ -86,7 +86,7 @@
           <ul class="nav nav-sidebar">
             <li><a href="">Change Password</a></li>
             <li><a href="addressbook.php">Address Book</a></li>
-            <li><a href="">Payment Types</a></li>
+            <li><a href="payment.php">Payment Types</a></li>
           </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
