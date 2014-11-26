@@ -28,8 +28,8 @@ CREATE TABLE Users(
 	city varchar(255) NOT NULL,
 	state_code varchar(2) NOT NULL,
 	user_id int NOT NULL,
-	FOREIGN KEY (user_id) REFERENCES Users,
-	PRIMARY KEY(street,street2,zip));
+	index_id serial PRIMARY KEY,
+	FOREIGN KEY (user_id) REFERENCES Users);
   
 CREATE TABLE Category(
   category varchar(50) PRIMARY KEY );

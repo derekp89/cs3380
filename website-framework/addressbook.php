@@ -2,8 +2,10 @@
 	session_start();
 	$log_display = $_SESSION['username'] ? "Logout" : "Log Into Your Account";
 	$href_page = $_SESSION['username'] ? "logout.php" : "login.php";
-
-$states = array (
+	
+	$dbconn =pg_connect("host=dbhost-pgsql.cs.missouri.edu dbname=cs3380f14grp13 user=cs3380f14grp13 password=quyRXtKs") or die("Could not connect: " . pg_last_error());
+	
+	$states = array (
             'AL'=>'Alabama',
             'AK'=>'Alaska',
             'AZ'=>'Arizona',
@@ -55,6 +57,16 @@ $states = array (
             'WV'=>'West Virginia',
             'WI'=>'Wisconsin',
             'WY'=>'Wyoming',);
+		
+		$username = $_SESSION['username'];
+		$getID = pg_prepare($dbconn, "getID", "SELECT user_Id FROM spices.Users where username LIKE $1");
+		$getID = pg_execute($dbconn,"getID",array($username));
+		$x = pg_fetch_array($getID, NULL, PGSQL_ASSOC);
+		$id = $x["user_id"];
+		
+		$getArray = pg_prepare($dbconn, "getArray", "SELECT * FROM spices.Address where user_Id = $1");
+		$getArray = pg_execute($dbconn,"getArray",array($id));
+
 
 if (isset( $_POST['Submit'])){
 		
@@ -67,19 +79,23 @@ if (isset( $_POST['Submit'])){
 		$city = htmlspecialchars($_POST['city']);
 		$state = htmlspecialchars($_POST['state']);
 		$zip = htmlspecialchars($_POST['zip']);
-		$username = $_SESSION['username'];
 		
-		$result = pg_prepare($dbconn, "check_u_name", "SELECT user_Id FROM spices.Users where username LIKE $1");
-		$result = pg_execute($dbconn,"check_u_name",array($username));
-		$line = pg_fetch_array($result, NULL, PGSQL_ASSOC);
-		$id = $line["user_id"];
 		
 		if(checkAdd($street,$street2,$zip,$id)==0)
 		{
 			addAddress($fname,$lname,$city,$street,$street2,$zip,$state,$id);
+			header("Location: home.php");
+			
 		}
 		else
 			$msg="Address already exists";
+	}
+	
+if (isset( $_POST['Delete'])){
+		
+
+		
+
 	}
 	
 function checkAdd($street,$street2,$zip,$id){
@@ -193,7 +209,7 @@ function addAddress($fname,$lname,$city,$street,$street2,$zip,$state,$id){
 
           </ul>
 		  <ul class="nav nav-sidebar">
-            <li><a href="#">Account Home</a></li>
+            <li><a href="account.php">Account Home</a></li>
             <li><a href="#">Order History</a></li>
           </ul>
           <ul class="nav nav-sidebar">
@@ -209,43 +225,34 @@ function addAddress($fname,$lname,$city,$street,$street2,$zip,$state,$id){
 </div>
 
 <div class="container">
+			<?php while ($y = pg_fetch_array($getArray, NULL, PGSQL_ASSOC)){
+								?>
 	<div class="row clearfix">
 		<div class="col-md-12 column">
+
 			<div class="row clearfix">
 				<div class="col-md-4 column">
-					<h2>
-						Heading
-					</h2>
-					<p>
-						Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-					</p>
-					<p>
-						<a class="btn" href="#">View details »</a>
-					</p>
+						<?php
+								echo "<hr>";
+                                echo $y["fname"] . " " .  $y["lname"];
+								echo "<br>";
+								echo $y["street"] . " " .  $y["street2"];
+								echo "<br>";
+								echo $y["city"] . ", " .  $y["state_code"] . "  " . $y["zip"] ;
+								echo "<br>";
+								echo "<button type=\"submit\" name=\"Delete\" value=\"Delete\"class=\"btn btn-default\">Delete</button><button type=\"submit\" name=\"Edit\" value=\"Edit\"class=\"btn btn-default\">Edit</button>";
+								echo "</hr>";
+						?>
 				</div>
-				<div class="col-md-4 column">
-					<h2>
-						Heading
-					</h2>
-					<p>
-						Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-					</p>
-					<p>
-						<a class="btn" href="#">View details »</a>
-					</p>
-				</div>
-				<div class="col-md-4 column">
-					<h2>
-						Heading
-					</h2>
-					<p>
-						Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-					</p>
-					<p>
-						<a class="btn" href="#">View details »</a>
-					</p>
-				</div>
-			</div>
+		</div><?php
+								}?>
+		
+		<div class="col-md-4 column"><br><br>
+		</div>
+		<div class="col-md-4 column">
+		</div>
+	</div>
+			
 			<h3 class="page-header">Enter New Address</h1>
 			<form id='address' action="<?= $_SERVER['PHP_SELF'] ?>" method='post'>
 			<div class="row clearfix">
@@ -270,7 +277,7 @@ function addAddress($fname,$lname,$city,$street,$street2,$zip,$state,$id){
 			<div class="row clearfix">
 				<div class="col-md-12 column">
 					<div class="form-group">
-						<label for="address2">Address #2</label><input class="form-control"  name="address2" id="address2" type="text" required/>
+						<label for="address2">Address #2</label><input class="form-control"  name="address2" id="address2" type="text" />
 					</div>
 				</div>
 			</div>
@@ -294,7 +301,7 @@ function addAddress($fname,$lname,$city,$street,$street2,$zip,$state,$id){
 				</div>
 				<div class="col-md-4 column">
 					<div class="form-group">
-						<label for="zip">Zip code</label><input class="form-control" id="zip" name="zip" type="text" required/>
+						<label for="zip">Zip code</label><input class="form-control" id="zip" name="zip" type="number" required/>
 					</div>
 				</div>
 			</div>
