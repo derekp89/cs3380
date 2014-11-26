@@ -84,7 +84,7 @@ if (isset( $_POST['Submit'])){
 		if(checkAdd($street,$street2,$zip,$id)==0)
 		{
 			addAddress($fname,$lname,$city,$street,$street2,$zip,$state,$id);
-			header("Location: home.php");
+			header("Location:" . $_SERVER["REQUEST_URI"]);
 			
 		}
 		else
@@ -230,6 +230,7 @@ function addAddress($fname,$lname,$city,$street,$street2,$zip,$state,$id){
 	<div class="row clearfix">
 		<div class="col-md-12 column">
 
+
 			<div class="row clearfix">
 				<div class="col-md-4 column">
 						<?php
@@ -247,11 +248,7 @@ function addAddress($fname,$lname,$city,$street,$street2,$zip,$state,$id){
 		</div><?php
 								}?>
 		
-		<div class="col-md-4 column"><br><br>
-		</div>
-		<div class="col-md-4 column">
-		</div>
-	</div>
+
 			
 			<h3 class="page-header">Enter New Address</h1>
 			<form id='address' action="<?= $_SERVER['PHP_SELF'] ?>" method='post'>
