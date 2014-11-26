@@ -93,8 +93,14 @@ if (isset( $_POST['Submit'])){
 	
 if (isset( $_POST['Delete'])){
 		
-
-		
+	$dbconn =pg_connect("host=dbhost-pgsql.cs.missouri.edu dbname=cs3380f14grp13 user=cs3380f14grp13 password=quyRXtKs") or die("Could not connect: " . pg_last_error());
+	
+	$index_id = htmlspecialchars($_POST['id']);
+	
+	pg_prepare($dbconn, "add_address","DELETE FROM spices.address WHERE index_id = $1");
+	pg_execute($dbconn, "add_address",array($index_id));
+	
+	header("Location:" . $_SERVER["REQUEST_URI"]);
 
 	}
 	
@@ -233,6 +239,7 @@ function addAddress($fname,$lname,$city,$street,$street2,$zip,$state,$id){
 
 			<div class="row clearfix">
 				<div class="col-md-4 column">
+					<form action="<?= $_SERVER['PHP_SELF'] ?>" method='post'>
 						<?php
 								echo "<hr>";
                                 echo $y["fname"] . " " .  $y["lname"];
@@ -241,15 +248,14 @@ function addAddress($fname,$lname,$city,$street,$street2,$zip,$state,$id){
 								echo "<br>";
 								echo $y["city"] . ", " .  $y["state_code"] . "  " . $y["zip"] ;
 								echo "<br>";
-								echo "<button type=\"submit\" name=\"Delete\" value=\"Delete\"class=\"btn btn-default\">Delete</button><button type=\"submit\" name=\"Edit\" value=\"Edit\"class=\"btn btn-default\">Edit</button>";
+								echo "<button type=\"submit\" name=\"Delete\" value=\"Delete\"class=\"btn btn-default\">Delete</button>";
+								echo '<input type="hidden" name="id" value="'.$y['index_id'].'">';
 								echo "</hr>";
+								echo "</form>";
 						?>
 				</div>
 		</div><?php
-								}?>
-		
-
-			
+								}?>	
 			<h3 class="page-header">Enter New Address</h1>
 			<form id='address' action="<?= $_SERVER['PHP_SELF'] ?>" method='post'>
 			<div class="row clearfix">
