@@ -2,6 +2,8 @@
 	session_start();
 	$log_display = $_SESSION['username'] ? "Logout" : "Log Into Your Account";
 	$href_page = $_SESSION['username'] ? "logout.php" : "login.php";
+	if(isset($_SESSION['username'])){ //if a session exists send client to home.php
+
 	
 	$dbconn =pg_connect("host=dbhost-pgsql.cs.missouri.edu dbname=cs3380f14grp13 user=cs3380f14grp13 password=quyRXtKs") or die("Could not connect: " . pg_last_error());
 	
@@ -322,4 +324,7 @@ function addAddress($fname,$lname,$city,$street,$street2,$zip,$state,$id){
 	<!-- Bottom Navigation Bar -->
 </body>
 </html>
-
+<?php
+	}else{
+	header("Location: home.php");
+	}?>
