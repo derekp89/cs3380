@@ -84,7 +84,7 @@
             <li><a href="#">Order History</a></li>
           </ul>
           <ul class="nav nav-sidebar">
-            <li><a href="">Change Password</a></li>
+            <li><a href="changepass.php">Change Password</a></li>
             <li><a href="addressbook.php">Address Book</a></li>
             <li><a href="payment.php">Payment Types</a></li>
           </ul>
