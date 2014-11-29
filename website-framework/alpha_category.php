@@ -31,7 +31,6 @@
 		$(function() {
 			$( "#search-by-tabs, #tabs-1" ).tabs();
 			$( "#tabs-2" ).tabs();
-			$( "#d-menu" ).tabs();
 		});
 		
 		/* Will highlight the search-by tabs which the user clicked on */
@@ -49,7 +48,7 @@
 				$("#tabs-1 li").not(this).removeClass("tabs-bg-highlight");
 			});
 		});
-		/* */
+		
 		$(function() {
 			$( "#tabs-2 li" ).click(function(){
 				$(this).addClass("tabs-bg-highlight");
@@ -57,8 +56,7 @@
 			});
 		});
 	</script>
-	<script src="ajax.js"></script>
-	<script>
+	<script type="text/javascript">
 		/* Will update the alphabet content box depending on the letter user chose to search by */
 		function updateAlpha(alphaId){
 			$.get("search_by_alphabet_handler.php",
@@ -93,6 +91,36 @@
 					updateCategory(this.textContent);
 			});
 		});
+		
+		/* for the drop-down menu (Shop For Spices) on navbar */
+		$(function(){
+			$("#alpha_cate li").click(
+				function(){
+					console.log(this.id);
+					if(this.id == "menu_cate"){
+						$("#cate").addClass("active");
+						$("#alpha").removeClass("active");
+						SetActiveTab('search-by-tabs',1);
+						//$("#search-by-tabs").tabs({active: 1});
+					}
+					else{
+						$("#alpha").addClass("active");
+						$("#cate").removeClass("active");
+						SetActiveTab('search-by-tabs',0);
+						//$("#search-by-tabs").tabs({active: 0});						
+					}
+			});
+		});
+		
+		function SetActiveTab(tabControl, tabNumber){
+			$(function(){
+				$('#'+tabControl).tabs({active: tabNumber});
+			});
+		}
+		//SetActiveTab('search-by-tabs', 1);
+		//SetActiveTab('tabs-1', 20);
+		//SetActiveTab('tabs-2', 8);
+		//console.log($('#search-by-tabs'));
 
 	</script>
 </head>
@@ -108,11 +136,14 @@
 			 <!-- Drop down menu for user to choose search by alphabet or by category -->
   	        <li class="dropdown">
   	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Shop For Spices <span class="caret"></span></a>
-  	          <ul id="d-menu" class="dropdown-menu" role="menu">
-  	            <li><a href="#alpha">By Alphabet</a></li>
+  	          <!--<form action="alpha_category.php" method="POST">-->
+  	          <ul id="alpha_cate" class="dropdown-menu" role="menu">
+  	            <li id="menu_alpha"><a href="#">By Alphabet</a></li>
 				<li class="divider"></li>
-  	            <li><a href="#cate">By Category</a></li>
+  	            <li id="menu_cate"><a href="#">By Category</a></li>
+  	           <!-- <input type="hidden" name="menu_act" value="">-->
   	          </ul>
+  	      <!--    </form>-->
   	        </li>
 	        <li><a href="cart.php">View Cart</a></li>
 	      </ul>
@@ -143,10 +174,10 @@
 
 		<div id="search-by-tabs">
 			<ul id="search-by" class="nav nav-tabs">
-		 	   <li class="active">
-		 		  <a id="alpha" href="#tabs-1">Alphabetical</a>
+		 	   <li id="alpha" class="active">
+		 		  <a href="#tabs-1">Alphabetical</a>
 			  </li>
-			  <li><a id="cate" href="#tabs-2">By category</a></li>
+			  <li id="cate"><a href="#tabs-2">By category</a></li>
 			</ul>
 			<div id="search-by-tab-content">
 				<div id="tabs-1">
