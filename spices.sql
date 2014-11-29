@@ -66,8 +66,9 @@ CREATE TABLE Order_Details(
 	product_id int,
 	quantity int,
 	price int,
-	order_id int PRIMARY KEY REFERENCES Orders,
-	FOREIGN KEY (product_id) REFERENCES Spices);
+	order_id int REFERENCES Orders,
+	FOREIGN KEY (product_id) REFERENCES Spices,
+	PRIMARY KEY (product_id, order_id));
 
 -- 1-20
 INSERT INTO Spices VALUES('Turmeric','Turmeric, essential to curry powder, is a member of the ginger family. It has a light, musky flavor along with a brilliant golden-orange color for which it is famous throughout the world. It contains the compound curcumin, which is a strong anti-inflammatory. In Asia, its main use for thousands of years was as a dyestuff. At one time, sun worshippers, whose sacred color was yellow, dyed their textiles with the very expensive saffron. When it was discovered that the very inexpensive turmeric produced the same brilliant color, the sacred saffron was guarded for special culinary dishes.',6.29,8,1,'Lamb, fish, beef, potatoes, artichokes, rice dishes, curry','Indian,Thai');
