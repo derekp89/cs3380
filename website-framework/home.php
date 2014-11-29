@@ -86,6 +86,9 @@
 		  <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
 		</div>
 		
+		<div class="paragraph-wrapper">
+			<p><b>Welcome to The Spice Shop!</b> This is a website where you can search for a wide variety of spices and herbs by name and catagory. You'll be able to see a discription about the spices and herbs and then add the ones you want to your shopping cart and purchase them based on the size you want. The database for our spices was created by us, using different spices we found and researched. A website that we used for a lot of the spice reference and the inspiration for the layout was www.thespicehouse.com, an already successful spice website. Our website is still a work in progress, and was mainly created to help devolop the team's coding skills in php and sql, in addition to learning basic website layout and website development which implements the use of databases.</p>
+		</div>
 
 	</div>
 
