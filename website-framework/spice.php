@@ -7,15 +7,15 @@
 	
 	$current_url = base64_encode($url="http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
 	//Selecting the name of spices by the alphabet
-	$result = pg_prepare($dbconn, "search_by_alpha", 'SELECT name, descr AS description, price, size, id, food FROM Spices.spices WHERE id = $1');
-	$result = pg_execute($dbconn, "search_by_alpha", array($id));
+	$result = pg_prepare($dbconn, "search_by_id", 'SELECT name, descr AS description, price, size, id, food FROM Spices.spices WHERE id = $1');
+	$result = pg_execute($dbconn, "search_by_id", array($id));
 	
 	$result2 = pg_prepare($dbconn, "category", 'SELECT category FROM Spices.Spice_Category WHERE id = $1');
 	$result2 = pg_execute($dbconn, "category", array($id));
 
 	session_start();
 
-//empty cart by distroying current session
+//empty cart by destroying current session
 if(isset($_GET["emptycart"]) && $_GET["emptycart"]==1)
 {
 	$return_url = base64_decode($_GET["return_url"]); //return url
@@ -36,8 +36,8 @@ if(isset($_POST["type"]) && $_POST["type"]=='add')
 		die('<div align="center">This demo does not allowed more than 10 quantity!<br /><a href="http://sanwebe.com/assets/paypal-shopping-cart-integration/">Back To Products</a>.</div>');
 	}
 	
-	$result3 = pg_prepare($dbconn, "search_by_alpha", 'SELECT name, price FROM Spices.spices WHERE id = $1 LIMIT 1');
-	$result3 = pg_execute($dbconn, "search_by_alpha", array($product_id));
+	$result3 = pg_prepare($dbconn, "search_by_id_limit", 'SELECT name, price FROM Spices.spices WHERE id = $1 LIMIT 1');
+	$result3 = pg_execute($dbconn, "search_by_id_limit", array($product_id));
 	$line2 = pg_fetch_array($result3, NULL, PGSQL_ASSOC);
 	
 	
@@ -149,7 +149,7 @@ if(isset($_GET["removep"]) && isset($_GET["return_url"]) && isset($_SESSION["pro
   	          <ul class="dropdown-menu" role="menu">
   	            <li><a href="alpha_category.php">By Alphabet</a></li>
 				<li class="divider"></li>
-  	            <li><a href="alpha_category.php#">By Category</a></li>
+  	            <li><a href="alpha_category.php">By Category</a></li>
   	          </ul>
   	        </li>
 	        <li><a href="cart.php">View Cart</a></li>
@@ -182,7 +182,7 @@ if(isset($_GET["removep"]) && isset($_GET["return_url"]) && isset($_SESSION["pro
                     <div class="list-group">
 					<?php while ($line = pg_fetch_array($result2, NULL, PGSQL_ASSOC)){
 								foreach($line as $col_value)
-                                echo "<a href=# class=list-group-item active>" .$col_value . "</a>";
+                                echo "<a href='#' class='list-group-item'>" .$col_value . "</a>";
 								}?>
                     </div>
                 </div>

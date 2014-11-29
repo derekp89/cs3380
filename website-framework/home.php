@@ -39,7 +39,7 @@
   	          <ul class="dropdown-menu" role="menu">
   	            <li><a href="alpha_category.php">By Alphabet</a></li>
 				<li class="divider"></li>
-  	            <li><a href="alpha_category.php#">By Category</a></li>
+  	            <li><a href="alpha_category.php">By Category</a></li>
   	          </ul>
   	        </li>
 	        <li><a href="cart.php">View Cart</a></li>
