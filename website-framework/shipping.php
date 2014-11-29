@@ -114,13 +114,17 @@
   	            <li><a href="alpha_category.php">By Category</a></li>
   	          </ul>
   	        </li>
-	        <li><a href="#">View Cart</a></li>
+	        <li><a href="cart.php">View Cart</a></li>
 	      </ul>
 	      <ul class="nav navbar-nav navbar-right">
+			<!-- Redirect to User account page -->
+		  <?php  if($_SESSION['username']){?>
+			<li><a href="account.php"><?php echo ucfirst($_SESSION['username']); ?>'s Account</a></li>
+			<?php } ?>
 			<!-- Redirect to About Us page -->
-	        <li><a href="#">About Us</a></li>
+	        <li><a href="about_us.php">About Us</a></li>
 			<!-- Redirect to Login page-->
-	        <li><a href= login.php >Log Into Your Account</a></li>
+	        <li><a href= <?=$href_page?> ><?=$log_display ?></a></li>
 	      </ul>
 	      <form class="navbar-form navbar-right" role="search">
 	        <div class="form-group">
