@@ -50,7 +50,7 @@
 			<li><a href="account.php"><?php echo ucfirst($_SESSION['username']); ?>'s Account</a></li>
 			<?php } ?>
 			<!-- Redirect to About Us page -->
-	        <li><a href="#">About Us</a></li>
+	        <li><a href="about_us.php">About Us</a></li>
 			<!-- Redirect to Login page-->
 	        <li><a href= <?=$href_page?> ><?=$log_display ?></a></li>
 	      </ul>
@@ -78,8 +78,8 @@
 	
 		  <div class="carousel-inner">
 		    <div class="active item"><img class="scale-img" src="https://farm6.staticflickr.com/5140/5461417415_b58a112fe1_b.jpg"></div>
-		    <div class="item"><img class="scale-img" src="https://farm4.staticflickr.com/3318/3346295578_2dcce20805_b.jpg"></div>
-		    <div class="item"><img class="scale-img" src="https://farm4.staticflickr.com/3221/2687570771_fc39dc2ee8_z.jpg?zz=1"></div>
+		    <div class="item"><img class="scale-img" style="height:577px;" src="https://farm4.staticflickr.com/3318/3346295578_2dcce20805_b.jpg"></div>
+		    <div class="item"><img class="scale-img" style="height:577px;" src="https://farm4.staticflickr.com/3221/2687570771_fc39dc2ee8_z.jpg?zz=1"></div>
 		  </div>
 
 		  <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>

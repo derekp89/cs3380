@@ -110,7 +110,7 @@
 			<li><a href="account.php"><?php echo ucfirst($_SESSION['username']); ?>'s Account</a></li>
 			<?php } ?>
 			<!-- Redirect to About Us page -->
-	        <li><a href="#">About Us</a></li>
+	        <li><a href="about_us.php">About Us</a></li>
 			<!-- Redirect to Login page-->
 			<?php
 	        	$log_display = $_SESSION['username'] ? "Logout" : "Log Into Your Account";

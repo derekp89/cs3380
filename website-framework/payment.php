@@ -173,7 +173,7 @@ function addCard($name,$cardNumber,$cardType,$expMonth,$expYear,$securityCode,$i
 			<li><a href="account.php"><?php echo ucfirst($_SESSION['username']); ?>'s Account</a></li>
 			<?php } ?>
 			<!-- Redirect to About Us page -->
-	        <li><a href="#">About Us</a></li>
+	        <li><a href="about_us.php">About Us</a></li>
 			<!-- Redirect to Login page-->
 	        <li><a href= <?=$href_page?> ><?=$log_display ?></a></li>
 	      </ul>

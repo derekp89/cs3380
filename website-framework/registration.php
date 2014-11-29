@@ -1,5 +1,7 @@
 <?php
 	session_start();
+	$log_display = $_SESSION['username'] ? "Logout" : "Log Into Your Account";
+	$href_page = $_SESSION['username'] ? "logout.php" : "login.php";
 	
 	if (isset( $_POST['Submit'])){
 		$username = htmlspecialchars($_POST['username']);
@@ -54,8 +56,6 @@
     <title>The Spice Shop - Registration</title>
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
 
 
 </head>
@@ -90,18 +90,22 @@
   	        <li class="dropdown">
   	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Shop For Spices <span class="caret"></span></a>
   	          <ul class="dropdown-menu" role="menu">
-  	            <li><a href="#">By Alphabet</a></li>
+  	            <li><a href="alpha_category.php">By Alphabet</a></li>
 				<li class="divider"></li>
-  	            <li><a href="#">By Category</a></li>
+  	            <li><a href="alpha_category.php">By Category</a></li>
   	          </ul>
   	        </li>
-	        <li><a href="#">View Cart</a></li>
+	        <li><a href="cart.php">View Cart</a></li>
 	      </ul>
 	      <ul class="nav navbar-nav navbar-right">
+			<!-- Redirect to User account page -->
+		  <?php  if($_SESSION['username']){?>
+			<li><a href="account.php"><?php echo ucfirst($_SESSION['username']); ?>'s Account</a></li>
+			<?php } ?>
 			<!-- Redirect to About Us page -->
-	        <li><a href="#">About Us</a></li>
+	        <li><a href="about_us.php">About Us</a></li>
 			<!-- Redirect to Login page-->
-	        <li><a href="http://babbage.cs.missouri.edu/~cs3380f14grp13/cs3380/website-framework/login.php">Log Into Your Account</a></li>
+	        <li><a href= <?=$href_page?> ><?=$log_display ?></a></li>
 	      </ul>
 	      <form class="navbar-form navbar-right" role="search">
 	        <div class="form-group">
