@@ -209,7 +209,7 @@ function addCard($name,$cardNumber,$cardType,$expMonth,$expYear,$securityCode,$i
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <h1 class="page-header">Payment Types</h1>
-<div class="container">
+<div id="set-width">
 	<?php while ($y = pg_fetch_array($getArray, NULL, PGSQL_ASSOC)){ ?>
 	<div class="row clearfix">
 		<div class="col-md-12 column">
