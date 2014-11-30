@@ -117,10 +117,46 @@
 				$('#'+tabControl).tabs({active: tabNumber});
 			});
 		}
-		//SetActiveTab('search-by-tabs', 1);
-		//SetActiveTab('tabs-1', 20);
-		//SetActiveTab('tabs-2', 8);
-		//console.log($('#search-by-tabs'));
+		
+		<?php
+			$cate = str_replace(" ","-",$_POST['cate']);
+			switch($cate){
+				case "Indian": $cate_index = 0; break;
+				case "Middle-Eastern": $cate_index = 1; break;
+				case "Thai": $cate_index = 2; break;
+				case "Scandinavian": $cate_index = 3; break;
+				case "Cajun": $cate_index = 4; break;
+				case "Mexican": $cate_index = 5; break;
+				case "Spanish": $cate_index = 6; break;
+				case "Greek-and-Turkish": $cate_index = 7; break;
+				case "Eastern-European": $cate_index = 8; break;
+				case "Caribbean": $cate_index = 9; break;
+				case "Italian": $cate_index = 10; break;
+				case "English": $cate_index = 11; break;
+				case "German": $cate_index = 12; break;
+				case "Irish": $cate_index = 13; break;
+				case "Hungarian": $cate_index = 14; break;
+				case "Chinese-and-Far-Eastern": $cate_index = 15; break;
+				case "French": $cate_index = 16; break;
+			}
+			if(isset($_POST['cate'])){
+				//echo "updateCategory(".$_POST['cate'].");",
+				echo"$(function(){",
+						//change style of search-by-tabs
+						"$('#cate').addClass('active');",
+						"$('#alpha').removeClass('active');",
+						//set active search-by-tabs
+						"SetActiveTab('search-by-tabs',1);",
+						//set active category tabs
+						"SetActiveTab('tabs-2',".$cate_index.");",
+						//update category content box
+						"updateCategory('".$cate."');",
+						//change highlight of category tabs
+						"$('#".$cate."-p').addClass('tabs-bg-highlight');",
+						"$('#tabs-2 li').not('#".$cate."-p').removeClass('tabs-bg-highlight');",
+					"});";
+			}	
+		?>
 
 	</script>
 </head>
@@ -240,23 +276,23 @@
 				</div>
 				<div id="tabs-2">
 					<ul id="category-tabs-list" class="nav nav-tabs">
-					  <li class="tabs-bg-highlight"><a href="#Indian">Indian</a></li>
-					  <li><a href="#Middle-Eastern">Middle-Eastern</a></li>
-					  <li><a href="#Thai">Thai</a></li>
-					  <li><a href="#Scandinavian">Scandinavian</a></li>
-					  <li><a href="#Cajun">Cajun</a></li>
-					  <li><a href="#Mexican">Mexican</a></li>
-					  <li><a href="#Spanish">Spanish</a></li>
-					  <li><a href="#Greek-and-Turkish">Greek-and-Turkish</a></li>
-					  <li><a href="#Eastern-European">Eastern-European</a></li>
-					  <li><a href="#Caribbean">Caribbean</a></li>
-					  <li><a href="#Italian">Italian</a></li>
-					  <li><a href="#English">English</a></li>
-					  <li><a href="#German">German</a></li>
-					  <li><a href="#Irish">Irish</a></li>
-					  <li><a href="#Hungarian">Hungarian</a></li>
-					  <li><a href="#Chinese-and-Far-Eastern">Chinese-and-Far-Eastern</a></li>
-					  <li><a href="#French">French</a></li>
+					  <li id="Indian-p" class="tabs-bg-highlight"><a href="#Indian">Indian</a></li>
+					  <li id="Middle-Eastern-p"><a href="#Middle-Eastern">Middle-Eastern</a></li>
+					  <li id="Thai-p"><a href="#Thai">Thai</a></li>
+					  <li id="Scandinavian-p"><a href="#Scandinavian">Scandinavian</a></li>
+					  <li id="Cajun-p"><a href="#Cajun">Cajun</a></li>
+					  <li id="Mexican-p"><a href="#Mexican">Mexican</a></li>
+					  <li id="Spanish-p"><a href="#Spanish">Spanish</a></li>
+					  <li id="Greek-and-Turkish-p"><a href="#Greek-and-Turkish">Greek-and-Turkish</a></li>
+					  <li id="Eastern-European-p"><a href="#Eastern-European">Eastern-European</a></li>
+					  <li id="Caribbean-p"><a href="#Caribbean">Caribbean</a></li>
+					  <li id="Italian-p"><a href="#Italian">Italian</a></li>
+					  <li id="English-p"><a href="#English">English</a></li>
+					  <li id="German-p"><a href="#German">German</a></li>
+					  <li id="Irish-p"><a href="#Irish">Irish</a></li>
+					  <li id="Hungarian-p"><a href="#Hungarian">Hungarian</a></li>
+					  <li id="Chinese-and-Far-Eastern-p"><a href="#Chinese-and-Far-Eastern">Chinese-and-Far-Eastern</a></li>
+					  <li id="French-p"><a href="#French">French</a></li>
 					</ul>
 					<div id="alphabet-content-box">
 						<div id="Indian">Select a category to start with.</div>

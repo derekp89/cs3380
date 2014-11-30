@@ -179,12 +179,20 @@ if(isset($_GET["removep"]) && isset($_GET["return_url"]) && isset($_SESSION["pro
             <div class="row">
                 <div class="col-md-3">
                     <p class="lead">Categories</p>
-                    <div class="list-group">
-					<?php while ($line = pg_fetch_array($result2, NULL, PGSQL_ASSOC)){
-								foreach($line as $col_value)
-                                echo "<a href='#' class='list-group-item'>" .$col_value . "</a>";
-								}?>
+                    <form method="POST" action="alpha_category.php" role="form">
+                    <div class="list-group form-group">
+					<?php 
+						while ($line = pg_fetch_array($result2, NULL, PGSQL_ASSOC)){
+							foreach($line as $col_value){
+                            //echo "<a href='#' class='list-group-item'>" .$col_value . "</a>";
+                            	echo "<input type='radio' id='".$col_value."'name='cate' value='".$col_value."'>";	
+                                echo "<label for='".$col_value."'>".$col_value."</label><br>";  
+                                }
+							}
+					?>
+					<input type="submit" value="Explore">
                     </div>
+                    </form>
                 </div>
                 <div class="col-md-9">
                     <div class="thumbnail">
@@ -193,9 +201,9 @@ if(isset($_GET["removep"]) && isset($_GET["return_url"]) && isset($_SESSION["pro
                         <div class="caption-full">
 						<form id="update" method="post" action="">		
 						<?php
-								if($line['size'] != null){
-									echo "<h4 class=pull-right>".$line['size']." oz.</h4>";
-								}
+							if($line['size'] != null){
+								echo "<h4 class=pull-right>".$line['size']." oz.</h4>";
+							}
                                 echo  "<h4>".$line['name']."</a>"; 
 								echo "</h4>";
 								echo "<p>".$line['description']."</p>";
