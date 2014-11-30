@@ -7,7 +7,7 @@ $href_page = $_SESSION['username'] ? "logout.php" : "login.php";
 <!DOCTYPE html>
 <html>
 <head>
-	<title>The Spice Shop</title>
+	<title>The Spice Shop: Cart</title>
 	<style>
 		body { padding-bottom: 70px; }
 		#body_wrapper{
