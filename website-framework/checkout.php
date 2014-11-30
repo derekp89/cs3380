@@ -142,7 +142,9 @@
 
 		
 	<h2>Check Out</h2>
-
+	<?
+	
+	?>
 
 	<!-- Bottom Navigation Bar -->
 	<nav class="navbar navbar-inverse navbar-fixed-bottom" role="navigation">

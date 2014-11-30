@@ -1,5 +1,7 @@
 <?php
 	session_start();
+	$log_display = $_SESSION['username'] ? "Logout" : "Log Into Your Account";
+	$href_page = $_SESSION['username'] ? "logout.php" : "login.php";
 	
 	if (isset( $_POST['Submit'])){
 		$fname = htmlspecialchars($_POST['fname']);

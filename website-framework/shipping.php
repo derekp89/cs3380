@@ -2,6 +2,32 @@
 	session_start();
 	$log_display = $_SESSION['username'] ? "Logout" : "Log Into Your Account";
 	$href_page = $_SESSION['username'] ? "logout.php" : "login.php";
+	
+	if (isset( $_POST['Submit'])){
+		$name = htmlspecialchars($_POST['name']);
+		$street = htmlspecialchars($_POST['street']);
+		$city = htmlspecialchars($_POST['city']);
+		$state_code = htmlspecialchars($_POST['state_code']);
+		$zip = htmlspecialchars($_POST['zip']);
+		
+		addShipping($name,$street,$city,$state_code,$zip);              
+
+	}
+	function addShipping($name,$street,$city,$state_code,$zip){
+
+		$dbconn =pg_connect("host=dbhost-pgsql.cs.missouri.edu dbname=cs3380f14grp13 user=cs3380f14grp13 password=quyRXtKs") or die("Could not connect: " . pg_last_error());
+		
+		$name = pg_escape_string(htmlspecialchars($name));
+		$street = pg_escape_string(htmlspecialchars($street));
+		$city = pg_escape_string(htmlspecialchars($city));
+		$state_code = pg_escape_string(htmlspecialchars(sha1($state_code)));
+		$zip= pg_escape_string(htmlspecialchars($zip));
+		
+		$query = "INSERT INTO spices.	Shipping (name, street, city, state_code, zip) VALUES ($1,$2,$3,$4,$5)";
+		pg_prepare($dbconn, "add_user_auth",$query);
+	
+		pg_execute($dbconn,"add_user_auth",array($name,$street,$city,$state_code,$zip));
+	}
 ?>
 <!DOCTYPE html>
 <html>
@@ -157,8 +183,8 @@
 				<input size="50" type="text" name="name">		
 			</div>	
 			<div class="form">	
-				<label for="field1">Street Address </label>
-				<input type="text" name="name">	
+				<label for="street">Street Address </label>
+				<input type="text" name="street">	
 				&nbsp;
 				&nbsp;
 				&nbsp;
@@ -169,14 +195,14 @@
 				<input type="text" name="city">					
 			</div>
 			<div class="form">
-				<label for="state">State</label>	
+				<label for="state_code">State</label>	
 				&nbsp;
 				&nbsp;
 				&nbsp;
 				&nbsp;
 				&nbsp;
 				
-				<select name="state" class="form">
+				<select name="state_code" class="form">
 				<option value="AL">AL</option>
 				<option value="AK">AK</option>
 				<option value="AZ">AZ</option>
@@ -240,7 +266,7 @@
 			</br>
 			</br>	
 		
-			<input class="btn btn-lg btn-primary btn-block" type="submit" value="Proceed to Shipping">	
+			<input class="btn btn-lg btn-primary btn-block" type="submit" value="Proceed to Checkout">	
 		</form>
 	</div>
 
