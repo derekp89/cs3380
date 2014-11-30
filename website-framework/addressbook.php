@@ -232,16 +232,15 @@ function addAddress($fname,$lname,$city,$street,$street2,$zip,$state,$id){
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <h1 class="page-header">Address Book</h1>
+          <p>test</p>
 		  </div>
     </div>
 </div>
 
 <div class="container">
-			<?php while ($y = pg_fetch_array($getArray, NULL, PGSQL_ASSOC)){
-								?>
+	<?php while ($y = pg_fetch_array($getArray, NULL, PGSQL_ASSOC)){ ?>
 	<div class="row clearfix">
 		<div class="col-md-12 column">
-
 
 			<div class="row clearfix">
 				<div class="col-md-4 column">
@@ -320,7 +319,7 @@ function addAddress($fname,$lname,$city,$street,$street2,$zip,$state,$id){
 					</div>
 				</div>
 	      </form>
-		  <h3 class="page-header"><?php echo $msg;?></h1>
+		  <h3 class="page-header"><?php echo $msg;?></h3>
 		</div>
 	</div>
 </div>

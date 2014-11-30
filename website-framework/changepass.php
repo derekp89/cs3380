@@ -172,13 +172,7 @@ function checkConfirm($npass,$confirm) {
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <h1 class="page-header">Change Password</h1>
-		  </div>
-    </div>
-</div>
-
-<div class="container">
-	<div class="row clearfix">
-		<div class="col-md-12 column">
+          <div class="col-md-12 column">
 
 			<form id='address' action="<?= $_SERVER['PHP_SELF'] ?>" method='post'>
 			<div class="row clearfix">
@@ -210,6 +204,14 @@ function checkConfirm($npass,$confirm) {
 	      </form>
 		  <h3 class="page-header"><?php echo $msg;?></h1>
 		</div>
+		</div>
+		
+    </div>
+</div>
+
+<div class="container">
+	<div class="row clearfix">
+		
 	</div>
 </div>
 
