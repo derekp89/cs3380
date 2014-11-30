@@ -86,7 +86,7 @@
 		    <div class="item"><img class="scale-img" style="height:577px;" src="https://farm4.staticflickr.com/3221/2687570771_fc39dc2ee8_z.jpg?zz=1"></div>
 		    <div class="item"><img class="scale-img" style="height:577px;" src="http://www.thesleuthjournal.com/wp-content/uploads/2014/02/HealthPromotingSpices.jpg"></div>
 		    <div class="item"><img class="scale-img" style="height:577px;" src="http://www.thespiceguyco.com/uploads/8/9/0/8/8908117/8561362.jpg"></div>
-		    <div class="item"><img class="scale-img" style="height:577px;" src="http://fbstop.com/media/uploads/2014/10/herbs-spices.jpg"></div>
+		    <div class="item"><img class="scale-img" style="height:577px;" src="http://www.getrichslowly.org/images/GRS/spices.jpg"></div>
 		    <div class="item"><img class="scale-img" style="height:577px;" src="http://pepperonisduluth.com/wp-content/uploads/2014/05/spices2.jpg"></div>
 		  </div>
 
