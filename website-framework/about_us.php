@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Home</title>
+	<title>About Us</title>
 	<style>
 		body { padding-bottom: 70px; }
 		#body_wrapper{
