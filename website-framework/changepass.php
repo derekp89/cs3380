@@ -90,7 +90,7 @@ function checkConfirm($npass,$confirm) {
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Account Details</title>
+	<title>Browse Spices by Name, Category</title>
 	<style>
 		body { padding-bottom: 70px; }
 		#body_wrapper{
@@ -121,12 +121,12 @@ function checkConfirm($npass,$confirm) {
 	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	      <ul class="nav navbar-nav">
 			 <!-- Drop down menu for user to choose search by alphabet or by category -->
-  	        <li class="dropdown">
+  	         <li class="dropdown">
   	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Shop For Spices <span class="caret"></span></a>
   	          <ul class="dropdown-menu" role="menu">
   	            <li><a href="alpha_category.php">By Alphabet</a></li>
 				<li class="divider"></li>
-  	            <li><a href="alpha_category.php#">By Category</a></li>
+  	            <li><a href="alpha_category.php">By Category</a></li>
   	          </ul>
   	        </li>
 	        <li><a href="cart.php">View Cart</a></li>
