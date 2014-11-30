@@ -73,7 +73,7 @@
 			<p>We are a group composed of 6 members who got together through our database class at the University of Missouri. In this class is where we learned most of the skills we used to utilize databases in websites we can create. All of the team members worked together in writing the sql to create the database for The Spice Shop. The team members are as followed:<br></p>
 
 			<p><b>Adam Hitchens:</b> A Junior in Computer Science at the University of Missouri. Adam's main responsibilities for the project was designing the checkout pages.</p>
-			<p><b>Andrew Pistole:</b> (add something about yourself). Andrew was in charge of the coding calls to the database for the various categories we have.</p>
+			<p><b>Andrew Pistole:</b> A Senior in Computer Science at the University of Missorui. Andrew was in charge of finding and adding various pictures as well as assisting in any other division and error checking.</p>
 			<p><b>Derek Phillips:</b> (add something about yourself). Derek developed the shopping cart and coding calls for checkout and assisted anyone if they were having issues. He also managed and supported the group as team leader, making sure everything was completed and came together.</p>
 			<p><b>Morgan Hutton:</b> (add something about yourself). Morgan's job included creating the coding calls to the database for the alphabetical queries.</p>
 			<p><b>Richard Elledge:</b> A Junior majoring in Information Technology at The University of Missouri. Richard was resposible for the main page and the about us page of the website.</p>
