@@ -9,10 +9,9 @@
 		or die('Could not connect:'.pg_last_error());
 		
 	//Selecting the name of spices by the alphabet
-	$result = pg_prepare($dbconn, "search_by_category", 'SELECT A.name, A.descr AS description, A.price, A.size FROM Spices.spices AS A INNER JOIN Spices.spice_category AS B USING (id) WHERE B.category = $1');
+	$result = pg_prepare($dbconn, "search_by_category", 'SELECT A.name as "Name", id FROM Spices.spices AS A INNER JOIN Spices.spice_category AS B USING (id) WHERE B.category = $1 ORDER BY Name ASC');
 	$result = pg_execute($dbconn, "search_by_category", array($cId));
 	/* Will return the total number of spices that is found */
-	echo"<br><p>There are <i>".pg_num_rows($result)." </i>spices found.</p>\n";
 ?>
 <!DOCTYPE html>
 <html>
@@ -22,19 +21,19 @@
 			//print table headers
 			echo "<thead>";
 			echo "\t<tr>\n";
-				$i = pg_num_fields($result);
-				for($j = 0; $j < $i; ++$j)
-					echo "\t\t<th>".pg_field_name($result,$j)."</th>\n";
+			$i = pg_num_fields($result);
+
+			echo "\t\t<th style=text-align:center>".pg_field_name($result,$j)."</th>\n";
 			echo "\t<tr>\n";
 			echo "</thead>";
 			
 			echo "<tbody>\n";		
 			while ($line = pg_fetch_array($result, null, PGSQL_ASSOC)){
-				echo "\t<tr>\n";
+				echo "\t<tr style=text-align:center>\n";
 				foreach($line as $col_value){
 					/* Will add a $ before each price */
-					if($col_value == $line['price']){
-						echo "\t\t<td>$".$col_value."</td>\n";
+					if($col_value == $line['id']){
+					
 					}
 					/* Will add "oz" after each size number */
 					else if($col_value == $line['size']){
@@ -42,7 +41,7 @@
 					}
 					/* Otherwise just print out the value */
 					else
-						echo "\t\t<td>".$col_value."</td>\n";
+						echo "\t\t<td><a href=spice.php?id=". $line['id'] . ">".$col_value."</a></td>\n";
 				}	
 				echo "\t</tr>\n";
 			}

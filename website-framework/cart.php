@@ -171,10 +171,10 @@ echo "							<h4 class=\"product-name\"><strong>".$line['name']."</strong></h4><
 echo "						</div>\n";
 echo "						<div class=\"col-xs-6\">\n";
 echo "							<div class=\"col-xs-6 text-right\">\n";
-echo "								<h6><strong>$".$line['price']."<span class=\"text-muted\">x</span></strong></h6>\n";
+echo "								<h6><strong>$".$line['price']." &nbsp;&nbsp;&nbsp;&nbsp;x</strong></h6>\n";
 echo "							</div>\n";
-echo "							<div class=\"col-xs-4\">\n";
-echo "								<input type=\"text\" class=\"form-control input-sm\" value=\"".$cart_itm["qty"]."\">\n";
+echo "							<div class=\"col-xs-2\">\n";
+echo "								<h6><strong>".$cart_itm["qty"]."</strong></h6>\n";
 echo "							</div>\n";
 echo "							<div class=\"col-xs-2\">\n";
 echo '								<a class="glyphicon glyphicon-trash" href="spice.php?removep='.$cart_itm["id"].'&return_url='.$current_url.'"></a>';
@@ -196,13 +196,7 @@ echo "					</div>\n";
 echo "					<hr>\n";
 echo "					<div class=\"row\">\n";
 echo "						<div class=\"text-center\">\n";
-echo "							<div class=\"col-xs-9\">\n";
-echo "								<h6 class=\"text-right\">Added items?</h6>\n";
-echo "							</div>\n";
 echo "							<div class=\"col-xs-3\">\n";
-echo "								<button type=\"button\" class=\"btn btn-default btn-sm btn-block\">\n";
-echo "									Update cart\n";
-echo "								</button>\n";
 echo "							</div>\n";
 echo "						</div>\n";
 echo "					</div>\n";
@@ -225,7 +219,7 @@ echo "		</div>\n";
 echo "	</div>\n";
        
     }else{
-        echo 'Your Cart is empty';
+        echo '<h1><strong>Your Cart is empty</h1></strong>';
     }
 ?>
 
