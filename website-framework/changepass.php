@@ -74,11 +74,14 @@ function updatePass($npass,$id){
 		pg_execute($dbconn, "update",array($password, $uid));
 	}
 	
-function checkConfirm($npass,$confirm) {			
+function checkConfirm($npass,$confirm) {
+			
 	if($npass === $confirm) 
 		return 1;
 	else
 		return 0;
+	
+	
 }
 
 ?>
