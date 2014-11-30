@@ -17,6 +17,13 @@
 		.scale-img{
 			width:1000px;
 		}
+		p {
+		    font-size: 22px;
+		}
+		#image-wrap{
+			padding: auto;
+			margin: auto;
+		}
 	</style>
 	<link rel="stylesheet" type="text/css" href="dist/css/bootstrap.min.css"/>
 	<script src="jquery-ui-1.11.2/external/jquery/jquery.js"></script>
@@ -80,6 +87,9 @@
 			<p><b>Yihua Shi:</b> (add something about yourself). Yihua designed the pages that displayed the database calls for the spices and categories.</p>
 		</div>
 
+		<div id="image-wrap">
+		<img src="http://img4.wikia.nocookie.net/__cb20120707081130/collegefootballmania/images/4/4e/NCAA-Mizzou-Primary_Logo.png" alt="Mizzou Logo">
+		</div>
 	</div>
 
 
