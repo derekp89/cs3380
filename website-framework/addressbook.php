@@ -150,7 +150,7 @@ function addAddress($fname,$lname,$city,$street,$street2,$zip,$state,$id){
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Browse Spices by Name, Category</title>
+	<title>Account Details</title>
 	<style>
 		body { padding-bottom: 70px; }
 		#body_wrapper{
@@ -160,6 +160,9 @@ function addAddress($fname,$lname,$city,$street,$street2,$zip,$state,$id){
 		}
 		.scale-img{
 			width:1000px;
+		}
+		#set-width{
+			width: 800px;
 		}
 	</style>
 	<link rel="stylesheet" href="css/style.css">
@@ -232,12 +235,7 @@ function addAddress($fname,$lname,$city,$street,$street2,$zip,$state,$id){
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <h1 class="page-header">Address Book</h1>
-          <p>test</p>
-		  </div>
-    </div>
-</div>
-
-<div class="container">
+<div id="set-width">
 	<?php while ($y = pg_fetch_array($getArray, NULL, PGSQL_ASSOC)){ ?>
 	<div class="row clearfix">
 		<div class="col-md-12 column">
@@ -323,6 +321,10 @@ function addAddress($fname,$lname,$city,$street,$street2,$zip,$state,$id){
 		</div>
 	</div>
 </div>
+		  </div>
+    </div>
+</div>
+
 
 	<!-- Bottom Navigation Bar -->
 </body>

@@ -90,7 +90,7 @@ function checkConfirm($npass,$confirm) {
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Browse Spices by Name, Category</title>
+	<title>Account Details</title>
 	<style>
 		body { padding-bottom: 70px; }
 		#body_wrapper{
