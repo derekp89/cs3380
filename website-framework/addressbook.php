@@ -232,36 +232,8 @@ function addAddress($fname,$lname,$city,$street,$street2,$zip,$state,$id){
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <h1 class="page-header">Address Book</h1>
-          <p>test</p>
-		  </div>
-    </div>
-</div>
-
-<div class="container">
-	<?php while ($y = pg_fetch_array($getArray, NULL, PGSQL_ASSOC)){ ?>
-	<div class="row clearfix">
-		<div class="col-md-12 column">
-
-			<div class="row clearfix">
-				<div class="col-md-4 column">
-					<form action="<?= $_SERVER['PHP_SELF'] ?>" method='post'>
-						<?php
-								echo "<hr>";
-                                echo $y["fname"] . " " .  $y["lname"];
-								echo "<br>";
-								echo $y["street"] . " " .  $y["street2"];
-								echo "<br>";
-								echo $y["city"] . ", " .  $y["state_code"] . "  " . $y["zip"] ;
-								echo "<br>";
-								echo "<button type=\"submit\" name=\"Delete\" value=\"Delete\"class=\"btn btn-default\">Delete</button>";
-								echo '<input type="hidden" name="id" value="'.$y['index_id'].'">';
-								echo "</hr>";
-								echo "</form>";
-						?>
-				</div>
-		</div><?php
-								}?>	
-			<h3 class="page-header">Enter New Address</h1>
+ 
+          <h3 class="page-header">Enter New Address</h1>
 			<form id='address' action="<?= $_SERVER['PHP_SELF'] ?>" method='post'>
 			<div class="row clearfix">
 				<div class="col-md-6 column">
@@ -319,6 +291,35 @@ function addAddress($fname,$lname,$city,$street,$street2,$zip,$state,$id){
 					</div>
 				</div>
 	      </form>
+		  </div>
+    </div>
+</div>
+
+<div class="container">
+	<?php while ($y = pg_fetch_array($getArray, NULL, PGSQL_ASSOC)){ ?>
+	<div class="row clearfix">
+		<div class="col-md-12 column">
+
+			<div class="row clearfix">
+				<div class="col-md-4 column">
+					<form action="<?= $_SERVER['PHP_SELF'] ?>" method='post'>
+						<?php
+								echo "<hr>";
+                                echo $y["fname"] . " " .  $y["lname"];
+								echo "<br>";
+								echo $y["street"] . " " .  $y["street2"];
+								echo "<br>";
+								echo $y["city"] . ", " .  $y["state_code"] . "  " . $y["zip"] ;
+								echo "<br>";
+								echo "<button type=\"submit\" name=\"Delete\" value=\"Delete\"class=\"btn btn-default\">Delete</button>";
+								echo '<input type="hidden" name="id" value="'.$y['index_id'].'">';
+								echo "</hr>";
+								echo "</form>";
+						?>
+				</div>
+		</div><?php
+								}?>	
+			
 		  <h3 class="page-header"><?php echo $msg;?></h3>
 		</div>
 	</div>
