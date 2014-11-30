@@ -126,7 +126,7 @@ if(isset($_GET["removep"]) && isset($_GET["return_url"]) && isset($_SESSION["pro
 			width:1000px;
 		}
 	</style>
-	<link rel="stylesheet" href="http://babbage.cs.missouri.edu/~dmpkb4/k/cs3380/website-framework/css/style.css">
+	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" type="text/css" href="dist/css/bootstrap.min.css"/>
 	<script src="jquery-ui-1.11.2/external/jquery/jquery.js"></script>
 	<script src="jquery-ui-1.11.2/jquery-ui.min.js"></script>

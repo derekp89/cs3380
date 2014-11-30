@@ -153,7 +153,7 @@ $href_page = $_SESSION['username'] ? "logout.php" : "login.php";
         foreach ($_SESSION["products"] as $cart_itm)
         {
 			$product_id = $cart_itm["id"];
-			$result = pg_prepare($dbconn, "search_by_alpha", 'SELECT name, price, descr FROM Spices.spices WHERE id = $1 LIMIT 1');
+			$result = pg_prepare($dbconn, "search_by_alpha", 'SELECT name, price, descr,size FROM Spices.spices WHERE id = $1 LIMIT 1');
 			$result = pg_execute($dbconn, "search_by_alpha", array($product_id));
 			$line = pg_fetch_array($result, NULL, PGSQL_ASSOC);
 			
@@ -169,6 +169,10 @@ echo "						</div>\n";
 echo "						<div class=\"col-xs-4\">\n";
 echo "							<h4 class=\"product-name\"><strong>".$line['name']."</strong></h4><h4><small>".$line['descr']."</small></h4>\n";
 echo "						</div>\n";
+echo "						<div class=\"col-xs-6\">\n";
+echo "							<div class=\"col-xs-6 text-right\">\n";
+echo "								<h6><strong>".$line['size']." oz.</strong></h6>\n";
+echo "							</div>\n";
 echo "						<div class=\"col-xs-6\">\n";
 echo "							<div class=\"col-xs-6 text-right\">\n";
 echo "								<h6><strong>$".$line['price']." &nbsp;&nbsp;&nbsp;&nbsp;x</strong></h6>\n";

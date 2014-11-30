@@ -12,6 +12,7 @@
 	  if(checkUserPass($username,$password)==1){
 	  	$_SESSION['username'] = $username;
 		header("Location: home.php");
+		forceHTTPS();
 	  }else 
 	   		echo "<br><div align=center><h4>Invalid username or password,  please try again</h4></div>"; 	
 		
@@ -38,6 +39,19 @@
 	}
 	
 	}
+	
+	function forceHTTPS(){
+  $httpsURL = 'https://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+  if( !isset( $_SERVER['HTTPS'] ) || $_SERVER['HTTPS']!=='on' ){
+    if( !headers_sent() ){
+      header( "Status: 301 Moved Permanently" );
+      header( "Location: $httpsURL" );
+      exit();
+    }else{
+      die( '<script type="javascript">document.location.href="'.$httpsURL.'";</script>' );
+    }
+  }
+}
   
 ?>	
 
