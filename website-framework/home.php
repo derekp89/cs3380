@@ -74,13 +74,20 @@
 		    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
 		    <li data-target="#myCarousel" data-slide-to="1"></li>
 		    <li data-target="#myCarousel" data-slide-to="2"></li>
+		    <li data-target="#myCarousel" data-slide-to="3"></li>
+		    <li data-target="#myCarousel" data-slide-to="4"></li>
+		    <li data-target="#myCarousel" data-slide-to="5"></li>
+		    <li data-target="#myCarousel" data-slide-to="6"></li>
 		  </ol>
 	
-		  <div class="carousel-inner">
+		  <div class="carousel-inner" data-interval="3000">
 		    <div class="active item"><img class="scale-img" src="https://farm6.staticflickr.com/5140/5461417415_b58a112fe1_b.jpg"></div>
 		    <div class="item"><img class="scale-img" style="height:577px;" src="https://farm4.staticflickr.com/3318/3346295578_2dcce20805_b.jpg"></div>
 		    <div class="item"><img class="scale-img" style="height:577px;" src="https://farm4.staticflickr.com/3221/2687570771_fc39dc2ee8_z.jpg?zz=1"></div>
 		    <div class="item"><img class="scale-img" style="height:577px;" src="http://www.thesleuthjournal.com/wp-content/uploads/2014/02/HealthPromotingSpices.jpg"></div>
+		    <div class="item"><img class="scale-img" style="height:577px;" src="http://www.thespiceguyco.com/uploads/8/9/0/8/8908117/8561362.jpg"></div>
+		    <div class="item"><img class="scale-img" style="height:577px;" src="http://myhealingkitchen.com/wp-content/uploads/2014/03/spices-turmeric2.jpg"></div>
+		    <div class="item"><img class="scale-img" style="height:577px;" src="http://pepperonisduluth.com/wp-content/uploads/2014/05/spices2.jpg"></div>
 		  </div>
 
 		  <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
