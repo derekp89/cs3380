@@ -7,7 +7,7 @@
 		or die('Could not connect:'.pg_last_error());
 		
 	//Selecting the name of spices by the alphabet
-	$result = pg_prepare($dbconn, "search_by_alpha", 'SELECT name AS "Name", id FROM Spices.spices WHERE name LIKE $1');
+	$result = pg_prepare($dbconn, "search_by_alpha", 'SELECT name AS "Name", id FROM Spices.spices WHERE name LIKE $1 ORDER BY Name ASC');
 	$result = pg_execute($dbconn, "search_by_alpha", array($alphaId.'%'));
 	
 ?>
