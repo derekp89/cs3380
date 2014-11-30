@@ -69,7 +69,7 @@
 			<h1>THE SPICE SHOP</h1>
 		</div>
 		
-		<div id="myCarousel" class="carousel slide">
+		<div id="myCarousel" class="carousel slide" data-interval="3000">
 		  <ol class="carousel-indicators">
 		    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
 		    <li data-target="#myCarousel" data-slide-to="1"></li>
@@ -80,6 +80,7 @@
 		    <div class="active item"><img class="scale-img" src="https://farm6.staticflickr.com/5140/5461417415_b58a112fe1_b.jpg"></div>
 		    <div class="item"><img class="scale-img" style="height:577px;" src="https://farm4.staticflickr.com/3318/3346295578_2dcce20805_b.jpg"></div>
 		    <div class="item"><img class="scale-img" style="height:577px;" src="https://farm4.staticflickr.com/3221/2687570771_fc39dc2ee8_z.jpg?zz=1"></div>
+		    <div class="item"><img class="scale-img" style="height:577px;" src="http://www.thesleuthjournal.com/wp-content/uploads/2014/02/HealthPromotingSpices.jpg"></div>
 		  </div>
 
 		  <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
@@ -87,7 +88,7 @@
 		</div>
 		
 		<div class="paragraph-wrapper">
-			<p><b>Welcome to The Spice Shop!</b> This is a website where you can search for a wide variety of spices and herbs by name and catagory. You'll be able to see a description about the spices and herbs and then add the ones you want to your shopping cart and purchase them based on the size you want. The database for our spices was created by us, using different spices we found and researched. A website that we used for a lot of the spice reference and the inspiration for the layout was www.thespicehouse.com, an already successful spice website. Our website is still a work in progress, and was mainly created to help develop the team's coding skills in php and sql, in addition to learning basic website layout and website development which implements the use of databases.</p>
+			<p><b>Welcome to The Spice Shop!</b> This is a website where you can search for a wide variety of spices and herbs by name and catagory. You'll be able to see a description about the spices and herbs and then add the ones you want to your shopping cart and purchase them based on the amount you want. The database for our spices was created by us, using different spices we found and researched. Our website is still a work in progress, and was mainly created to help develop the team's coding skills in php and sql, in addition to learning basic website layout and website development which implements the use of databases.</p>
 		</div>
 
 	</div>
