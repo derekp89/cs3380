@@ -25,7 +25,7 @@
 
 </head>
 <body>
-	<!-- Top Navigation Bar -->
+<!-- Top Navigation Bar -->
 	<nav class="navbar navbar-inverse" role="navigation">
 	  <div class="container-fluid">
 	    <div class="navbar-header">
@@ -39,7 +39,7 @@
   	          <ul class="dropdown-menu" role="menu">
   	            <li><a href="alpha_category.php">By Alphabet</a></li>
 				<li class="divider"></li>
-  	            <li><a href="alpha_category.php">By Category</a></li>
+  	            <li><a href="alpha_category.php#">By Category</a></li>
   	          </ul>
   	        </li>
 	        <li><a href="cart.php">View Cart</a></li>
@@ -54,9 +54,9 @@
 			<!-- Redirect to Login page-->
 	        <li><a href= <?=$href_page?> ><?=$log_display ?></a></li>
 	      </ul>
-	      <form class="navbar-form navbar-right" role="search">
+	      <form class="navbar-form navbar-right" action="search.php" method="post">
 	        <div class="form-group">
-	          <input type="text" class="form-control" placeholder="Enter Search Term">
+	          <input type="text" class="form-control" name="search" placeholder="Enter Search Term">
 	        </div>
 	        <button type="submit" class="btn btn-default">Search</button>
 	      </form>

@@ -57,13 +57,13 @@
 			<li><a href="account.php"><?php echo ucfirst($_SESSION['username']); ?>'s Account</a></li>
 			<?php } ?>
 			<!-- Redirect to About Us page -->
-	        <li><a href="#">About Us</a></li>
+	        <li><a href="about_us.php">About Us</a></li>
 			<!-- Redirect to Login page-->
 	        <li><a href= <?=$href_page?> ><?=$log_display ?></a></li>
 	      </ul>
-	      <form class="navbar-form navbar-right" role="search">
+	      <form class="navbar-form navbar-right" action="search.php" method="post">
 	        <div class="form-group">
-	          <input type="text" class="form-control" placeholder="Enter Search Term">
+	          <input type="text" class="form-control" name="search" placeholder="Enter Search Term">
 	        </div>
 	        <button type="submit" class="btn btn-default">Search</button>
 	      </form>
@@ -84,7 +84,7 @@
 			<p><b>Derek Phillips:</b> A Junior majoring in Information Technology at the University of Missouri. Derek developed the shopping cart and coding calls for checkout, created the account dashboard and all its sub-pages, and assisted anyone if they were having issues. He also managed and supported the group as team leader, making sure everything was completed and came together.</p>
 			<p><b>Morgan Hutton:</b> A Senior majoring in Information Technology at the University of Missouri . Morgan was responsible for user registration, coding with the search bar, helping find various pictures, as well as error checking/</p>
 			<p><b>Richard Elledge:</b> A Junior majoring in Information Technology at The University of Missouri. Richard was resposible for the main page and the about us page of the website.</p>
-			<p><b>Yihua Shi:</b> (add something about yourself). Yihua designed the pages that displayed the database calls for the spices and categories, as well as generated the layout for the site..</p>
+			<p><b>Yihua Shi:</b> (add something about yourself). Yihua designed the pages that displayed the database calls for the spices and categories, as well as generated the layout for the site.</p>
 		</div>
 
 		<div id="image-wrap">

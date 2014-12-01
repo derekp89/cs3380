@@ -240,7 +240,7 @@ function addAddress($fname,$lname,$city,$street,$street2,$zip,$state,$id){
 	</script>
 </head>
 <body>
-	<!-- Top Navigation Bar -->
+<!-- Top Navigation Bar -->
 	<nav class="navbar navbar-inverse" role="navigation">
 	  <div class="container-fluid">
 	    <div class="navbar-header">
@@ -251,23 +251,27 @@ function addAddress($fname,$lname,$city,$street,$street2,$zip,$state,$id){
 			 <!-- Drop down menu for user to choose search by alphabet or by category -->
   	        <li class="dropdown">
   	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Shop For Spices <span class="caret"></span></a>
-  	          <ul id="d-menu" class="dropdown-menu" role="menu">
+  	          <ul class="dropdown-menu" role="menu">
   	            <li><a href="alpha_category.php">By Alphabet</a></li>
 				<li class="divider"></li>
-  	            <li><a href="alpha_category.php">By Category</a></li>
+  	            <li><a href="alpha_category.php#">By Category</a></li>
   	          </ul>
   	        </li>
-	        <li><a href="#">View Cart</a></li>
+	        <li><a href="cart.php">View Cart</a></li>
 	      </ul>
 	      <ul class="nav navbar-nav navbar-right">
+		  <!-- Redirect to User account page -->
+		  <?php  if($_SESSION['username']){?>
+			<li><a href="account.php"><?php echo ucfirst($_SESSION['username']); ?>'s Account</a></li>
+			<?php } ?>
 			<!-- Redirect to About Us page -->
-	        <li><a href="#">About Us</a></li>
+	        <li><a href="about_us.php">About Us</a></li>
 			<!-- Redirect to Login page-->
-	        <li><a href= login.php >Log Into Your Account</a></li>
+	        <li><a href= <?=$href_page?> ><?=$log_display ?></a></li>
 	      </ul>
-	      <form class="navbar-form navbar-right" role="search">
+	      <form class="navbar-form navbar-right" action="search.php" method="post">
 	        <div class="form-group">
-	          <input type="text" class="form-control" placeholder="Enter Search Term">
+	          <input type="text" class="form-control" name="search" placeholder="Enter Search Term">
 	        </div>
 	        <button type="submit" class="btn btn-default">Search</button>
 	      </form>

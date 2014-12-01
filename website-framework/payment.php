@@ -178,9 +178,9 @@ function addCard($name,$cardNumber,$cardType,$expMonth,$expYear,$securityCode,$i
 			<!-- Redirect to Login page-->
 	        <li><a href= <?=$href_page?> ><?=$log_display ?></a></li>
 	      </ul>
-	      <form class="navbar-form navbar-right" role="search">
+	      <form class="navbar-form navbar-right" action="search.php" method="post">
 	        <div class="form-group">
-	          <input type="text" class="form-control" placeholder="Enter Search Term">
+	          <input type="text" class="form-control" name="search" placeholder="Enter Search Term">
 	        </div>
 	        <button type="submit" class="btn btn-default">Search</button>
 	      </form>
