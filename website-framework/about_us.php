@@ -17,12 +17,8 @@
 		.scale-img{
 			width:1000px;
 		}
-		p {
-		    font-size: 22px;
-		}
 		#image-wrap{
-			padding: auto;
-			margin: auto;
+		
 		}
 	</style>
 	<link rel="stylesheet" type="text/css" href="dist/css/bootstrap.min.css"/>
