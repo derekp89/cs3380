@@ -12,7 +12,7 @@
 		or die('Could not connect:'.pg_last_error());
 		
 		
-	$sname =  ucfirst($_POST["search"]);
+	$sname =  htmlspecialchars(ucfirst($_POST["search"]));
 
   
   //-run  the query against the mysql query function
@@ -84,7 +84,7 @@
 	      </ul>
 	      <form class="navbar-form navbar-right" action="search.php" method="post">
 	        <div class="form-group">
-	          <input type="text" class="form-control" name="search" placeholder="Enter Search Term">
+	          <input type="text" class="form-control" name="search" placeholder="Enter Search Term" required>
 	        </div>
 	        <button type="submit" class="btn btn-default">Search</button>
 	      </form>

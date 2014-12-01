@@ -162,7 +162,7 @@ if(isset($_GET["removep"]) && isset($_GET["return_url"]) && isset($_SESSION["pro
 	      </ul>
 	      <form class="navbar-form navbar-right" action="search.php" method="post">
 	        <div class="form-group">
-	          <input type="text" class="form-control" name="search" placeholder="Enter Search Term">
+	          <input type="text" class="form-control" name="search" placeholder="Enter Search Term" required>
 	        </div>
 	        <button type="submit" class="btn btn-default">Search</button>
 	      </form>
