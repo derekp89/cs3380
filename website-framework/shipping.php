@@ -3,30 +3,126 @@
 	$log_display = $_SESSION['username'] ? "Logout" : "Log Into Your Account";
 	$href_page = $_SESSION['username'] ? "logout.php" : "login.php";
 	
-	if (isset( $_POST['Submit'])){
-		$name = htmlspecialchars($_POST['name']);
-		$street = htmlspecialchars($_POST['street']);
+	$dbconn =pg_connect("host=dbhost-pgsql.cs.missouri.edu dbname=cs3380f14grp13 user=cs3380f14grp13 password=quyRXtKs") or die("Could not connect: " . pg_last_error());
+	
+	
+	$username = $_SESSION['username'];
+		$getID = pg_prepare($dbconn, "getID", "SELECT user_Id FROM spices.Users where username LIKE $1");
+		$getID = pg_execute($dbconn,"getID",array($username));
+		$x = pg_fetch_array($getID, NULL, PGSQL_ASSOC);
+		$id = $x["user_id"];
+		
+	$getArray = pg_prepare($dbconn, "getArray", "SELECT * FROM spices.Address where user_Id = $1");
+	$getArray = pg_execute($dbconn,"getArray",array($id));
+
+	$states = array (
+            'AL'=>'Alabama',
+            'AK'=>'Alaska',
+            'AZ'=>'Arizona',
+            'AR'=>'Arkansas',
+            'CA'=>'California',
+            'CO'=>'Colorado',
+            'CT'=>'Connecticut',
+            'DE'=>'Delaware',
+            'DC'=>'District Of Columbia',
+            'FL'=>'Florida',
+            'GA'=>'Georgia',
+            'HI'=>'Hawaii',
+            'ID'=>'Idaho',
+            'IL'=>'Illinois',
+            'IN'=>'Indiana',
+            'IA'=>'Iowa',
+            'KS'=>'Kansas',
+            'KY'=>'Kentucky',
+            'LA'=>'Louisiana',
+            'ME'=>'Maine',
+            'MD'=>'Maryland',
+            'MA'=>'Massachusetts',
+            'MI'=>'Michigan',
+            'MN'=>'Minnesota',
+            'MS'=>'Mississippi',
+            'MO'=>'Missouri',
+            'MT'=>'Montana',
+            'NE'=>'Nebraska',
+            'NV'=>'Nevada',
+            'NH'=>'New Hampshire',
+            'NJ'=>'New Jersey',
+            'NM'=>'New Mexico',
+            'NY'=>'New York',
+            'NC'=>'North Carolina',
+            'ND'=>'North Dakota',
+            'OH'=>'Ohio',
+            'OK'=>'Oklahoma',
+            'OR'=>'Oregon',
+            'PA'=>'Pennsylvania',
+            'RI'=>'Rhode Island',
+            'SC'=>'South Carolina',
+            'SD'=>'South Dakota',
+            'TN'=>'Tennessee',
+            'TX'=>'Texas',
+            'UT'=>'Utah',
+            'VT'=>'Vermont',
+            'VA'=>'Virginia',
+            'WA'=>'Washington',
+            'WV'=>'West Virginia',
+            'WI'=>'Wisconsin',
+            'WY'=>'Wyoming',);
+			
+			if (isset( $_POST['Submit'])){
+		
+		$dbconn =pg_connect("host=dbhost-pgsql.cs.missouri.edu dbname=cs3380f14grp13 user=cs3380f14grp13 password=quyRXtKs") or die("Could not connect: " . pg_last_error());
+		
+		$fname = htmlspecialchars($_POST['fname']);
+		$lname = htmlspecialchars($_POST['lname']);
+		$street = htmlspecialchars($_POST['address']);
+		$street2 = htmlspecialchars($_POST['address2']);
 		$city = htmlspecialchars($_POST['city']);
-		$state_code = htmlspecialchars($_POST['state_code']);
+		$state = htmlspecialchars($_POST['state']);
 		$zip = htmlspecialchars($_POST['zip']);
 		
-		addShipping($name,$street,$city,$state_code,$zip);              
-
+		
+		if(checkAdd($street,$street2,$zip,$id)==0)
+		{
+			addAddress($fname,$lname,$city,$street,$street2,$zip,$state,$id);
+			header("Location:" . $_SERVER["REQUEST_URI"]);
+			
+		}
+		else
+			$msg="Address already exists";
 	}
-	function addShipping($name,$street,$city,$state_code,$zip){
+	
+function checkAdd($street,$street2,$zip,$id){
+
+		$dbconn =pg_connect("host=dbhost-pgsql.cs.missouri.edu dbname=cs3380f14grp13 user=cs3380f14grp13 password=quyRXtKs") or die("Could not connect: " . pg_last_error());
+	
+		$user_id = pg_escape_string(htmlspecialchars($id));
+		$street = pg_escape_string(htmlspecialchars($street));
+		$street2 = pg_escape_string(htmlspecialchars($street2));
+		$zip = pg_escape_string(htmlspecialchars($zip));
+		
+		$result = pg_prepare($dbconn, "check_address","SELECT * FROM spices.Address WHERE user_id = $1 AND street = $2 AND street2 = $3 AND zip = $4");
+		$result = pg_execute($dbconn,"check_address",array($user_id,$street,$street2,$zip));
+		if(pg_num_rows($result)==0)
+			return 0;
+		else
+			return 1;
+	}
+	
+function addAddress($fname,$lname,$city,$street,$street2,$zip,$state,$id){
 
 		$dbconn =pg_connect("host=dbhost-pgsql.cs.missouri.edu dbname=cs3380f14grp13 user=cs3380f14grp13 password=quyRXtKs") or die("Could not connect: " . pg_last_error());
 		
-		$name = pg_escape_string(htmlspecialchars($name));
+		$user_id = pg_escape_string(htmlspecialchars($id));
 		$street = pg_escape_string(htmlspecialchars($street));
+		$street2 = pg_escape_string(htmlspecialchars($street2));
+		$fname = pg_escape_string(htmlspecialchars($fname));
+		$lname = pg_escape_string(htmlspecialchars($lname));
 		$city = pg_escape_string(htmlspecialchars($city));
-		$state_code = pg_escape_string(htmlspecialchars(sha1($state_code)));
-		$zip= pg_escape_string(htmlspecialchars($zip));
-		
-		$query = "INSERT INTO spices.	Shipping (name, street, city, state_code, zip) VALUES ($1,$2,$3,$4,$5)";
-		pg_prepare($dbconn, "add_user_auth",$query);
-	
-		pg_execute($dbconn,"add_user_auth",array($name,$street,$city,$state_code,$zip));
+		$state = pg_escape_string(htmlspecialchars($state));
+		$zip = pg_escape_string(htmlspecialchars($zip));	
+
+		pg_prepare($dbconn, "add_address","INSERT INTO spices.address (fname, lname, street, street2, city, state_code, zip, user_Id) VALUES ($1,$2,$3,$4,$5,$6,$7,$8)");
+		pg_execute($dbconn, "add_address",array($fname,$lname, $street, $street2, $city, $state, $zip, $user_id));
 	}
 ?>
 <!DOCTYPE html>
@@ -175,100 +271,101 @@
 	</nav>
 	
 
-	<div class="col-sm-6 col-md-4 col-md-offset-4 content">	
-		<h2 class="text-center">Shipping Information</h2>
-		<form  action="checkout.php">
-			<div >
-				<label for="field1">Name</label>
-				<input size="50" type="text" name="name">		
-			</div>	
-			<div class="form">	
-				<label for="street">Street Address </label>
-				<input type="text" name="street">	
-				&nbsp;
-				&nbsp;
-				&nbsp;
-				&nbsp;
-			</div>			
-			<div>
-				<label for="city">City</label>
-				<input type="text" name="city">					
+	<div class="container">
+			<?php while ($y = pg_fetch_array($getArray, NULL, PGSQL_ASSOC)){
+								?>
+	<div class="row clearfix">
+		<div class="col-md-12 column">
+
+
+			<div class="row clearfix">
+				<div class="col-md-4 column">
+					<form action="billing.php" method='post'>
+						<?php
+								echo "<hr>";
+                                echo $y["fname"] . " " .  $y["lname"];
+								echo "<br>";
+								echo $y["street"] . " " .  $y["street2"];
+								echo "<br>";
+								echo $y["city"] . ", " .  $y["state_code"] . "  " . $y["zip"] ;
+								echo "<br>";
+								echo "<button type=\"submit\" name=\"Select\" value=\"Select\"class=\"btn btn-default\">Select</button>";
+								echo '<input type="hidden" name="id" value="'.$y['index_id'].'">';
+								echo '<input type="hidden" name="fname" value="'.$y['fname'].'">';
+								echo '<input type="hidden" name="lname" value="'.$y['lname'].'">';
+								echo '<input type="hidden" name="street" value="'.$y['street'].'">';
+								echo '<input type="hidden" name="street2" value="'.$y['street2'].'">';
+								echo '<input type="hidden" name="city" value="'.$y['city'].'">';
+								echo '<input type="hidden" name="state_code" value="'.$y['state_code'].'">';
+								echo '<input type="hidden" name="zip" value="'.$y['zip'].'">';
+								echo "</hr>";
+								echo "</form>";
+						?>
+				</div>
+		</div><?php
+								}?>	
+			<h3 class="page-header">Create New Adress</h1>
+			<form id='address' action="<?= $_SERVER['PHP_SELF'] ?>" method='post'>
+			<div class="row clearfix">
+				<div class="col-md-6 column">
+					<div class="form-group">
+						<label for="fname">First Name</label><input class="form-control" name="fname" id="fname" type="text" required/>
+					</div>
+				</div>
+				<div class="col-md-6 column">
+					<div class="form-group">
+						<label for="lname">Last Name</label><input class="form-control" name="lname" id="lname" type="text" required/>
+					</div>
+				</div>
 			</div>
-			<div class="form">
-				<label for="state_code">State</label>	
-				&nbsp;
-				&nbsp;
-				&nbsp;
-				&nbsp;
-				&nbsp;
-				
-				<select name="state_code" class="form">
-				<option value="AL">AL</option>
-				<option value="AK">AK</option>
-				<option value="AZ">AZ</option>
-				<option value="AR">AR</option>
-				<option value="CA">CA</option>
-				<option value="CO">CO</option>
-				<option value="CT">CT</option>
-				<option value="DE">DE</option>
-				<option value="DC">DC</option>
-				<option value="FL">FL</option>
-				<option value="GA">GA</option>
-				<option value="HI">HI</option>
-				<option value="ID">ID</option>
-				<option value="IL">IL</option>
-				<option value="IN">IN</option>
-				<option value="IA">IA</option>
-				<option value="KS">KS</option>
-				<option value="KY">KY</option>
-				<option value="LA">LA</option>
-				<option value="ME">ME</option>
-				<option value="MD">MD</option>
-				<option value="MA">MA</option>
-				<option value="MI">MI</option>
-				<option value="MN">MN</option>
-				<option value="MS">MS</option>
-				<option value="MO">MO</option>
-				<option value="MT">MT</option>
-				<option value="NE">NE</option>
-				<option value="NV">NV</option>
-				<option value="NH">NH</option>
-				<option value="NJ">NJ</option>
-				<option value="NM">NM</option>
-				<option value="NY">NY</option>
-				<option value="NC">NC</option>
-				<option value="ND">ND</option>
-				<option value="OH">OH</option>
-				<option value="OK">OK</option>
-				<option value="OR">OR</option>
-				<option value="PA">PA</option>
-				<option value="RI">RI</option>
-				<option value="SC">SC</option>
-				<option value="SD">SD</option>
-				<option value="TN">TN</option>
-				<option value="TX">TX</option>
-				<option value="UT">UT</option>
-				<option value="VT">VT</option>
-				<option value="VA">VA</option>
-				<option value="WA">WA</option>
-				<option value="WV">WV</option>
-				<option value="WI">WI</option>
-				<option value="WY">WY</option>
-				</select>	
-				
+			<div class="row clearfix">
+				<div class="col-md-12 column">
+					<div class="form-group">
+						<label for="address">Address</label><input class="form-control" name="address" id="address" type="text" required/>
+					</div>
+				</div>
 			</div>
-			
-			<div>				
-				<label for="zip">Zip Code</label>				
-				<input type="text" name="zip">		
-			
-			</div>	
-			</br>
-			</br>	
-		
-			<input class="btn btn-lg btn-primary btn-block" type="submit" value="Proceed to Checkout">	
-		</form>
+			<div class="row clearfix">
+				<div class="col-md-12 column">
+					<div class="form-group">
+						<label for="address2">Address #2</label><input class="form-control"  name="address2" id="address2" type="text" />
+					</div>
+				</div>
+			</div>
+			<div class="row clearfix">
+				<div class="col-md-4 column">
+					<div class="form-group">
+						<label for="city">City</label><input class="form-control" id="city" name="city" type="text" required/>
+					</div>
+				</div>
+				<div class="col-md-4 column">
+					<div class="form-group">
+						<label for="state">State</label><select  class="form-control" name="state">
+								<option value="">Select</option>
+								<?php
+									foreach($states as $key => $value):
+									echo '<option value="'.$key.'">'.$value.'</option>'; //close your tags!!
+									endforeach;
+									?>
+							</select>
+					</div>
+				</div>
+				<div class="col-md-4 column">
+					<div class="form-group">
+						<label for="zip">Zip code</label><input class="form-control" id="zip" name="zip" type="number" required/>
+					</div>
+				</div>
+			</div>
+				<div class="row clearfix">
+					<div class="col-md-6 column">
+						<button type="submit" name='Submit' value='Submit' class="btn btn-default">Submit</button>
+					</div>
+				</div>
+	      </form>
+		  <h3 class="page-header"><?php echo $msg;?></h1>
+		</div>
 	</div>
+</div>
 
 	<!-- Bottom Navigation Bar -->
 	<nav class="navbar navbar-inverse navbar-fixed-bottom" role="navigation">
