@@ -31,10 +31,6 @@ if(isset($_POST["type"]) && $_POST["type"]=='add')
 	$quantity 	= filter_var($_POST["quantity"], FILTER_SANITIZE_NUMBER_INT); //product code
 	$return_url 	= base64_decode($_POST["return_url"]); //return url
 	
-	//limit quantity for single product
-	if($quantity > 10){
-		die('<div align="center">This demo does not allowed more than 10 quantity!<br /><a href="http://sanwebe.com/assets/paypal-shopping-cart-integration/">Back To Products</a>.</div>');
-	}
 	
 	$result3 = pg_prepare($dbconn, "search_by_id_limit", 'SELECT name, price FROM Spices.spices WHERE id = $1 LIMIT 1');
 	$result3 = pg_execute($dbconn, "search_by_id_limit", array($product_id));
@@ -177,7 +173,7 @@ if(isset($_GET["removep"]) && isset($_GET["return_url"]) && isset($_SESSION["pro
     <table class="table table-hover">
         <div class="container">
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-xs-2">
                     <p class="lead">Categories</p>
                     <form method="POST" action="alpha_category.php" role="form">
                     <div class="list-group form-group">
@@ -185,16 +181,15 @@ if(isset($_GET["removep"]) && isset($_GET["return_url"]) && isset($_SESSION["pro
 						while ($line = pg_fetch_array($result2, NULL, PGSQL_ASSOC)){
 							foreach($line as $col_value){
                             //echo "<a href='#' class='list-group-item'>" .$col_value . "</a>";
-                            	echo "<input type='radio' id='".$col_value."'name='cate' value='".$col_value."'>";	
+                            	echo "<button class='btn btn-default' id='".$col_value."'name='cate' value='".$col_value."'>";	
                                 echo "<label for='".$col_value."'>".$col_value."</label><br>";  
                                 }
 							}
 					?>
-					<input type="submit" value="Explore">
                     </div>
                     </form>
                 </div>
-                <div class="col-md-9">
+                <div class="col-md-7">
                     <div class="thumbnail">
 					<?php $line = pg_fetch_array($result, NULL, PGSQL_ASSOC);
                      echo  "<img class=\"img-responsive\" style=\"width:50%;height:50%\"src=\"bigpic/".$line["id"].".png\">\n"; ?>
@@ -242,7 +237,7 @@ if(isset($_SESSION["products"]))
     foreach ($_SESSION["products"] as $cart_itm)
     {
         echo '<li class="cart-item">';
-        echo '<div class="cart-item-name"><span><a href="cart_update.php?removep='.$cart_itm["id"].'&return_url='.$current_url.'">&times;</a>'.$cart_itm["name"].'</span></div>';
+        echo '<div class="cart-item-name"><span><a href="?removep='.$cart_itm["id"].'&return_url='.$current_url.'">&times;</a>'.$cart_itm["name"].'</span></div>';
         echo '<div class="cart-item-desc">Qty : '.$cart_itm["qty"].'</div>';
         echo '<div class="cart-item-price">Price :$'.$cart_itm["price"].'</div>';
         echo '</li>';
