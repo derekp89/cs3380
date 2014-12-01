@@ -4,6 +4,11 @@
 	$href_page = $_SESSION['username'] ? "logout.php" : "login.php";
 	//phpinfo(INFO_VARIABLES);>
 	
+	if(isset($_SESSION['username'])){ //if a session exists send client to home.php
+	}else{
+		header("Location: login.php");
+	}
+	
 	if(isset($_POST["fname"])){
 	$_SESSION["checkout"]=array('cardOwner'=>htmlspecialchars($_POST["cardOwner"]), 'cardNumber'=>htmlspecialchars($_POST["cardNumber"]), 'expMonth'=>htmlspecialchars($_POST["expMonth"]), 'expYear'=>htmlspecialchars($_POST["expYear"]),
 	'fname'=>htmlspecialchars($_POST["fname"]),

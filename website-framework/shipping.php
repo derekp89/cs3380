@@ -3,6 +3,11 @@
 	$log_display = $_SESSION['username'] ? "Logout" : "Log Into Your Account";
 	$href_page = $_SESSION['username'] ? "logout.php" : "login.php";
 	
+	if(isset($_SESSION['username'])){ //if a session exists send client to home.php
+	}else{
+		header("Location: login.php");
+	}
+	
 	$dbconn =pg_connect("host=dbhost-pgsql.cs.missouri.edu dbname=cs3380f14grp13 user=cs3380f14grp13 password=quyRXtKs") or die("Could not connect: " . pg_last_error());
 	
 	
@@ -272,6 +277,7 @@ function addAddress($fname,$lname,$city,$street,$street2,$zip,$state,$id){
 	
 
 	<div class="container">
+		<h3>Select Shipping Address</h1>
 			<?php while ($y = pg_fetch_array($getArray, NULL, PGSQL_ASSOC)){
 								?>
 	<div class="row clearfix">
@@ -304,7 +310,7 @@ function addAddress($fname,$lname,$city,$street,$street2,$zip,$state,$id){
 				</div>
 		</div><?php
 								}?>	
-			<h3 class="page-header">Create New Adress</h1>
+			<h3 class="page-header">Create New Address</h1>
 			<form id='address' action="<?= $_SERVER['PHP_SELF'] ?>" method='post'>
 			<div class="row clearfix">
 				<div class="col-md-6 column">

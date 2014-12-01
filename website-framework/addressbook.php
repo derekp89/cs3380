@@ -259,6 +259,7 @@ function addAddress($fname,$lname,$city,$street,$street2,$zip,$state,$id){
 				</div>
 		</div><?php
 								}?>	
+								<br>
 			<h3 class="page-header">Enter New Address</h1>
 			<form id='address' action="<?= $_SERVER['PHP_SELF'] ?>" method='post'>
 			<div class="row clearfix">

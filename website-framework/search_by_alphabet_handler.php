@@ -33,10 +33,6 @@
 					if($col_value == $line['id']){
 					
 					}
-					/* Will add "oz" after each size number */
-					else if($col_value == $line['size']){
-						echo "\t\t<td>".$col_value." oz</td>\n";
-					}
 					/* Otherwise just print out the value */
 					else
 						echo "\t\t<td><a href=spice.php?id=". $line['id'] . ">".$col_value."</a></td>\n";

@@ -5,7 +5,7 @@
 
 	if(isset($_SESSION['username'])){ //if a session exists send client to home.php
 	}else{
-		header("Location: home.php");
+		header("Location: login.php");
 	}
 
 	
@@ -256,6 +256,7 @@ function addCard($name,$cardNumber,$cardType,$expMonth,$expYear,$securityCode,$i
 	
 
 	<div class="container">
+		<h3>Select Payment Method</h1>
 			<?php while ($y = pg_fetch_array($getArray, NULL, PGSQL_ASSOC)){
 								?>
 	<div class="row clearfix">

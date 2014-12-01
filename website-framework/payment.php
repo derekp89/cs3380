@@ -234,6 +234,7 @@ function addCard($name,$cardNumber,$cardType,$expMonth,$expYear,$securityCode,$i
 				</div>
 		</div><?php
 								}?>	
+								<br>
 			<h3 class="page-header">Enter New Payment Method</h1>
 			<form id='address' action="<?= $_SERVER['PHP_SELF'] ?>" method='post'>
 			<div class="row clearfix">
