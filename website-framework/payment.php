@@ -199,7 +199,7 @@ function addCard($name,$cardNumber,$cardType,$expMonth,$expYear,$securityCode,$i
           </ul>
 		  <ul class="nav nav-sidebar">
             <li><a href="account.php">Account Home</a></li>
-            <li><a href="#">Order History</a></li>
+            <li><a href="about_us.php">Order History</a></li>
           </ul>
           <ul class="nav nav-sidebar">
             <li><a href="changepass.php">Change Password</a></li>
