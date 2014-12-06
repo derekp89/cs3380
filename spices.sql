@@ -52,7 +52,7 @@ CREATE TABLE Spice_Category(
 CREATE TABLE Orders(
 	order_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	user_id int,
-	order_id serial PRIMARY KEY DEFAULT 0,
+	order_id serial PRIMARY KEY,
 	FOREIGN KEY (user_id) REFERENCES Users);
 	
 CREATE TABLE Shipping(
