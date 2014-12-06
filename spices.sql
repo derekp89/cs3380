@@ -70,7 +70,7 @@ CREATE TABLE Shipping(
 CREATE TABLE Order_Details(
 	product_id int,
 	quantity int,
-	price int,
+	price decimal(13,2),
 	order_id int REFERENCES Orders,
 	FOREIGN KEY (product_id) REFERENCES Spices,
 	PRIMARY KEY (product_id, order_id));
@@ -483,3 +483,5 @@ INSERT INTO Spice_Category VALUES (96, 'Indian');
 INSERT INTO Spice_Category VALUES (99, 'French');
 
 INSERT INTO Spice_Category VALUES (100, 'Italian');
+
+INSERT INTO Orders(order_id) VALUES (0);
