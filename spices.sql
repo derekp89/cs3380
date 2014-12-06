@@ -48,6 +48,13 @@ CREATE TABLE Spice_Category(
 	expYear smallint,
 	FOREIGN KEY (user_id) REFERENCES Users);
 	
+	
+CREATE TABLE Orders(
+	order_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	user_id int,
+	order_id serial PRIMARY KEY DEFAULT 0,
+	FOREIGN KEY (user_id) REFERENCES Users);
+	
 CREATE TABLE Shipping(
 	fname varchar(50) NOT NULL,
 	lname varchar(50) NOT NULL,
@@ -56,15 +63,9 @@ CREATE TABLE Shipping(
 	city varchar(50),
 	state_code varchar(2),
 	zip int,
-	order_id int PRIMARY KEY REFERENCES Orders,
+	shipping_id int PRIMARY KEY REFERENCES Orders(order_id),
 	tracking_no varchar(25),
 	carrier varchar(50));
-	
-CREATE TABLE Orders(
-	order_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	user_id int,
-	order_id serial PRIMARY KEY DEFAULT 0,
-	FOREIGN KEY (user_id) REFERENCES Users);
 	
 CREATE TABLE Order_Details(
 	product_id int,
