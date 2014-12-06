@@ -22,7 +22,7 @@ CREATE TABLE Users(
 	fname varchar(50) NOT NULL,
 	lname varchar(50) NOT NULL,
 	street varchar(255) NOT NULL,
-	street2 varchar(50) NOT NULL,
+	street2 varchar(50),
 	zip int NOT NULL,
 	city varchar(255) NOT NULL,
 	state_code varchar(2) NOT NULL,
@@ -49,17 +49,22 @@ CREATE TABLE Spice_Category(
 	FOREIGN KEY (user_id) REFERENCES Users);
 	
 CREATE TABLE Shipping(
-	street varchar(255),
+	fname varchar(50) NOT NULL,
+	lname varchar(50) NOT NULL,
+	street varchar(255) NOT NULL,
+	street2 varchar(50),
 	city varchar(50),
 	state_code varchar(2),
 	zip int,
-	shipping_id int PRIMARY KEY,
+	shipping_id int PRIMARY KEY REFERENCES Orders(order_id),
 	tracking_no varchar(25),
 	carrier varchar(50));
 	
 CREATE TABLE Orders(
 	order_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	order_id serial PRIMARY KEY);
+	user_id int,
+	order_id serial PRIMARY KEY DEFAULT 0,
+	FOREIGN KEY (user_id) REFERENCES Users);
 	
 CREATE TABLE Order_Details(
 	product_id int,
