@@ -56,7 +56,7 @@ CREATE TABLE Shipping(
 	city varchar(50),
 	state_code varchar(2),
 	zip int,
-	shipping_id int PRIMARY KEY REFERENCES Orders(order_id),
+	order_id int PRIMARY KEY REFERENCES Orders,
 	tracking_no varchar(25),
 	carrier varchar(50));
 	
