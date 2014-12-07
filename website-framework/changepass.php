@@ -162,7 +162,7 @@ function checkConfirm($npass,$confirm) {
           </ul>
 		  <ul class="nav nav-sidebar">
             <li><a href="account.php">Account Home</a></li>
-            <li><a href="#">Order History</a></li>
+            <li><a href="orders.php">Order History</a></li>
           </ul>
           <ul class="nav nav-sidebar">
             <li class="active"><a href="changepass.php">Change Password<span class="sr-only">(current)</span></a></li>

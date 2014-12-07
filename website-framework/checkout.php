@@ -9,15 +9,9 @@
 		header("Location: login.php");
 	}
 	
-	if(isset($_POST["fname"])){
-	$_SESSION["checkout"]=array('cardOwner'=>htmlspecialchars($_POST["cardOwner"]), 'cardNumber'=>htmlspecialchars($_POST["cardNumber"]), 'expMonth'=>htmlspecialchars($_POST["expMonth"]), 'expYear'=>htmlspecialchars($_POST["expYear"]),
-	'fname'=>htmlspecialchars($_POST["fname"]),
-	'lname'=>htmlspecialchars($_POST["lname"]),
-	'street'=>htmlspecialchars($_POST["street"]),
-	'street2'=>htmlspecialchars($_POST["street2"]),
-	'state_code'=>htmlspecialchars($_POST["state_code"]),
-	'city'=>htmlspecialchars($_POST["city"]),
-	'zip'=>htmlspecialchars($_POST["zip"])
+	if(isset($_POST["cardOwner"])){
+	$_SESSION["card"]=array('cardOwner'=>htmlspecialchars($_POST["cardOwner"]), 'cardNumber'=>htmlspecialchars($_POST["cardNumber"]), 'expMonth'=>htmlspecialchars($_POST["expMonth"]), 'expYear'=>htmlspecialchars($_POST["expYear"])
+	
 	);
 	}
 	
@@ -164,15 +158,20 @@
 	<div class="container">
 	<div class="row clearfix">
 		<div class="col-md-12 column">
+		<form action="secure_checkout.php" method="post">
 
 			<?php
 			$dbconn =pg_connect("host=dbhost-pgsql.cs.missouri.edu dbname=cs3380f14grp13 user=cs3380f14grp13 password=quyRXtKs") or die('Could not connect:'.pg_last_error());
+			
+			$cart_items = 0;
+			
 			 foreach ($_SESSION["products"] as $cart_itm)
         {
 			$product_id = $cart_itm["id"];
 			$result = pg_prepare($dbconn, "search_by_alpha", 'SELECT name, price, descr,size FROM Spices.spices WHERE id = $1 LIMIT 1');
 			$result = pg_execute($dbconn, "search_by_alpha", array($product_id));
 			$line = pg_fetch_array($result, NULL, PGSQL_ASSOC);
+			
 			
 	
 echo "		<div class=\"col-xs-8\">\n";
@@ -197,18 +196,12 @@ echo "							</div>\n";
 echo "							<div class=\"col-xs-2\">\n";
 echo "								<h6><strong>".$cart_itm["qty"]."</strong></h6>\n";
 echo "							</div>\n";
-echo "							<div class=\"col-xs-2\">\n";
-echo '								<a class="glyphicon glyphicon-trash" href="spice.php?removep='.$cart_itm["id"].'&return_url='.$current_url.'"></a>';
-echo "							</div>\n";
 echo "						</div>\n";
 echo "					</div>\n";
 
 			$subtotal = ($cart_itm["price"]*$cart_itm["qty"]);
             $total = ($total + $subtotal);
-            echo '<input type="hidden" name="item_name['.$cart_items.']" value="'.$line['name'].'" />';
-            echo '<input type="hidden" name="item_code['.$cart_items.']" value="'.$line['id'].'" />';
-            echo '<input type="hidden" name="item_desc['.$cart_items.']" value="'.$line['descr'].'" />';
-            echo '<input type="hidden" name="item_qty['.$cart_items.']" value="'.$cart_itm["qty"].'" />';
+            echo '<input type="hidden" name="price" value="'.$line['price'].'" />';
             $cart_items ++;
            
         }
@@ -229,7 +222,7 @@ setlocale(LC_MONETARY, 'en_US');
 echo "							<h4 class=\"text-right\">Total <strong>$" .number_format($total, 2) ."</strong></h4>\n";
 echo "						</div>\n";
 echo "						<div class=\"col-xs-3\">\n";
-echo "							<button type=\"button\" class=\"btn btn-success btn-block\">\n";
+echo "							<button type=\"submit\" class=\"btn btn-success btn-block\">\n";
 echo "								Checkout\n";
 echo "							</button>\n";
 echo "						</div>\n";
@@ -239,33 +232,34 @@ echo "			</div>\n";
 echo "		</div>\n";
 echo "	</div>\n";
 ?>
+<div class="container">
+      <div class="row">
 			<div class="row clearfix">
-				<div class="col-md-4 column">
+				<div class="col-md-4 col-sm-offset-3">
+					<h1 class="page-header">Payment Info</h1>
 						<?php
-								echo "<hr>";
-                                echo "<strong>Owner: </strong>".htmlspecialchars($_SESSION["checkout"]["cardOwner"]);
+                                echo "<strong>Owner: </strong>".htmlspecialchars($_SESSION["card"]["cardOwner"]);
 								echo "<br>";
-								echo "<strong>Card ending in: </strong>". htmlspecialchars(substr($_SESSION["checkout"]["cardNumber"], -4 ));
+								echo "<strong>Card ending in: </strong>". htmlspecialchars(substr($_SESSION["card"]["cardNumber"], -4 ));
 								echo "<br>";
-								echo "<strong>Expires: </strong>".htmlspecialchars($_SESSION["checkout"]["expMonth"]) . "/" .  htmlspecialchars($_SESSION["checkout"]["expYear"]);
-								echo "</hr>";
+								echo "<strong>Expires: </strong>".htmlspecialchars($_SESSION["card"]["expMonth"]) . "/" .  htmlspecialchars($_SESSION["card"]["expYear"]);
 						?>
 				</div>
-				<div class="col-md-4 column">
+				<div class="col-md-4">
+					<h1 class="page-header">Shipping Info</h1>
 						<?php
 								
-								echo "<hr>";
                                 echo htmlspecialchars($_SESSION["checkout"]["fname"] ). " " .  htmlspecialchars($_SESSION["checkout"]["lname"]);
 								echo "<br>";
 								echo htmlspecialchars($_SESSION["checkout"]["street"]) . " " .  htmlspecialchars($_SESSION["checkout"]["street2"]);
 								echo "<br>";
 								echo htmlspecialchars($_SESSION["checkout"]["city"]) . ", " .  htmlspecialchars($_SESSION["checkout"]["state_code"]) . "  " . htmlspecialchars($_SESSION["checkout"]["zip"] );
-								echo "</hr>";
-								
-
 						?>
+						</form>
 				</div>
 		</div>
+	</div>
+	</div>
 	</div>
 </div>
 

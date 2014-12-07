@@ -8,7 +8,17 @@
 		header("Location: login.php");
 	}
 
-	
+	if(isset($_POST["fname"])){
+	$_SESSION["checkout"]=array(
+	'fname'=>htmlspecialchars($_POST["fname"]),
+	'lname'=>htmlspecialchars($_POST["lname"]),
+	'street'=>htmlspecialchars($_POST["street"]),
+	'street2'=>htmlspecialchars($_POST["street2"]),
+	'state_code'=>htmlspecialchars($_POST["state_code"]),
+	'city'=>htmlspecialchars($_POST["city"]),
+	'zip'=>htmlspecialchars($_POST["zip"])
+	);
+	}
 	$dbconn =pg_connect("host=dbhost-pgsql.cs.missouri.edu dbname=cs3380f14grp13 user=cs3380f14grp13 password=quyRXtKs") or die("Could not connect: " . pg_last_error());
 	
 	//phpinfo(INFO_VARIABLES);
@@ -283,14 +293,6 @@ function addCard($name,$cardNumber,$cardType,$expMonth,$expYear,$securityCode,$i
 								echo '<input type="hidden" name="cardOwner" value="'.$y['cardowner'].'">';
 								echo '<input type="hidden" name="expMonth" value="'.$y['expmonth'].'">';
 								echo '<input type="hidden" name="expYear" value="'.$y['expyear'].'">';
-								echo '<input type="hidden" name="id" value="'.htmlspecialchars($_POST['id']).'">';
-								echo '<input type="hidden" name="fname" value="'.htmlspecialchars($_POST['fname']).'">';
-								echo '<input type="hidden" name="lname" value="'.htmlspecialchars($_POST['lname']).'">';
-								echo '<input type="hidden" name="street" value="'.htmlspecialchars($_POST['street']).'">';
-								echo '<input type="hidden" name="street2" value="'.htmlspecialchars($_POST['street2']).'">';
-								echo '<input type="hidden" name="city" value="'.htmlspecialchars($_POST['city']).'">';
-								echo '<input type="hidden" name="state_code" value="'.htmlspecialchars($_POST['state_code']).'">';
-								echo '<input type="hidden" name="zip" value="'.htmlspecialchars($_POST['zip']).'">';
 								echo "</hr>";
 								echo "</hr>";
 								echo "</form>";
