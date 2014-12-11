@@ -15,7 +15,7 @@
 	$sname =  htmlspecialchars(ucfirst($_POST["search"]));
 
   
-  //-run  the query against the mysql query function
+  //-run  the query against the query function
 	$result = pg_prepare($dbconn, "search_by_alpha", 'SELECT name AS "Name", id FROM Spices.spices WHERE name LIKE $1 ORDER BY Name ASC');
 	$result = pg_execute($dbconn, "search_by_alpha", array('%'.$sname.'%'));
   
