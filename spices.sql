@@ -485,3 +485,5 @@ INSERT INTO Spice_Category VALUES (99, 'French');
 INSERT INTO Spice_Category VALUES (100, 'Italian');
 
 INSERT INTO Orders(order_id) VALUES (0);
+
+ALTER TABLE Spices DROP COLUMN category;
