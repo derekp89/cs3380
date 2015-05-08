@@ -3,7 +3,7 @@
 	$alphaId = empty($_GET['alphaId']) ? 'A' : $_GET['alphaId'];
 	
 	//Connecting, selecting database
-	$dbconn =pg_connect("host=dbhost-pgsql.cs.missouri.edu dbname=cs3380f14grp13 user=cs3380f14grp13 password=quyRXtKs")
+	$dbconn =pg_connect("host=dbhost-pgsql.cs.missouri.edu dbname=dmpkb4 user=dmpkb4 password=tigNzr1w")
 		or die('Could not connect:'.pg_last_error());
 		
 	//Selecting the name of spices by the alphabet

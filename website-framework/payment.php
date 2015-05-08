@@ -10,7 +10,7 @@
 	
 
 	
-	$dbconn =pg_connect("host=dbhost-pgsql.cs.missouri.edu dbname=cs3380f14grp13 user=cs3380f14grp13 password=quyRXtKs") or die("Could not connect: " . pg_last_error());
+	$dbconn =pg_connect("host=dbhost-pgsql.cs.missouri.edu dbname=dmpkb4 user=dmpkb4 password=tigNzr1w") or die("Could not connect: " . pg_last_error());
 	
 	$cardType = array (
 			'Visa'=>'Visa',
@@ -54,7 +54,7 @@
 
 if (isset( $_POST['Submit'])){
 		
-		$dbconn =pg_connect("host=dbhost-pgsql.cs.missouri.edu dbname=cs3380f14grp13 user=cs3380f14grp13 password=quyRXtKs") or die("Could not connect: " . pg_last_error());
+		$dbconn =pg_connect("host=dbhost-pgsql.cs.missouri.edu dbname=dmpkb4 user=dmpkb4 password=tigNzr1w") or die("Could not connect: " . pg_last_error());
 		
 		$fname = htmlspecialchars($_POST['fname']);
 		$lname = htmlspecialchars($_POST['lname']);
@@ -78,7 +78,7 @@ if (isset( $_POST['Submit'])){
 	
 if (isset( $_POST['Delete'])){
 		
-	$dbconn =pg_connect("host=dbhost-pgsql.cs.missouri.edu dbname=cs3380f14grp13 user=cs3380f14grp13 password=quyRXtKs") or die("Could not connect: " . pg_last_error());
+	$dbconn =pg_connect("host=dbhost-pgsql.cs.missouri.edu dbname=dmpkb4 user=dmpkb4 password=tigNzr1w") or die("Could not connect: " . pg_last_error());
 	
 	$index_id = htmlspecialchars($_POST['id']);
 	
@@ -91,7 +91,7 @@ if (isset( $_POST['Delete'])){
 	
 function checkCard($cardNumber){
 
-		$dbconn =pg_connect("host=dbhost-pgsql.cs.missouri.edu dbname=cs3380f14grp13 user=cs3380f14grp13 password=quyRXtKs") or die("Could not connect: " . pg_last_error());
+		$dbconn =pg_connect("host=dbhost-pgsql.cs.missouri.edu dbname=dmpkb4 user=dmpkb4 password=tigNzr1w") or die("Could not connect: " . pg_last_error());
 	
 		$cardNumber = pg_escape_string(htmlspecialchars($cardNumber));
 		
@@ -105,7 +105,7 @@ function checkCard($cardNumber){
 	
 function addCard($name,$cardNumber,$cardType,$expMonth,$expYear,$securityCode,$id){
 
-		$dbconn =pg_connect("host=dbhost-pgsql.cs.missouri.edu dbname=cs3380f14grp13 user=cs3380f14grp13 password=quyRXtKs") or die("Could not connect: " . pg_last_error());
+		$dbconn =pg_connect("host=dbhost-pgsql.cs.missouri.edu dbname=dmpkb4 user=dmpkb4 password=tigNzr1w") or die("Could not connect: " . pg_last_error());
 		
 		$user_id = pg_escape_string(htmlspecialchars($id));
 		$cardNumber = pg_escape_string(htmlspecialchars($cardNumber));
@@ -150,44 +150,7 @@ function addCard($name,$cardNumber,$cardType,$expMonth,$expYear,$securityCode,$i
 
 </head>
 <body>
-	<!-- Top Navigation Bar -->
-	<nav class="navbar navbar-inverse" role="navigation">
-	  <div class="container-fluid">
-	    <div class="navbar-header">
-	      <a class="navbar-brand" href="home.php">Home</a>
-	    </div>
-	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-	      <ul class="nav navbar-nav">
-			 <!-- Drop down menu for user to choose search by alphabet or by category -->
-  	        <li class="dropdown">
-  	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Shop For Spices <span class="caret"></span></a>
-  	          <ul class="dropdown-menu" role="menu">
-  	            <li><a href="alpha_category.php">By Alphabet</a></li>
-				<li class="divider"></li>
-  	            <li><a href="alpha_category.php#">By Category</a></li>
-  	          </ul>
-  	        </li>
-	        <li><a href="cart.php">View Cart</a></li>
-	      </ul>
-	      <ul class="nav navbar-nav navbar-right">
-		  <!-- Redirect to User account page -->
-		  <?php  if($_SESSION['username']){?>
-			<li><a href="account.php"><?php echo ucfirst($_SESSION['username']); ?>'s Account</a></li>
-			<?php } ?>
-			<!-- Redirect to About Us page -->
-	        <li><a href="about_us.php">About Us</a></li>
-			<!-- Redirect to Login page-->
-	        <li><a href= <?=$href_page?> ><?=$log_display ?></a></li>
-	      </ul>
-	      <form class="navbar-form navbar-right" action="search.php" method="post">
-	        <div class="form-group">
-	          <input type="text" class="form-control" name="search" placeholder="Enter Search Term" required>
-	        </div>
-	        <button type="submit" class="btn btn-default">Search</button>
-	      </form>
-	    </div><!-- /.navbar-collapse -->
-	  </div><!-- /.container-fluid -->
-	</nav>
+	<?php include('nav.php'); ?>
 
 <div class="container-fluid">
       <div class="row">
@@ -296,7 +259,7 @@ function addCard($name,$cardNumber,$cardType,$expMonth,$expYear,$securityCode,$i
 				</div>
 				<div class="col-md-2 column">
 					<div class="form-group">
-						<label for="securityCode">Security Code</label><input class="form-control" id="securityCode" name="securityCode" type="number"  pattern=".{3,3}" required title="3 characters" required/>
+						<label for="securityCode">Security Code</label><input class="form-control" id="securityCode" name="securityCode" type="text" pattern="[0-9]{3}"  title="3 characters" required/>
 					</div>
 				</div>
 			</div>

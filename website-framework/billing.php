@@ -8,7 +8,7 @@
 		header("Location: login.php");
 	}
 
-	if(isset($_POST["fname"])){
+	if(isset($_POST["fname"])) {
 	$_SESSION["checkout"]=array(
 	'fname'=>htmlspecialchars($_POST["fname"]),
 	'lname'=>htmlspecialchars($_POST["lname"]),
@@ -19,7 +19,7 @@
 	'zip'=>htmlspecialchars($_POST["zip"])
 	);
 	}
-	$dbconn =pg_connect("host=dbhost-pgsql.cs.missouri.edu dbname=cs3380f14grp13 user=cs3380f14grp13 password=quyRXtKs") or die("Could not connect: " . pg_last_error());
+	$dbconn =pg_connect("host=dbhost-pgsql.cs.missouri.edu dbname=dmpkb4 user=dmpkb4 password=tigNzr1w") or die("Could not connect: " . pg_last_error());
 	
 	//phpinfo(INFO_VARIABLES);
 	
@@ -65,10 +65,10 @@
 
 if (isset( $_POST['Submit'])){
 		
-		$dbconn =pg_connect("host=dbhost-pgsql.cs.missouri.edu dbname=cs3380f14grp13 user=cs3380f14grp13 password=quyRXtKs") or die("Could not connect: " . pg_last_error());
+		$dbconn =pg_connect("host=dbhost-pgsql.cs.missouri.edu dbname=dmpkb4 user=dmpkb4 password=tigNzr1w") or die("Could not connect: " . pg_last_error());
 		
-		$fname = htmlspecialchars($_POST['fname']);
-		$lname = htmlspecialchars($_POST['lname']);
+		$fname = htmlspecialchars($_POST['firstName']);
+		$lname = htmlspecialchars($_POST['lastName']);
 		$cardNumber = htmlspecialchars($_POST['cardNumber']);
 		$cardType = htmlspecialchars($_POST['cardType']);
 		$expMonth = htmlspecialchars($_POST['expMonth']);
@@ -91,7 +91,7 @@ if (isset( $_POST['Submit'])){
 	
 function checkCard($cardNumber){
 
-		$dbconn =pg_connect("host=dbhost-pgsql.cs.missouri.edu dbname=cs3380f14grp13 user=cs3380f14grp13 password=quyRXtKs") or die("Could not connect: " . pg_last_error());
+		$dbconn =pg_connect("host=dbhost-pgsql.cs.missouri.edu dbname=dmpkb4 user=dmpkb4 password=tigNzr1w") or die("Could not connect: " . pg_last_error());
 	
 		$cardNumber = pg_escape_string(htmlspecialchars($cardNumber));
 		
@@ -105,7 +105,7 @@ function checkCard($cardNumber){
 	
 function addCard($name,$cardNumber,$cardType,$expMonth,$expYear,$securityCode,$id){
 
-		$dbconn =pg_connect("host=dbhost-pgsql.cs.missouri.edu dbname=cs3380f14grp13 user=cs3380f14grp13 password=quyRXtKs") or die("Could not connect: " . pg_last_error());
+		$dbconn =pg_connect("host=dbhost-pgsql.cs.missouri.edu dbname=dmpkb4 user=dmpkb4 password=tigNzr1w") or die("Could not connect: " . pg_last_error());
 		
 		$user_id = pg_escape_string(htmlspecialchars($id));
 		$cardNumber = pg_escape_string(htmlspecialchars($cardNumber));
@@ -158,115 +158,9 @@ function addCard($name,$cardNumber,$cardType,$expMonth,$expYear,$securityCode,$i
 	<script src="jquery-ui-1.11.2/external/jquery/jquery.js"></script>
 	<script src="jquery-ui-1.11.2/jquery-ui.min.js"></script>
 	<script src="dist/js/bootstrap.js"></script>
-	<script>
-		/* Will create three dynamic tabs */
-		$(function() {
-			$( "#search-by-tabs, #tabs-1" ).tabs();
-			$( "#tabs-2" ).tabs();
-			$( "#d-menu" ).tabs();
-		});
-		
-		/* Will highlight the search-by tabs which the user clicked on */
-		$(function() {
-			$( "#search-by li" ).click(function(){
-				$(this).addClass("active");
-				$("li").not(this).removeClass("active");
-			});
-		});
-		
-		/* Will highlight the alphabet tab which the user clicked on */
-		$(function() {
-			$( "#tabs-1 li" ).click(function(){
-				$(this).addClass("tabs-bg-highlight");
-				$("#tabs-1 li").not(this).removeClass("tabs-bg-highlight");
-			});
-		});
-		/* */
-		$(function() {
-			$( "#tabs-2 li" ).click(function(){
-				$(this).addClass("tabs-bg-highlight");
-				$("#tabs-2 li").not(this).removeClass("tabs-bg-highlight");
-			});
-		});
-	</script>
-	<script src="ajax.js"></script>
-	<script>
-		/* Will update the alphabet content box depending on the letter user chose to search by */
-		function updateAlpha(alphaId){
-			$.get("search_by_alphabet_handler.php",
-			{ "alphaId": alphaId },
-			function(data){
-				$('#'+alphaId).html(data);
-			});
-		}
-
-		/* Will update the category content box depending on the category user chose to search by */
-		function updateCategory(cId){
-			$.get("search_by_category_handler.php",
-			{ "cId": cId },
-			function(data){
-				$('#'+cId).html(data);
-			});
-		}
-		
-		/* Will apply the function updateAlpha on the <li> element that the user clicked on */
-		$(function(){
-			$("#alpha-tabs-list li").click(
-				function(){
-					updateAlpha(this.textContent);
-			});
-		});
-		
-		/* Will apply the function updateCategory on the <li> element that the user clicked on */
-		$(function(){
-			$("#category-tabs-list li").click(
-				function(){
-					console.log(this.textContent);
-					updateCategory(this.textContent);
-			});
-		});
-
-	</script>
 </head>
 <body>
-<!-- Top Navigation Bar -->
-	<nav class="navbar navbar-inverse" role="navigation">
-	  <div class="container-fluid">
-	    <div class="navbar-header">
-	      <a class="navbar-brand" href="home.php">Home</a>
-	    </div>
-	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-	      <ul class="nav navbar-nav">
-			 <!-- Drop down menu for user to choose search by alphabet or by category -->
-  	        <li class="dropdown">
-  	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Shop For Spices <span class="caret"></span></a>
-  	          <ul class="dropdown-menu" role="menu">
-  	            <li><a href="alpha_category.php">By Alphabet</a></li>
-				<li class="divider"></li>
-  	            <li><a href="alpha_category.php#">By Category</a></li>
-  	          </ul>
-  	        </li>
-	        <li><a href="cart.php">View Cart</a></li>
-	      </ul>
-	      <ul class="nav navbar-nav navbar-right">
-		  <!-- Redirect to User account page -->
-		  <?php  if($_SESSION['username']){?>
-			<li><a href="account.php"><?php echo ucfirst($_SESSION['username']); ?>'s Account</a></li>
-			<?php } ?>
-			<!-- Redirect to About Us page -->
-	        <li><a href="about_us.php">About Us</a></li>
-			<!-- Redirect to Login page-->
-	        <li><a href= <?=$href_page?> ><?=$log_display ?></a></li>
-	      </ul>
-	      <form class="navbar-form navbar-right" action="search.php" method="post">
-	        <div class="form-group">
-	          <input type="text" class="form-control" name="search" placeholder="Enter Search Term" required>
-	        </div>
-	        <button type="submit" class="btn btn-default">Search</button>
-	      </form>
-	    </div><!-- /.navbar-collapse -->
-	  </div><!-- /.container-fluid -->
-	</nav>
+<?php include('nav.php'); ?>
 	
 
 	<div class="container">
@@ -305,12 +199,12 @@ function addCard($name,$cardNumber,$cardType,$expMonth,$expYear,$securityCode,$i
 			<div class="row clearfix">
 				<div class="col-md-6 column">
 					<div class="form-group">
-						<label for="fname">First Name</label><input class="form-control" name="fname" id="fname" type="text" required/>
+						<label for="fname">First Name</label><input class="form-control" name="firstName" id="firstName" type="text" required/>
 					</div>
 				</div>
 				<div class="col-md-6 column">
 					<div class="form-group">
-						<label for="lname">Last Name</label><input class="form-control" name="lname" id="lname" type="text" required/>
+						<label for="lname">Last Name</label><input class="form-control" name="lastName" id="lastName" type="text" required/>
 					</div>
 				</div>
 			</div>
@@ -360,7 +254,7 @@ function addCard($name,$cardNumber,$cardType,$expMonth,$expYear,$securityCode,$i
 				</div>
 				<div class="col-md-2 column">
 					<div class="form-group">
-						<label for="securityCode">Security Code</label><input class="form-control" id="securityCode" name="securityCode" type="number"  pattern=".{3,3}" required title="3 characters" required/>
+						<label for="securityCode">Security Code</label><input class="form-control" id="securityCode" name="securityCode" type="text" pattern="[0-9]{3}"  title="3 characters" required/>
 					</div>
 				</div>
 			</div>
@@ -377,10 +271,6 @@ function addCard($name,$cardNumber,$cardType,$expMonth,$expYear,$securityCode,$i
 
 
 	<!-- Bottom Navigation Bar -->
-	<nav class="navbar navbar-inverse navbar-fixed-bottom" role="navigation">
-	  <div class="container">
-		  
-	  </div>
-	</nav>
+
 </body>
 </html>

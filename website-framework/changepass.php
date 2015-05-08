@@ -9,7 +9,7 @@
 	}
 
 	
-	$dbconn =pg_connect("host=dbhost-pgsql.cs.missouri.edu dbname=cs3380f14grp13 user=cs3380f14grp13 password=quyRXtKs") or die("Could not connect: " . pg_last_error());
+	$dbconn =pg_connect("host=dbhost-pgsql.cs.missouri.edu dbname=dmpkb4 user=dmpkb4 password=tigNzr1w") or die("Could not connect: " . pg_last_error());
 		
 		$username = $_SESSION['username'];
 		$getID = pg_prepare($dbconn, "getID", "SELECT user_Id FROM spices.Users where username LIKE $1");
@@ -20,7 +20,7 @@
 
 if (isset( $_POST['Submit'])){
 		
-		$dbconn =pg_connect("host=dbhost-pgsql.cs.missouri.edu dbname=cs3380f14grp13 user=cs3380f14grp13 password=quyRXtKs") or die("Could not connect: " . pg_last_error());
+		$dbconn =pg_connect("host=dbhost-pgsql.cs.missouri.edu dbname=dmpkb4 user=dmpkb4 password=tigNzr1w") or die("Could not connect: " . pg_last_error());
 		
 		$cpass = htmlspecialchars($_POST['cpass']);
 		$npass = htmlspecialchars($_POST['npass']);
@@ -44,7 +44,7 @@ if (isset( $_POST['Submit'])){
 
 function checkUserPass($username,$password) {
 		
-			$dbconn =pg_connect("host=dbhost-pgsql.cs.missouri.edu dbname=cs3380f14grp13 user=cs3380f14grp13 password=quyRXtKs") or die("Could not connect: " . pg_last_error());
+			$dbconn =pg_connect("host=dbhost-pgsql.cs.missouri.edu dbname=dmpkb4 user=dmpkb4 password=tigNzr1w") or die("Could not connect: " . pg_last_error());
 			
 			$result = pg_prepare($dbconn,"check", "SELECT password_hash FROM spices.Users WHERE username LIKE $1");
 			
@@ -65,7 +65,7 @@ function checkUserPass($username,$password) {
 	
 function updatePass($npass,$id){
 
-		$dbconn =pg_connect("host=dbhost-pgsql.cs.missouri.edu dbname=cs3380f14grp13 user=cs3380f14grp13 password=quyRXtKs") or die("Could not connect: " . pg_last_error());
+		$dbconn =pg_connect("host=dbhost-pgsql.cs.missouri.edu dbname=dmpkb4 user=dmpkb4 password=tigNzr1w") or die("Could not connect: " . pg_last_error());
 		
 		$password = pg_escape_string(htmlspecialchars(sha1($npass)));
 		$uid = $id;
